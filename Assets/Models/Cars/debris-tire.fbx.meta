@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: e783d609d2ceab04a8495abd5c504ac8
+guid: 3718dd8260378f24dac47cae13791f0c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: _defaultMat
-    second: {fileID: 2100000, guid: ef04a49c9ba484e4d9d8382407d794c4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: dirt
-    second: {fileID: 2100000, guid: 66277ef369a576c4b98020c26abf0403, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: dirtDark
-    second: {fileID: 2100000, guid: 818a4d6f93d2c62468597e231a5a66aa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: grass
-    second: {fileID: 2100000, guid: 64214f2ba1c7211428565266e4e9f99a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: water
-    second: {fileID: 2100000, guid: 2fba6245fcbb2064792979e2215fe87b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
