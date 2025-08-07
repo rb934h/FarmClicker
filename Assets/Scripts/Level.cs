@@ -15,8 +15,7 @@ public class Level : MonoBehaviour
     {
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
-        _player.OnDig += ChangeState;
-        _player.OnWaterTankInteract += ChangeState;
+        _player.InteractEnded += ChangeState;
     }
     
     private void OnPointerClick(Vector3 positionForInteract, PointerObject pointerObject)
@@ -25,11 +24,15 @@ public class Level : MonoBehaviour
         if (pointerObject is Garden garden)
         {
             garden.SetSeedingData(_player.SeedingData);
-            _player.StartDigging(positionForInteract, garden);
+            _player.InteractWithGarden(positionForInteract, garden);
         }
         else if (pointerObject is WaterTank waterTank)
         {
             _player.InteractWithWaterTank(positionForInteract, waterTank);
+        }
+        else if (pointerObject is DeliveryCar deliveryCar)
+        {
+            _player.InteractWithDeliveryCar(positionForInteract, deliveryCar);
         }
         else
         {
@@ -47,6 +50,10 @@ public class Level : MonoBehaviour
         else if (pointerObject is WaterTank waterTank)
         {
             waterTank.ChangeState();
+        }
+        else if (pointerObject is DeliveryCar deliveryCar)
+        {
+            deliveryCar.ChangeState();
         }
         else
         {

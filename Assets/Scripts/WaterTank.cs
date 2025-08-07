@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaterTank : PointerObject
 {
-    private WaterTankState currentState = WaterTankState.Empty;
+    private WaterTankState currentState = WaterTankState.NeedToRefill;
     
     public WaterTankState State => currentState;
    
@@ -12,16 +12,14 @@ public class WaterTank : PointerObject
         switch (currentState)
         {
             case WaterTankState.Empty:
-                Debug.Log("WaterTank is empty. Refill needed.");
-                currentState = WaterTankState.NeedToRefill;
                 break;
             case WaterTankState.NeedToRefill:
-                Debug.Log("Refilling WaterTank...");
+                ShowStateInfo("Идет наполнение...");
                 currentState = WaterTankState.ReadyToCollect;
                 break;
             case WaterTankState.ReadyToCollect:
-                Debug.Log("Water is ready to collect.");
-                currentState = WaterTankState.Empty;
+                ShowStateInfo("Воду забрали, нужно наполнить снова.");
+                currentState = WaterTankState.NeedToRefill;
                 break;
             default:
                 Debug.LogWarning("Unknown WaterTank state.");

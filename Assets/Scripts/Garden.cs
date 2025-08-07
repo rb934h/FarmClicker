@@ -21,7 +21,9 @@ using UnityEngine;
         private Color gardenDefaultColor;
         private string seedingName; 
         private float seedingGrowTime; 
+        private float seedingPrice; 
         
+        public float SeedingPrice => seedingPrice;
         public GardenState State => currentState;
         
 
@@ -59,10 +61,10 @@ using UnityEngine;
             switch (seedingScriptableObject)
             {
                 case PlantData plantData:
-                    ApplySeedingData(plantData.name, plantData.prefab, plantData.growTime);
+                    ApplySeedingData(plantData.name, plantData.prefab, plantData.growTime, plantData.price);
                     break;
                 case VegetableData vegetableData:
-                    ApplySeedingData(vegetableData.name, vegetableData.prefab, vegetableData.growTime);
+                    ApplySeedingData(vegetableData.name, vegetableData.prefab, vegetableData.growTime, vegetableData.price);
                     break;
                 default:
                     Debug.LogWarning("Неизвестный тип данных для посадки.");
@@ -70,18 +72,19 @@ using UnityEngine;
             }
         }
         
-        private void ApplySeedingData(string name, GameObject prefab, float growTime)
+        private void ApplySeedingData(string name, GameObject prefab, float growTime, float price)
         {
             seedingName = name;
             seedingPrefab = prefab;
             seedingGrowTime = growTime;
+            seedingPrice = price;
         }
         
         private IEnumerator PlantSeed()
         {
             if (seedingPrefab == null)
             {
-                Debug.LogWarning("Невозможно посадить: нет данных о семени.");
+                ShowStateInfo("Невозможно посадить: нет данных о семени.");
                 yield break;
             }
             
@@ -91,7 +94,7 @@ using UnityEngine;
             yield return new WaitForSeconds(seedingGrowTime);
             
             currentState = GardenState.Planted;
-            Debug.Log("Семя посажено, требуется полив.");
+            ShowStateInfo("Семя посажено, требуется полив.");
             hintSpriteRenderer.sprite = hintData.waterSprite;
         }
 
@@ -99,7 +102,7 @@ using UnityEngine;
         {
             if (currentSeedingInstance == null)
             {
-                Debug.LogWarning("Нет посаженного растения для полива.");
+                ShowStateInfo("Нет посаженного растения для полива.");
                 return;
             }
 
@@ -108,7 +111,7 @@ using UnityEngine;
                 gardenMaterial.DOColor(gardenColorAfterWaterSeed, seedingGrowTime);
             }
             
-            Debug.Log("Полив начат, идет рост...");
+            ShowStateInfo("Полив начат, идет рост...");
             currentState = GardenState.Watered;
             StartCoroutine(GrowCoroutine());
         }
@@ -117,7 +120,7 @@ using UnityEngine;
         {
             yield return new WaitForSeconds(seedingGrowTime);
 
-            Debug.Log("Рост завершен, готово к сбору.");
+            ShowStateInfo("Рост завершен, готово к сбору.");
             currentState = GardenState.ReadyToHarvest;
             hintSpriteRenderer.sprite = hintData.harvestSprite;
         }
@@ -129,7 +132,7 @@ using UnityEngine;
                 Destroy(currentSeedingInstance);
             }
 
-            Debug.Log("Урожай собран!");
+            ShowStateInfo("Урожай собран!");
             currentState = GardenState.Empty;
             hintSpriteRenderer.sprite = null;
             
