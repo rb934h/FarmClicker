@@ -18,6 +18,8 @@ public class DeliveryCar : PointerObject
    
     public override void ChangeState()
     {
+        IsAvailable = false;
+        
         switch (currentState)
         {
             case DeliveryCarState.Empty:

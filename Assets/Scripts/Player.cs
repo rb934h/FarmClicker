@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     public event Action <PointerObject> InteractEnded;
     
     public bool IsHaveWater ;
-    public bool IsHavePackage ;
     
 
     public CollectableItemData SeedingData
@@ -45,32 +44,34 @@ public class Player : MonoBehaviour
     
     public void InteractWithGarden(Vector3 positionForDigging, Garden garden)
     {
+        if (garden.State == GardenState.Planted && !IsHaveWater)
+        {
+            Debug.LogWarning("Нужна вода, чтобы полить");
+            return;
+        }
+    
+        if (garden.State == GardenState.ReadyToHarvest && _harvestedScriptableObject != null)
+        {
+            Debug.LogWarning("Руки уже заняты");
+            return;
+        }
+
         _actionQueue.Enqueue(async () =>
         {
             var currentPointerObject = garden;
-            
+
             switch (garden.State)
             {
                 case GardenState.Planted:
-                    if (!IsHaveWater)
-                    {
-                        Debug.LogWarning("Нужна вода, чтобы полить");
-                        return;
-                    } 
-                    IsHaveWater = false;
+                    IsHaveWater = false; 
                     break;
-                case GardenState.ReadyToHarvest:
-                    if (_harvestedScriptableObject != null)
-                    {
-                        Debug.LogWarning("Руки уже заняты");
-                        return;
-                    }
 
+                case GardenState.ReadyToHarvest:
                     _seedingPrice = garden.SeedingPrice;
                     _harvestedScriptableObject = garden.GetSeedingObject();
                     break;
             }
-            
+
             await InteractSequence(positionForDigging, currentPointerObject);
         });
     }
@@ -93,16 +94,16 @@ public class Player : MonoBehaviour
     
     public void InteractWithDeliveryCar(Vector3 positionForGetWater, DeliveryCar deliveryCar)
     {
+        if (_harvestedScriptableObject == null && deliveryCar.State == DeliveryCarState.Empty)
+        {
+            Debug.LogWarning("Нужно что-то положить в машину");
+            return;
+        }
+        
         _actionQueue.Enqueue(async () =>
         {
             if (deliveryCar.State == DeliveryCarState.Empty )
             {
-                if (_harvestedScriptableObject == null)
-                {
-                    Debug.LogWarning("Нужно что-то положить в машину");
-                    return;
-                }
-
                 PutCargoToCar(deliveryCar,_harvestedScriptableObject);
             }
             

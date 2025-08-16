@@ -9,8 +9,10 @@ public class WaterTank : PointerObject
    
     public override void ChangeState()
     {
+        IsAvailable = false;
+        
         switch (currentState)
-        {
+        { 
             case WaterTankState.Empty:
                 break;
             case WaterTankState.NeedToRefill:

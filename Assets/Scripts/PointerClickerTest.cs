@@ -23,7 +23,6 @@ public class PointerClickerTest : MonoBehaviour
                     if (pointerObject.IsAvailable)
                     {
                         OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
-                        pointerObject.IsAvailable = false;
                     }
                        
                 }

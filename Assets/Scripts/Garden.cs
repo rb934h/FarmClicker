@@ -43,6 +43,7 @@ using UnityEngine;
 
         public override void ChangeState()
         {
+            IsAvailable = false;
             switch (currentState)
             {
                 case GardenState.Empty:
