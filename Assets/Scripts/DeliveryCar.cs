@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Enum;
 using ScriptableObjects;
@@ -8,8 +10,11 @@ public class DeliveryCar : PointerObject
     [SerializeField] private DeliveryCarData deliveryCarData;
     
     private DeliveryCarState currentState = DeliveryCarState.Empty;
+    private List<CollectableItemData> cargo = new ();
     
     public DeliveryCarState State => currentState;
+    
+    public event Action<List<CollectableItemData>> IsDeparted;
    
     public override void ChangeState()
     {
@@ -25,6 +30,12 @@ public class DeliveryCar : PointerObject
                 transform.DOMoveX(defaultPosition+20, 2f).OnComplete(() =>
                 {
                     ShowStateInfo("Машина отправлена");
+                    IsDeparted?.Invoke(cargo);
+                    foreach (var collectableItemData in cargo)
+                    {
+                        Debug.Log(collectableItemData.name);
+                    }
+                    cargo.Clear();
                     DOVirtual.DelayedCall(deliveryCarData.deliveryTime,
                         () => transform.DOMoveX(defaultPosition, 2f).OnComplete(() => currentState = DeliveryCarState.WithMoney));
                 });
@@ -39,5 +50,12 @@ public class DeliveryCar : PointerObject
                 Debug.LogWarning("Unknown DeliveryCar state.");
                 break;
         }
+        
+        IsAvailable = true;
+    }
+
+    public void PutCargo(CollectableItemData objectFromPlayer)
+    {
+        cargo.Add(objectFromPlayer);
     }
 }

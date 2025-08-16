@@ -11,7 +11,8 @@ using UnityEngine;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
         [SerializeField] private HintData hintData;
 
-        private ScriptableObject seedingScriptableObject; 
+        private CollectableItemData seedingScriptableObject; 
+        private CollectableItemData harvestScriptableObject; 
          
         private Material[] gardenMaterials;
         private GameObject seedingPrefab; 
@@ -22,11 +23,17 @@ using UnityEngine;
         private string seedingName; 
         private float seedingGrowTime; 
         private float seedingPrice; 
+      
         
+        public GameObject SeedingPrefab => seedingPrefab;
         public float SeedingPrice => seedingPrice;
         public GardenState State => currentState;
-        
 
+
+        public CollectableItemData GetSeedingObject()
+        {
+            return harvestScriptableObject;
+        }
         private void Start()
         {
             gardenMaterials = gardenRenderer.materials;
@@ -51,10 +58,9 @@ using UnityEngine;
                     Debug.Log("Нет доступного действия для текущего состояния: " + currentState);
                     break;
             }
-            
         }
         
-        public void SetSeedingData(ScriptableObject seedingData)
+        public void SetSeedingData(CollectableItemData seedingData)
         {
             seedingScriptableObject = seedingData;
 
@@ -85,8 +91,11 @@ using UnityEngine;
             if (seedingPrefab == null)
             {
                 ShowStateInfo("Невозможно посадить: нет данных о семени.");
+                IsAvailable = true;
                 yield break;
             }
+            
+            harvestScriptableObject = seedingScriptableObject;
             
             Vector3 spawnPosition = new Vector3(transform.position.x, 0, transform.position.z);
             currentSeedingInstance = Instantiate(seedingPrefab, spawnPosition, Quaternion.identity);
@@ -96,6 +105,8 @@ using UnityEngine;
             currentState = GardenState.Planted;
             ShowStateInfo("Семя посажено, требуется полив.");
             hintSpriteRenderer.sprite = hintData.waterSprite;
+            
+            IsAvailable = true;
         }
 
         private void WaterSeed()
@@ -123,6 +134,8 @@ using UnityEngine;
             ShowStateInfo("Рост завершен, готово к сбору.");
             currentState = GardenState.ReadyToHarvest;
             hintSpriteRenderer.sprite = hintData.harvestSprite;
+            
+            IsAvailable = true;
         }
 
         private void Harvest()
@@ -131,7 +144,7 @@ using UnityEngine;
             {
                 Destroy(currentSeedingInstance);
             }
-
+            
             ShowStateInfo("Урожай собран!");
             currentState = GardenState.Empty;
             hintSpriteRenderer.sprite = null;
@@ -140,6 +153,10 @@ using UnityEngine;
             {
                 gardenMaterial.DOColor(gardenDefaultColor, seedingGrowTime);
             }
+            
+            IsAvailable = true;
+
+            harvestScriptableObject = null;
         }
     }
 

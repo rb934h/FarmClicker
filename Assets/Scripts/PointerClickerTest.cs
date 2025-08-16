@@ -20,7 +20,12 @@ public class PointerClickerTest : MonoBehaviour
             {
                 if (pointerObject.Collider != null && pointerObject.Collider.Raycast(ray, out hitData, 1000))
                 {
-                    OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
+                    if (pointerObject.IsAvailable)
+                    {
+                        OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
+                        pointerObject.IsAvailable = false;
+                    }
+                       
                 }
             }
         }

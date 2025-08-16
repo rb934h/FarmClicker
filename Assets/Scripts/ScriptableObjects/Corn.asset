@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Corn
   m_EditorClassIdentifier: 
   prefab: {fileID: 5842970912687788396, guid: dc58b871c7daf4e43aa564c027d69e43, type: 3}
-  name: Corn
+  itemName: Corn
   price: 5
   growTime: 3

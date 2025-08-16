@@ -1,16 +1,19 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PointerObject : MonoBehaviour
 {
-    [SerializeField] private Collider collider;
+    [SerializeField] private Collider pointerObjectCollider;
     [SerializeField] private Transform pointForInteraction;
     [SerializeField] protected TMP_Text _stateInfoText;
     
-    public Collider Collider => collider;
+    public bool IsAvailable = true;
+    
+    public Collider Collider => pointerObjectCollider;
     public Transform PointForInteraction => pointForInteraction;
-
+    
     public virtual void ChangeState()
     {
       

@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using Enum; 
+using Enum;
+using ScriptableObjects;
 
 public class Player : MonoBehaviour
 {
@@ -12,9 +13,10 @@ public class Player : MonoBehaviour
     [Header("UI")]
     [SerializeField] private PlayerWallet _playerWallet;
 
-    private ScriptableObject _seedingData;
+    private CollectableItemData _seedingData;
     private PointerObject _pointerObject;
     private CharacterState _state = CharacterState.Idle;
+    private CollectableItemData _harvestedScriptableObject;
     private readonly ActionQueue _actionQueue = new();
     private float _seedingPrice;
 
@@ -22,16 +24,21 @@ public class Player : MonoBehaviour
     public event Action <PointerObject> Interacted;
     public event Action <PointerObject> InteractEnded;
     
-    public bool IsHaveWater = false;
-    public bool IsHavePackage = false;
+    public bool IsHaveWater ;
+    public bool IsHavePackage ;
     
 
-    public ScriptableObject SeedingData
+    public CollectableItemData SeedingData
     {
         get => _seedingData;
     }
+
+    public float CheckWallet()
+    {
+        return _playerWallet.GetMoney();
+    }
     
-    public void SetSeedingData(ScriptableObject seedingData)
+    public void SetSeedingData(CollectableItemData seedingData)
     {
         _seedingData = seedingData;
     }
@@ -53,15 +60,14 @@ public class Player : MonoBehaviour
                     IsHaveWater = false;
                     break;
                 case GardenState.ReadyToHarvest:
-                    if (IsHavePackage)
+                    if (_harvestedScriptableObject != null)
                     {
                         Debug.LogWarning("Руки уже заняты");
                         return;
                     }
 
                     _seedingPrice = garden.SeedingPrice;
-                    IsHavePackage = true;
-                    
+                    _harvestedScriptableObject = garden.GetSeedingObject();
                     break;
             }
             
@@ -72,6 +78,9 @@ public class Player : MonoBehaviour
     {
         _actionQueue.Enqueue(async () =>
         {
+            if(IsHaveWater)
+                return;
+            
             if (waterTank.State == WaterTankState.ReadyToCollect)
             {
                 IsHaveWater = true;
@@ -88,12 +97,13 @@ public class Player : MonoBehaviour
         {
             if (deliveryCar.State == DeliveryCarState.Empty )
             {
-                if (!IsHavePackage)
+                if (_harvestedScriptableObject == null)
                 {
                     Debug.LogWarning("Нужно что-то положить в машину");
                     return;
                 }
-                IsHavePackage = false;
+
+                PutCargoToCar(deliveryCar,_harvestedScriptableObject);
             }
             
             if (deliveryCar.State == DeliveryCarState.WithMoney )
@@ -110,7 +120,6 @@ public class Player : MonoBehaviour
     {
         SetState(CharacterState.Walking);
         await MoveTo(positionForDigging);
-
         SetState(CharacterState.Digging);
         Interacted?.Invoke(currentPointerObject);
         await UniTask.WaitForSeconds(diggingTime);
@@ -131,6 +140,11 @@ public class Player : MonoBehaviour
     private void SetState(CharacterState newState)
     {
         _state = newState;
-        Debug.Log($"Состояние: {_state}");
-    } 
+    }
+
+    private void PutCargoToCar(DeliveryCar deliveryCar, CollectableItemData cargo)
+    {
+        deliveryCar.PutCargo(cargo);
+        _harvestedScriptableObject = null;
+    }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   prefab: {fileID: 8530139522806440882, guid: a455b670e1750fb46ae90745b9b2ca04, type: 3}
-  name: Tomato
+  itemName: Tomato
   price: 10
   growTime: 1

@@ -47,9 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed07b78083b41d7b69d7ecbafd273cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1878599542087630724}
+  pointerObjectCollider: {fileID: 1878599542087630724}
   pointForInteraction: {fileID: 6942877135739906044}
   _stateInfoText: {fileID: 6705494302878982402}
+  IsAvailable: 1
   gardenRenderer: {fileID: 3084925981406905974}
   hintSpriteRenderer: {fileID: 4577925439775716226}
   hintData: {fileID: 11400000, guid: 6a68aaa7cf50f1040bcdc319c820486c, type: 2}

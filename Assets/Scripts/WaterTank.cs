@@ -25,5 +25,7 @@ public class WaterTank : PointerObject
                 Debug.LogWarning("Unknown WaterTank state.");
                 break;
         }
+        
+        IsAvailable = true;
     }
 }

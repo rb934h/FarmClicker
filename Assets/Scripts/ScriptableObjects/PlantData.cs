@@ -1,10 +1,11 @@
+using ScriptableObjects;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlant", menuName = "Plant/PlnatData")]
-public class PlantData : ScriptableObject
+public class PlantData : CollectableItemData
 {
     public GameObject prefab;
-    public string name;
+    public string itemName;
     public int price;
     public float growTime;
 }

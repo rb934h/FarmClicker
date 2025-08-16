@@ -122,9 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bce7831a909774db48eab09b07fed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 6790139483956107260}
+  pointerObjectCollider: {fileID: 6790139483956107260}
   pointForInteraction: {fileID: 241187998832248570}
   _stateInfoText: {fileID: 3561870404593614782}
+  IsAvailable: 1
 --- !u!1 &4584269091857018770
 GameObject:
   m_ObjectHideFlags: 0

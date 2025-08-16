@@ -12,6 +12,11 @@ public class PlayerWallet : MonoBehaviour
       UpdateCoinsCountText();
    }
    
+   public float GetMoney()
+   {
+      return _coins;
+   }
+   
    private void UpdateCoinsCountText()
    {
       if (_coinsCountText != null)
