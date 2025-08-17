@@ -89,10 +89,8 @@ public class Level : MonoBehaviour
     {
         foreach (var item in items)
         {
-            if (_deliveredItems.ContainsKey(item)) //ТУТ
+            if (!_deliveredItems.TryAdd(item, 1))
                 _deliveredItems[item]++;
-            else
-                _deliveredItems[item] = 1;
         }
        
         CheckLevelGoals();
