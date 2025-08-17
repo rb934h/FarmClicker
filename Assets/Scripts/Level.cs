@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using DefaultNamespace;
-using JetBrains.Annotations;
 using ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,14 +13,24 @@ public class Level : MonoBehaviour
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private Image _timerImage;
     [SerializeField] private DeliveryCar _deliveryCar;
+    [SerializeField] private Transform _levelGoalsUITransform;
+    [SerializeField] private TMP_Text _levelGoalsText;
     
     private Timer _levelTimer;
+    private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
 
     private void Start()
     {
         _inputSystem.DownTouched += StartLevel;
         _levelTimer = new Timer(_timerImage);
+        _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
+        
+        foreach (var levelDataGoal in _levelData.goals)
+        {
+            _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
+        }
+
     }
     
     private void StartLevel()
