@@ -24,7 +24,6 @@ public class PointerClickerTest : MonoBehaviour
                     {
                         OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
                     }
-                       
                 }
             }
         }

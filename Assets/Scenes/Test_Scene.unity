@@ -6761,6 +6761,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6077260705089369092, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: workTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077260705089369092, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: _playerWallet
       value: 
       objectReference: {fileID: 623159856}

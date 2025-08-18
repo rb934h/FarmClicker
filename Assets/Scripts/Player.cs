@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Enum;
@@ -6,11 +7,11 @@ using ScriptableObjects;
 
 public class Player : MonoBehaviour
 {
-    [Header("Настройки движения")]
+    [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float diggingTime = 5f;
-    
-    [Header("UI")]
+    [SerializeField] private float workTime = 5f;
+
+    [Header("UI")] 
     [SerializeField] private PlayerWallet _playerWallet;
 
     private CollectableItemData _seedingData;
@@ -20,12 +21,14 @@ public class Player : MonoBehaviour
     private readonly ActionQueue _actionQueue = new();
     private float _seedingPrice;
 
-    
-    public event Action <PointerObject> Interacted;
-    public event Action <PointerObject> InteractEnded;
-    
-    public bool IsHaveWater ;
-    
+    private HashSet<PointerObject> _busyPointerObjects = new HashSet<PointerObject>();
+
+
+    public event Action<PointerObject> MoveCompleted;
+    public event Action<PointerObject> WorkCompleted;
+
+    public bool isHaveWater;
+
 
     public CollectableItemData SeedingData
     {
@@ -36,99 +39,102 @@ public class Player : MonoBehaviour
     {
         return _playerWallet.GetMoney();
     }
-    
+
     public void SetSeedingData(CollectableItemData seedingData)
     {
         _seedingData = seedingData;
     }
-    
-    public void InteractWithGarden(Vector3 positionForDigging, Garden garden)
+
+    public void InteractWithGarden(Vector3 pos, Garden garden)
     {
-        if (garden.State == GardenState.Planted && !IsHaveWater)
+        InteractWithPointerObject(pos, garden, async _ => { await UniTask.WaitForSeconds(workTime); });
+    }
+
+    public void InteractWithWaterTank(Vector3 pos, WaterTank tank)
+    {
+        InteractWithPointerObject(pos, tank, async t =>
         {
-            Debug.LogWarning("Нужна вода, чтобы полить");
-            return;
-        }
-    
-        if (garden.State == GardenState.ReadyToHarvest && _harvestedScriptableObject != null)
-        {
-            Debug.LogWarning("Руки уже заняты");
-            return;
-        }
-
-        _actionQueue.Enqueue(async () =>
-        {
-            var currentPointerObject = garden;
-
-            switch (garden.State)
-            {
-                case GardenState.Planted:
-                    IsHaveWater = false; 
-                    break;
-
-                case GardenState.ReadyToHarvest:
-                    _seedingPrice = garden.SeedingPrice;
-                    _harvestedScriptableObject = garden.GetSeedingObject();
-                    break;
-            }
-
-            await InteractSequence(positionForDigging, currentPointerObject);
+            if (!isHaveWater && t.State == WaterTankState.ReadyToCollect)
+                isHaveWater = true;
+            await UniTask.WaitForSeconds(workTime);
+            ;
         });
     }
-    public void InteractWithWaterTank(Vector3 positionForGetWater, WaterTank waterTank)
+
+    public void InteractWithDeliveryCar(Vector3 pos, DeliveryCar car)
     {
-        _actionQueue.Enqueue(async () =>
+        InteractWithPointerObject(pos, car, async c =>
         {
-            if(IsHaveWater)
-                return;
-            
-            if (waterTank.State == WaterTankState.ReadyToCollect)
-            {
-                IsHaveWater = true;
-            }
-            
-            var currentPointerObject = waterTank;
-            await InteractSequence(positionForGetWater, currentPointerObject);
-        });
-    }
-    
-    public void InteractWithDeliveryCar(Vector3 positionForGetWater, DeliveryCar deliveryCar)
-    {
-        if (_harvestedScriptableObject == null && deliveryCar.State == DeliveryCarState.Empty)
-        {
-            Debug.LogWarning("Нужно что-то положить в машину");
-            return;
-        }
-        
-        _actionQueue.Enqueue(async () =>
-        {
-            if (deliveryCar.State == DeliveryCarState.Empty )
-            {
-                PutCargoToCar(deliveryCar,_harvestedScriptableObject);
-            }
-            
-            if (deliveryCar.State == DeliveryCarState.WithMoney )
-            {
+            if (c.State == DeliveryCarState.Empty)
+                PutCargoToCar(c, _harvestedScriptableObject);
+
+            if (c.State == DeliveryCarState.WithMoney)
                 _playerWallet.SetMoney(_seedingPrice);
-            }
-            
-            var currentPointerObject = deliveryCar;
-            await InteractSequence(positionForGetWater, currentPointerObject);
+
+            await UniTask.WaitForSeconds(workTime);
+            ;
         });
     }
     
-    private async UniTask InteractSequence(Vector3 positionForDigging, PointerObject currentPointerObject)
+    private void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject, Func<T, UniTask> work)
+        where T : PointerObject
     {
-        SetState(CharacterState.Walking);
-        await MoveTo(positionForDigging);
-        SetState(CharacterState.Digging);
-        Interacted?.Invoke(currentPointerObject);
-        await UniTask.WaitForSeconds(diggingTime);
-        InteractEnded?.Invoke(currentPointerObject);
+        if (_busyPointerObjects.Contains(pointerObject))
+            return;
 
-        SetState(CharacterState.Idle);
+        _actionQueue.Enqueue(async () =>
+        {
+            _busyPointerObjects.Add(pointerObject);
+            try
+            {
+                await MoveTo(targetPosition);
+                MoveCompleted?.Invoke(pointerObject);
+                
+                switch (pointerObject)
+                {
+                    case Garden garden:
+                        if (garden.State == GardenState.Planted)
+                        {
+                            if (!isHaveWater)
+                            {
+                                Debug.LogWarning("Нет воды для полива");
+                                return;
+                            }
+                            isHaveWater = false; // тратим воду
+                        }
+                        else if (garden.State == GardenState.ReadyToHarvest)
+                        {
+                            if (_harvestedScriptableObject != null)
+                            {
+                                Debug.LogWarning("Руки уже заняты");
+                                return;
+                            }
+                            _seedingPrice = garden.SeedingPrice;
+                            _harvestedScriptableObject = garden.GetHarvestObject();
+                        }
+                        break;
+
+                    case DeliveryCar car:
+                        if (car.State == DeliveryCarState.Empty && _harvestedScriptableObject == null)
+                        {
+                            Debug.LogWarning("Нужно что-то положить в машину");
+                            return;
+                        }
+                        break;
+                }
+
+                await work(pointerObject);
+
+                WorkCompleted?.Invoke(pointerObject);
+            }
+            finally
+            {
+                _busyPointerObjects.Remove(pointerObject);
+                SetState(CharacterState.Idle);
+            }
+        });
     }
-    
+
     private async UniTask MoveTo(Vector3 target)
     {
         while (Vector3.Distance(transform.position, target) > 0.1f)
@@ -137,7 +143,7 @@ public class Player : MonoBehaviour
             await UniTask.Yield();
         }
     }
-    
+
     private void SetState(CharacterState newState)
     {
         _state = newState;

@@ -9,6 +9,9 @@ public class WaterTank : PointerObject
    
     public override void ChangeState()
     {
+        if(!IsAvailable)
+            return;
+            
         IsAvailable = false;
         
         switch (currentState)

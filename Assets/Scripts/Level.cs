@@ -37,7 +37,7 @@ public class Level : MonoBehaviour
     {
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
-        _player.InteractEnded += ChangeState;
+        _player.WorkCompleted += ChangeState;
         _deliveryCar.IsDeparted += AddDeliveredItem;
      
         foreach (var screen in ScreenBase.Screens)

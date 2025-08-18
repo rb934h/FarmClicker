@@ -17,7 +17,10 @@ public class DeliveryCar : PointerObject
     public event Action<List<CollectableItemData>> IsDeparted;
    
     public override void ChangeState()
-    {
+    { 
+        if(!IsAvailable)
+            return;
+            
         IsAvailable = false;
         
         switch (currentState)

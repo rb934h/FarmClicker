@@ -30,7 +30,7 @@ using UnityEngine;
         public GardenState State => currentState;
 
 
-        public CollectableItemData GetSeedingObject()
+        public CollectableItemData GetHarvestObject()
         {
             return harvestScriptableObject;
         }
@@ -43,14 +43,18 @@ using UnityEngine;
 
         public override void ChangeState()
         {
+            if(!IsAvailable)
+                return;
+            
             IsAvailable = false;
+            
             switch (currentState)
             {
                 case GardenState.Empty:
                     StartCoroutine(PlantSeed());
                     break;
                 case GardenState.Planted:
-                    WaterSeed();
+                    StartCoroutine(WaterAndGrow());
                     break;
                 case GardenState.ReadyToHarvest:
                     Harvest();
@@ -106,36 +110,33 @@ using UnityEngine;
             currentState = GardenState.Planted;
             ShowStateInfo("Семя посажено, требуется полив.");
             hintSpriteRenderer.sprite = hintData.waterSprite;
-            
             IsAvailable = true;
+            
+            Debug.Log(IsAvailable);
         }
 
-        private void WaterSeed()
+        private IEnumerator WaterAndGrow()
         {
             if (currentSeedingInstance == null)
             {
                 ShowStateInfo("Нет посаженного растения для полива.");
-                return;
+                IsAvailable = true;
+                yield break;
             }
+
+            ShowStateInfo("Полив начат, идет рост...");
 
             foreach (var gardenMaterial in gardenMaterials)
             {
                 gardenMaterial.DOColor(gardenColorAfterWaterSeed, seedingGrowTime);
             }
             
-            ShowStateInfo("Полив начат, идет рост...");
-            currentState = GardenState.Watered;
-            StartCoroutine(GrowCoroutine());
-        }
-
-        private IEnumerator GrowCoroutine()
-        {
             yield return new WaitForSeconds(seedingGrowTime);
-
-            ShowStateInfo("Рост завершен, готово к сбору.");
+            
             currentState = GardenState.ReadyToHarvest;
             hintSpriteRenderer.sprite = hintData.harvestSprite;
-            
+            ShowStateInfo("Рост завершен, готово к сбору.");
+
             IsAvailable = true;
         }
 
@@ -154,9 +155,8 @@ using UnityEngine;
             {
                 gardenMaterial.DOColor(gardenDefaultColor, seedingGrowTime);
             }
-            
-            IsAvailable = true;
 
+            IsAvailable = true;
             harvestScriptableObject = null;
         }
     }
