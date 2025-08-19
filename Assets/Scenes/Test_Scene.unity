@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efae6e9c9fad6e4eb6b8553be9f7381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsCountText: {fileID: 1385081617}
+  coinsCountText: {fileID: 0}
 --- !u!4 &626852452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6985144698159955388, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
@@ -3207,7 +3207,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 57.6
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

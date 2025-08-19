@@ -58,7 +58,7 @@ public class Level : MonoBehaviour
         _levelTimer.CheckTimer();
     }
 
-    private void OnPointerClick(Vector3 positionForInteract, PointerObject pointerObject)
+    private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
         if (pointerObject is Garden garden)
         {

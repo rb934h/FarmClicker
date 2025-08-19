@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerWallet : MonoBehaviour
 {
-   [SerializeField] private TMP_Text _coinsCountText;
+   [SerializeField] private TMP_Text coinsCountText;
+   
    private float _coins;
 
    public void SetMoney(float seedingPrice)
@@ -19,9 +21,9 @@ public class PlayerWallet : MonoBehaviour
    
    private void UpdateCoinsCountText()
    {
-      if (_coinsCountText != null)
+      if (coinsCountText != null)
       {
-         _coinsCountText.text = $"Coins: {_coins}";
+         coinsCountText.text = $"Coins: {_coins}";
       }
    }
 }

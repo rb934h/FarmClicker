@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using DefaultNamespace;
+using DG.Tweening;
 using Enum;
 using ScriptableObjects;
 
@@ -10,9 +12,13 @@ public class Player : MonoBehaviour
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float workTime = 5f;
-
+    
     [Header("UI")] 
-    [SerializeField] private PlayerWallet _playerWallet;
+    [SerializeField] private PlayerWallet playerWallet;
+    
+    [Header("Анимация")] 
+    [SerializeField] private PlayerAnimator _playerAnimator;
+    
 
     private CollectableItemData _seedingData;
     private PointerObject _pointerObject;
@@ -20,15 +26,15 @@ public class Player : MonoBehaviour
     private CollectableItemData _harvestedScriptableObject;
     private readonly ActionQueue _actionQueue = new();
     private float _seedingPrice;
+    
 
-    private HashSet<PointerObject> _busyPointerObjects = new HashSet<PointerObject>();
+    private readonly HashSet<PointerObject> _busyPointerObjects = new ();
 
 
     public event Action<PointerObject> MoveCompleted;
     public event Action<PointerObject> WorkCompleted;
 
     public bool isHaveWater;
-
 
     public CollectableItemData SeedingData
     {
@@ -37,7 +43,7 @@ public class Player : MonoBehaviour
 
     public float CheckWallet()
     {
-        return _playerWallet.GetMoney();
+        return playerWallet.GetMoney();
     }
 
     public void SetSeedingData(CollectableItemData seedingData)
@@ -57,7 +63,6 @@ public class Player : MonoBehaviour
             if (!isHaveWater && t.State == WaterTankState.ReadyToCollect)
                 isHaveWater = true;
             await UniTask.WaitForSeconds(workTime);
-            ;
         });
     }
 
@@ -69,10 +74,9 @@ public class Player : MonoBehaviour
                 PutCargoToCar(c, _harvestedScriptableObject);
 
             if (c.State == DeliveryCarState.WithMoney)
-                _playerWallet.SetMoney(_seedingPrice);
-
+                playerWallet.SetMoney(_seedingPrice);
+            
             await UniTask.WaitForSeconds(workTime);
-            ;
         });
     }
     
@@ -87,8 +91,13 @@ public class Player : MonoBehaviour
             _busyPointerObjects.Add(pointerObject);
             try
             {
+                float yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
+                
+                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
                 await MoveTo(targetPosition);
                 MoveCompleted?.Invoke(pointerObject);
+                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
                 
                 switch (pointerObject)
                 {
@@ -100,7 +109,8 @@ public class Player : MonoBehaviour
                                 Debug.LogWarning("Нет воды для полива");
                                 return;
                             }
-                            isHaveWater = false; // тратим воду
+                            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerWatering);
+                            isHaveWater = false;
                         }
                         else if (garden.State == GardenState.ReadyToHarvest)
                         {
@@ -109,6 +119,7 @@ public class Player : MonoBehaviour
                                 Debug.LogWarning("Руки уже заняты");
                                 return;
                             }
+                            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerWeeding);
                             _seedingPrice = garden.SeedingPrice;
                             _harvestedScriptableObject = garden.GetHarvestObject();
                         }
@@ -118,6 +129,14 @@ public class Player : MonoBehaviour
                         if (car.State == DeliveryCarState.Empty && _harvestedScriptableObject == null)
                         {
                             Debug.LogWarning("Нужно что-то положить в машину");
+                            return;
+                        }
+                        break;
+                    
+                    case WaterTank waterTank:
+                        if (waterTank.State == WaterTankState.ReadyToCollect && isHaveWater)
+                        {
+                            Debug.LogWarning("В руках уже есть вода");
                             return;
                         }
                         break;

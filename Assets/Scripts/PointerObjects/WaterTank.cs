@@ -19,7 +19,7 @@ public class WaterTank : PointerObject
             case WaterTankState.Empty:
                 break;
             case WaterTankState.NeedToRefill:
-                ShowStateInfo("Идет наполнение...");
+                ShowStateInfo("Ведро воды готово, можно забрать");
                 currentState = WaterTankState.ReadyToCollect;
                 break;
             case WaterTankState.ReadyToCollect:

@@ -1,20 +1,21 @@
 ﻿using System.Collections;
-using DG.Tweening;
+using System.Collections.Generic;
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
-    public class Garden : PointerObject
+public class Garden : PointerObject
     {
-        [SerializeField] private MeshRenderer gardenRenderer;
+        //[SerializeField] private List<Tile> gardenTiles;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
         [SerializeField] private HintData hintData;
 
         private CollectableItemData seedingScriptableObject; 
         private CollectableItemData harvestScriptableObject; 
-         
-        private Material[] gardenMaterials;
+        
+
         private GameObject seedingPrefab; 
         private GameObject currentSeedingInstance; 
         private GardenState currentState = GardenState.Empty;
@@ -36,8 +37,7 @@ using UnityEngine;
         }
         private void Start()
         {
-            gardenMaterials = gardenRenderer.materials;
-            gardenDefaultColor = gardenMaterials[1].color;
+           // gardenDefaultColor = gardenTiles[0].color;
             gardenColorAfterWaterSeed = new Color(0.7f, 0.5f, 0.35f);
         }
 
@@ -125,11 +125,11 @@ using UnityEngine;
             }
 
             ShowStateInfo("Полив начат, идет рост...");
-
-            foreach (var gardenMaterial in gardenMaterials)
-            {
-                gardenMaterial.DOColor(gardenColorAfterWaterSeed, seedingGrowTime);
-            }
+            
+            // foreach (var gardenTile in gardenTiles)
+            // {
+            //     gardenTile.color = gardenColorAfterWaterSeed;
+            // }
             
             yield return new WaitForSeconds(seedingGrowTime);
             
@@ -151,10 +151,10 @@ using UnityEngine;
             currentState = GardenState.Empty;
             hintSpriteRenderer.sprite = null;
             
-            foreach (var gardenMaterial in gardenMaterials)
-            {
-                gardenMaterial.DOColor(gardenDefaultColor, seedingGrowTime);
-            }
+            // foreach (var gardenTile in gardenTiles)
+            // {
+            //     gardenTile.color = gardenDefaultColor;
+            // }
 
             IsAvailable = true;
             harvestScriptableObject = null;

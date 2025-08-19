@@ -19,4 +19,4 @@ MonoBehaviour:
     requiredCount: 1
   - itemData: {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
     requiredCount: 3
-  requiredCoins: 0
+  requiredCoins: 4

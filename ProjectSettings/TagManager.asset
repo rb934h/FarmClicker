@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PointerObjects
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 176498069
+    locked: 0
+  - name: UpperGround
+    uniqueID: 3641439817
+    locked: 0
+  - name: Objects
+    uniqueID: 1933057433
+    locked: 0
+  - name: UpperObjects
+    uniqueID: 4278749611
+    locked: 0
+  - name: Plants
+    uniqueID: 4221228141
+    locked: 0
+  - name: Player
+    uniqueID: 2695417519
     locked: 0

@@ -1,31 +1,30 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using System;
 
 public class PointerClickerTest : MonoBehaviour
 {
-    [FormerlySerializedAs("gardens")] [SerializeField] private PointerObject[] pointerObjects;
-    
-    Ray ray;
-    public event Action<Vector3, PointerObject> OnPointerClick;
-    
+    [SerializeField] private PointerObject[] pointerObjects;
+
+    public event Action<Vector2, PointerObject> OnPointerClick;
+
     void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitData;
-
         if (Input.GetMouseButtonDown(0))
         {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);  // чтобы вернуть в z = 0
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
+
             foreach (var pointerObject in pointerObjects)
             {
-                if (pointerObject.Collider != null && pointerObject.Collider.Raycast(ray, out hitData, 1000))
+                if (pointerObject.IsAvailable && 
+                    pointerObject.Collider != null &&
+                    pointerObject.Collider.OverlapPoint(worldPoint))
                 {
-                    if (pointerObject.IsAvailable)
-                    {
-                        OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
-                    }
+                    OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
                 }
             }
         }
+
     }
 }
