@@ -22,11 +22,13 @@ public class Garden : PointerObject
         private Color gardenColorAfterWaterSeed;
         private Color gardenDefaultColor;
         private string seedingName; 
+        private Sprite seedingSprite; 
         private float seedingGrowTime; 
         private float seedingPrice; 
       
         
         public GameObject SeedingPrefab => seedingPrefab;
+        public Sprite SeedingSprite => seedingSprite;
         public float SeedingPrice => seedingPrice;
         public GardenState State => currentState;
 
@@ -72,10 +74,10 @@ public class Garden : PointerObject
             switch (seedingScriptableObject)
             {
                 case PlantData plantData:
-                    ApplySeedingData(plantData.name, plantData.prefab, plantData.growTime, plantData.price);
+                    ApplySeedingData(plantData.name, plantData.prefab, plantData.growTime, plantData.price, plantData.plantSprite);
                     break;
                 case VegetableData vegetableData:
-                    ApplySeedingData(vegetableData.name, vegetableData.prefab, vegetableData.growTime, vegetableData.price);
+                    ApplySeedingData(vegetableData.name, vegetableData.prefab, vegetableData.growTime, vegetableData.price, vegetableData.vegetableSprite);
                     break;
                 default:
                     Debug.LogWarning("Неизвестный тип данных для посадки.");
@@ -83,8 +85,9 @@ public class Garden : PointerObject
             }
         }
         
-        private void ApplySeedingData(string name, GameObject prefab, float growTime, float price)
+        private void ApplySeedingData(string name, GameObject prefab, float growTime, float price, Sprite itemSprite)
         {
+            seedingSprite = itemSprite;
             seedingName = name;
             seedingPrefab = prefab;
             seedingGrowTime = growTime;

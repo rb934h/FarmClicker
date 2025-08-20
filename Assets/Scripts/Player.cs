@@ -18,23 +18,26 @@ public class Player : MonoBehaviour
     
     [Header("Анимация")] 
     [SerializeField] private PlayerAnimator _playerAnimator;
+    [SerializeField] private PlayerInventory _playerInventory;
     
 
     private CollectableItemData _seedingData;
     private PointerObject _pointerObject;
-    private CharacterState _state = CharacterState.Idle;
-    private CollectableItemData _harvestedScriptableObject;
+    //private CharacterState _state = CharacterState.Idle;
     private readonly ActionQueue _actionQueue = new();
     private float _seedingPrice;
     
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
+    private readonly List<CollectableItemData> _harvestedScriptableObjects = new();
 
 
     public event Action<PointerObject> MoveCompleted;
     public event Action<PointerObject> WorkCompleted;
 
     public bool isHaveWater;
+
+    private int itemsInHandCount;
 
     public CollectableItemData SeedingData
     {
@@ -71,7 +74,15 @@ public class Player : MonoBehaviour
         InteractWithPointerObject(pos, car, async c =>
         {
             if (c.State == DeliveryCarState.Empty)
-                PutCargoToCar(c, _harvestedScriptableObject);
+            {
+                foreach (var _harvestedScriptableObject in _harvestedScriptableObjects)
+                {
+                    PutCargoToCar(c, _harvestedScriptableObject);
+                }
+
+                ClearItemsInHand();
+            }
+                
 
             if (c.State == DeliveryCarState.WithMoney)
                 playerWallet.SetMoney(_seedingPrice);
@@ -114,23 +125,28 @@ public class Player : MonoBehaviour
                         }
                         else if (garden.State == GardenState.ReadyToHarvest)
                         {
-                            if (_harvestedScriptableObject != null)
+                            itemsInHandCount++;
+                            
+                            if (itemsInHandCount == 2)
                             {
                                 Debug.LogWarning("Руки уже заняты");
                                 return;
                             }
                             _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerWeeding);
-                            _seedingPrice = garden.SeedingPrice;
-                            _harvestedScriptableObject = garden.GetHarvestObject();
+                            DOVirtual.DelayedCall(1,() => _playerInventory.SetItem(garden.SeedingSprite)); //TODO
+                            _seedingPrice += garden.SeedingPrice;
+                            _harvestedScriptableObjects.Add(garden.GetHarvestObject());
                         }
                         break;
 
                     case DeliveryCar car:
-                        if (car.State == DeliveryCarState.Empty && _harvestedScriptableObject == null)
+                        if (car.State == DeliveryCarState.Empty && _harvestedScriptableObjects[0] == null)
                         {
                             Debug.LogWarning("Нужно что-то положить в машину");
                             return;
                         }
+                        itemsInHandCount = 0;
+                        _playerInventory.ClearItem();
                         break;
                     
                     case WaterTank waterTank:
@@ -149,7 +165,7 @@ public class Player : MonoBehaviour
             finally
             {
                 _busyPointerObjects.Remove(pointerObject);
-                SetState(CharacterState.Idle);
+               // SetState(CharacterState.Idle);
             }
         });
     }
@@ -163,14 +179,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void SetState(CharacterState newState)
-    {
-        _state = newState;
-    }
+    // private void SetState(CharacterState newState)
+    // {
+    //     _state = newState;
+    // }
 
     private void PutCargoToCar(DeliveryCar deliveryCar, CollectableItemData cargo)
     {
         deliveryCar.PutCargo(cargo);
-        _harvestedScriptableObject = null;
+    }
+
+    private void ClearItemsInHand()
+    {
+        _harvestedScriptableObjects.Clear();
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a6e60cc3f400a83e4f7ab3210e9b4, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: 
+  plantSprite: {fileID: 1700330473, guid: c52439be0dceeb141adbec4630146525, type: 3}
   prefab: {fileID: 5842970912687788396, guid: dc58b871c7daf4e43aa564c027d69e43, type: 3}
   itemName: Corn
   price: 5

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4f5a77f20492347973b89deddc662e, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
+  vegetableSprite: {fileID: 523383999, guid: c52439be0dceeb141adbec4630146525, type: 3}
   prefab: {fileID: 8530139522806440882, guid: a455b670e1750fb46ae90745b9b2ca04, type: 3}
   itemName: Tomato
   price: 10

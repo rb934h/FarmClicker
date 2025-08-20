@@ -53,9 +53,9 @@ TagManager:
   - name: UpperObjects
     uniqueID: 4278749611
     locked: 0
-  - name: Plants
-    uniqueID: 4221228141
-    locked: 0
   - name: Player
     uniqueID: 2695417519
+    locked: 0
+  - name: Plants
+    uniqueID: 4221228141
     locked: 0
