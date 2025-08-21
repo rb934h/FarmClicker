@@ -2,5 +2,13 @@
 
 namespace ScriptableObjects
 {
-    public abstract class CollectableItemData : ScriptableObject { }
+    public abstract class CollectableItemData : ScriptableObject
+    {
+        public string itemName;
+        public int price;
+        public float growTime;
+        public Sprite spriteForHands;
+        public Sprite[] spritesForGarden;
+        
+    }
 }
