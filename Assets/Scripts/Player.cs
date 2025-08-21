@@ -132,9 +132,10 @@ public class Player : MonoBehaviour
                                 Debug.LogWarning("Руки уже заняты");
                                 return;
                             }
+                            
                             _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerWeeding);
-                            DOVirtual.DelayedCall(1,() => _playerInventory.SetItem(garden.SeedingSprite)); //TODO
-                            _seedingPrice += garden.SeedingPrice;
+                            DOVirtual.DelayedCall(1,() => _playerInventory.SetItem(garden.SeedingScriptableObject.spriteForHands)); //TODO
+                            _seedingPrice += garden.SeedingScriptableObject.price;
                             _harvestedScriptableObjects.Add(garden.GetHarvestObject());
                         }
                         break;

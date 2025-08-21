@@ -1,35 +1,25 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 public class Garden : PointerObject
     {
-        //[SerializeField] private List<Tile> gardenTiles;
+        [SerializeField] private SpriteRenderer[] seedingPointsSpriteRenderers;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
         [SerializeField] private HintData hintData;
 
         private CollectableItemData seedingScriptableObject; 
         private CollectableItemData harvestScriptableObject; 
         
-
-        private GameObject seedingPrefab; 
         private GameObject currentSeedingInstance; 
         private GardenState currentState = GardenState.Empty;
         private Color gardenColorAfterWaterSeed;
         private Color gardenDefaultColor;
-        private string seedingName; 
-        private Sprite seedingSprite; 
-        private float seedingGrowTime; 
-        private float seedingPrice; 
-      
         
-        public GameObject SeedingPrefab => seedingPrefab;
-        public Sprite SeedingSprite => seedingSprite;
-        public float SeedingPrice => seedingPrice;
+        
+        public CollectableItemData SeedingScriptableObject => seedingScriptableObject;
         public GardenState State => currentState;
 
 
@@ -39,10 +29,8 @@ public class Garden : PointerObject
         }
         private void Start()
         {
-           // gardenDefaultColor = gardenTiles[0].color;
             gardenColorAfterWaterSeed = new Color(0.7f, 0.5f, 0.35f);
         }
-
         public override void ChangeState()
         {
             if(!IsAvailable)
@@ -70,33 +58,11 @@ public class Garden : PointerObject
         public void SetSeedingData(CollectableItemData seedingData)
         {
             seedingScriptableObject = seedingData;
-
-            switch (seedingScriptableObject)
-            {
-                case PlantData plantData:
-                    ApplySeedingData(plantData.name, plantData.prefab, plantData.growTime, plantData.price, plantData.plantSprite);
-                    break;
-                case VegetableData vegetableData:
-                    ApplySeedingData(vegetableData.name, vegetableData.prefab, vegetableData.growTime, vegetableData.price, vegetableData.vegetableSprite);
-                    break;
-                default:
-                    Debug.LogWarning("Неизвестный тип данных для посадки.");
-                    break;
-            }
-        }
-        
-        private void ApplySeedingData(string name, GameObject prefab, float growTime, float price, Sprite itemSprite)
-        {
-            seedingSprite = itemSprite;
-            seedingName = name;
-            seedingPrefab = prefab;
-            seedingGrowTime = growTime;
-            seedingPrice = price;
         }
         
         private IEnumerator PlantSeed()
         {
-            if (seedingPrefab == null)
+            if (seedingScriptableObject == null)
             {
                 ShowStateInfo("Невозможно посадить: нет данных о семени.");
                 IsAvailable = true;
@@ -104,63 +70,78 @@ public class Garden : PointerObject
             }
             
             harvestScriptableObject = seedingScriptableObject;
+
+            SetSpritesSeedingPoints(GrowStates.Seed);
             
-            Vector3 spawnPosition = new Vector3(transform.position.x, 0, transform.position.z);
-            currentSeedingInstance = Instantiate(seedingPrefab, spawnPosition, Quaternion.identity);
-            
-            yield return new WaitForSeconds(seedingGrowTime);
+            yield return new WaitForSeconds(seedingScriptableObject.growTime);
             
             currentState = GardenState.Planted;
             ShowStateInfo("Семя посажено, требуется полив.");
             hintSpriteRenderer.sprite = hintData.waterSprite;
             IsAvailable = true;
             
+            SetSpritesSeedingPoints(GrowStates.Sprout);
+            
             Debug.Log(IsAvailable);
         }
 
         private IEnumerator WaterAndGrow()
         {
-            if (currentSeedingInstance == null)
+            if (seedingScriptableObject == null)
             {
                 ShowStateInfo("Нет посаженного растения для полива.");
                 IsAvailable = true;
                 yield break;
             }
 
+            SetSpritesSeedingPoints(GrowStates.Young);
+            
             ShowStateInfo("Полив начат, идет рост...");
             
-            // foreach (var gardenTile in gardenTiles)
-            // {
-            //     gardenTile.color = gardenColorAfterWaterSeed;
-            // }
-            
-            yield return new WaitForSeconds(seedingGrowTime);
+            yield return new WaitForSeconds(seedingScriptableObject.growTime);
             
             currentState = GardenState.ReadyToHarvest;
             hintSpriteRenderer.sprite = hintData.harvestSprite;
             ShowStateInfo("Рост завершен, готово к сбору.");
+            
+            SetSpritesSeedingPoints(GrowStates.Mature);
+            
+            yield return new WaitForSeconds(seedingScriptableObject.growTime);
+            
+            SetSpritesSeedingPoints(GrowStates.Harvest);
 
             IsAvailable = true;
         }
 
         private void Harvest()
         {
-            if (currentSeedingInstance != null)
+            if (seedingScriptableObject != null)
             {
-                Destroy(currentSeedingInstance);
+                ClearSpritesFromSeedingPoints();
             }
             
             ShowStateInfo("Урожай собран!");
             currentState = GardenState.Empty;
             hintSpriteRenderer.sprite = null;
             
-            // foreach (var gardenTile in gardenTiles)
-            // {
-            //     gardenTile.color = gardenDefaultColor;
-            // }
-
             IsAvailable = true;
             harvestScriptableObject = null;
+        }
+
+        private void SetSpritesSeedingPoints(GrowStates growState)
+        {
+            for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
+            {
+                seedingPointsSpriteRenderers[i].sprite = seedingScriptableObject.spritesForGarden[(int)growState];
+            }
+        }
+        
+        private void ClearSpritesFromSeedingPoints()
+        {
+            for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
+            {
+                seedingPointsSpriteRenderers[i].sprite = null;
+            }
         }
     }
 

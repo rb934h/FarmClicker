@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4f5a77f20492347973b89deddc662e, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  vegetableSprite: {fileID: 523383999, guid: c52439be0dceeb141adbec4630146525, type: 3}
   prefab: {fileID: 8530139522806440882, guid: a455b670e1750fb46ae90745b9b2ca04, type: 3}
   itemName: Tomato
   price: 10
   growTime: 1
+  spriteForHands: {fileID: 523383999, guid: c52439be0dceeb141adbec4630146525, type: 3}
+  spritesForGarden:
+  - {fileID: -1931543912, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: 395876349, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: 197975434, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: 508448013, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: 60909638, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
