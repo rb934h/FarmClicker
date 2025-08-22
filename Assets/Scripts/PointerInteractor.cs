@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class PointerClickerTest : MonoBehaviour
+public class PointerInteractor : MonoBehaviour
 {
     [SerializeField] private PointerObject[] pointerObjects;
 
@@ -12,7 +12,7 @@ public class PointerClickerTest : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);  // чтобы вернуть в z = 0
+            mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
 
             foreach (var pointerObject in pointerObjects)

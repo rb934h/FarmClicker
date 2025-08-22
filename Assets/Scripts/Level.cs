@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Level : MonoBehaviour
 {
     [SerializeField] private LevelData _levelData;
-    [SerializeField] private PointerClickerTest _pointerClicker;
+    [SerializeField] private PointerInteractor _pointerClicker;
     [SerializeField] private Player _player;
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private Image _timerImage;

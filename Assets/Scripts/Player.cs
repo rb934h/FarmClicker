@@ -20,23 +20,18 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerAnimator _playerAnimator;
     [SerializeField] private PlayerInventory _playerInventory;
     
-
     private CollectableItemData _seedingData;
     private PointerObject _pointerObject;
-    //private CharacterState _state = CharacterState.Idle;
     private readonly ActionQueue _actionQueue = new();
     private float _seedingPrice;
-    
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
     private readonly List<CollectableItemData> _harvestedScriptableObjects = new();
-
 
     public event Action<PointerObject> MoveCompleted;
     public event Action<PointerObject> WorkCompleted;
 
     public bool isHaveWater;
-
     private int itemsInHandCount;
 
     public CollectableItemData SeedingData
@@ -104,10 +99,12 @@ public class Player : MonoBehaviour
             {
                 float yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
-                
+
                 _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
                 await MoveTo(targetPosition);
+                
                 MoveCompleted?.Invoke(pointerObject);
+                
                 _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
                 
                 switch (pointerObject)
@@ -127,7 +124,7 @@ public class Player : MonoBehaviour
                         {
                             itemsInHandCount++;
                             
-                            if (itemsInHandCount == 2)
+                            if (itemsInHandCount > 2)
                             {
                                 Debug.LogWarning("Руки уже заняты");
                                 return;
@@ -146,6 +143,12 @@ public class Player : MonoBehaviour
                             Debug.LogWarning("Нужно что-то положить в машину");
                             return;
                         }
+                        // else if (car.State == DeliveryCarState.Loaded && _harvestedScriptableObjects[0] != null)
+                        // {
+                        //     Debug.LogWarning("Уже занято");
+                        //     return;
+                        // }
+                        
                         itemsInHandCount = 0;
                         _playerInventory.ClearItem();
                         break;
@@ -166,7 +169,6 @@ public class Player : MonoBehaviour
             finally
             {
                 _busyPointerObjects.Remove(pointerObject);
-               // SetState(CharacterState.Idle);
             }
         });
     }
@@ -179,11 +181,7 @@ public class Player : MonoBehaviour
             await UniTask.Yield();
         }
     }
-
-    // private void SetState(CharacterState newState)
-    // {
-    //     _state = newState;
-    // }
+    
 
     private void PutCargoToCar(DeliveryCar deliveryCar, CollectableItemData cargo)
     {

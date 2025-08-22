@@ -2,10 +2,10 @@
 {
     public enum GrowStates
     {
-        Seed,        // Семя
-        Sprout,      // Росток
-        Young,       // Молодое растение
-        Mature,      // Зрелое растение
+        Seed,    
+        Sprout,   
+        Young,     
+        Mature,    
         Harvest  
     }
 }
