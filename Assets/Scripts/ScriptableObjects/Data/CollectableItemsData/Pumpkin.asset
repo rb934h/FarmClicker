@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4f5a77f20492347973b89deddc662e, type: 3}
+  m_Name: Pumpkin
+  m_EditorClassIdentifier: Assembly-CSharp::VegetableData
+  itemName: Pumpkin
+  price: 20
+  growTime: 5
+  spriteForHands: {fileID: 1621195056, guid: c52439be0dceeb141adbec4630146525, type: 3}
+  spritesForGarden:
+  - {fileID: 1518154373, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: -1585369528, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: -1122553910, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: 1487368888, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  - {fileID: -831890119, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}

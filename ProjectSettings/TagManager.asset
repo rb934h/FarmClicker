@@ -47,6 +47,9 @@ TagManager:
   - name: UpperGround
     uniqueID: 3641439817
     locked: 0
+  - name: Gardens
+    uniqueID: 2946822873
+    locked: 0
   - name: Objects
     uniqueID: 1933057433
     locked: 0

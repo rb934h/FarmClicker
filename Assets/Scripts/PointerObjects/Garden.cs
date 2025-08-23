@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
@@ -71,7 +72,7 @@ public class Garden : PointerObject
             
             harvestScriptableObject = seedingScriptableObject;
 
-            SetSpritesSeedingPoints(GrowStates.Seed);
+            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
             
             yield return new WaitForSeconds(seedingScriptableObject.growTime);
             
@@ -80,7 +81,7 @@ public class Garden : PointerObject
             hintSpriteRenderer.sprite = hintData.waterSprite;
             IsAvailable = true;
             
-            SetSpritesSeedingPoints(GrowStates.Sprout);
+            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
             
             Debug.Log(IsAvailable);
         }
@@ -94,7 +95,7 @@ public class Garden : PointerObject
                 yield break;
             }
 
-            SetSpritesSeedingPoints(GrowStates.Young);
+            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Young));
             
             ShowStateInfo("Полив начат, идет рост...");
             
@@ -102,13 +103,14 @@ public class Garden : PointerObject
             
             currentState = GardenState.ReadyToHarvest;
             hintSpriteRenderer.sprite = hintData.harvestSprite;
+            
             ShowStateInfo("Рост завершен, готово к сбору.");
             
-            SetSpritesSeedingPoints(GrowStates.Mature);
+            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Mature));
             
             yield return new WaitForSeconds(seedingScriptableObject.growTime);
             
-            SetSpritesSeedingPoints(GrowStates.Harvest);
+            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
 
             IsAvailable = true;
         }
@@ -128,10 +130,11 @@ public class Garden : PointerObject
             harvestScriptableObject = null;
         }
 
-        private void SetSpritesSeedingPoints(GrowStates growState)
+        private IEnumerator SetSpritesSeedingPoints(GrowStates growState)
         {
             for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
             {
+                yield return new WaitForSeconds(.05f);
                 seedingPointsSpriteRenderers[i].sprite = seedingScriptableObject.spritesForGarden[(int)growState];
             }
         }
