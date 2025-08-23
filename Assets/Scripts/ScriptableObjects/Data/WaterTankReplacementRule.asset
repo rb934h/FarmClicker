@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa388f3836341619f1bff3f1ef974df, type: 3}
+  m_Name: WaterTankReplacementRule
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.TileReplacementRule
+  tilemap: {fileID: 6306406765846063545, guid: 9df3577eeb3485744b7c603c107fada1, type: 3}
+  from:
+  - {fileID: 11400000, guid: 8c3c71814b75dd241953fc49c36d0454, type: 2}
+  - {fileID: 11400000, guid: f21bfb281a3723847a05632df2ab91b7, type: 2}
+  to:
+  - {fileID: 11400000, guid: f8c8e4ef61ba2454992bba9de28bf0ae, type: 2}
+  - {fileID: 11400000, guid: f06703f54418f1040bcdf9f3bbfc0e78, type: 2}
