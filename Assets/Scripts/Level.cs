@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DefaultNamespace;
+using Enum;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class Level : MonoBehaviour
     [SerializeField] private DeliveryCar _deliveryCar;
     [SerializeField] private Transform _levelGoalsUITransform;
     [SerializeField] private TMP_Text _levelGoalsText;
+    [SerializeField] private TileChanger _tileChanger;
+    [SerializeField] private WaterTank _waterTank;
     
     private Timer _levelTimer;
     private LevelGoalsView _levelGoalsView;
@@ -38,6 +41,10 @@ public class Level : MonoBehaviour
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
         _player.WorkCompleted += ChangeState;
+        _deliveryCar.IsLoaded += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
+        _deliveryCar.IsSolded += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
+        _waterTank.IsReadyToCollect += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
+        _waterTank.IsCollected += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
         _deliveryCar.IsDeparted += AddDeliveredItem;
      
         foreach (var screen in ScreenBase.Screens)

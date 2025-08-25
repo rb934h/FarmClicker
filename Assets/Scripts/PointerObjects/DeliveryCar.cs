@@ -15,6 +15,8 @@ public class DeliveryCar : PointerObject
     public DeliveryCarState State => currentState;
     
     public event Action<List<CollectableItemData>> IsDeparted;
+    public event Action IsLoaded;
+    public event Action IsSolded;
    
     public override void ChangeState()
     { 
@@ -28,6 +30,7 @@ public class DeliveryCar : PointerObject
             case DeliveryCarState.Empty:
                 currentState = DeliveryCarState.Loaded;
                 ShowStateInfo("Машина загружена");
+                IsLoaded?.Invoke();
                 break;
             case DeliveryCarState.Loaded:
                 currentState = DeliveryCarState.Departed;
@@ -42,7 +45,11 @@ public class DeliveryCar : PointerObject
                     }
                     cargo.Clear();
                     DOVirtual.DelayedCall(deliveryCarData.deliveryTime,
-                        () => transform.DOMoveX(defaultPosition, 2f).OnComplete(() => currentState = DeliveryCarState.WithMoney));
+                        () => transform.DOMoveX(defaultPosition, 2f).OnComplete(() =>
+                        {
+                            currentState = DeliveryCarState.WithMoney;
+                            IsSolded?.Invoke();
+                        }));
                 });
                 break;
             case DeliveryCarState.Departed:

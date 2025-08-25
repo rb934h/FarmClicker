@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using DG.Tweening;
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
-
 
 public class Garden : PointerObject
     {
@@ -14,23 +12,14 @@ public class Garden : PointerObject
         private CollectableItemData seedingScriptableObject; 
         private CollectableItemData harvestScriptableObject; 
         
-        private GameObject currentSeedingInstance; 
         private GardenState currentState = GardenState.Empty;
-        private Color gardenColorAfterWaterSeed;
-        private Color gardenDefaultColor;
-        
         
         public CollectableItemData SeedingScriptableObject => seedingScriptableObject;
         public GardenState State => currentState;
-
-
+        
         public CollectableItemData GetHarvestObject()
         {
             return harvestScriptableObject;
-        }
-        private void Start()
-        {
-            gardenColorAfterWaterSeed = new Color(0.7f, 0.5f, 0.35f);
         }
         public override void ChangeState()
         {
@@ -58,7 +47,8 @@ public class Garden : PointerObject
         
         public void SetSeedingData(CollectableItemData seedingData)
         {
-            seedingScriptableObject = seedingData;
+            if(harvestScriptableObject == null)
+                seedingScriptableObject = seedingData;
         }
         
         private IEnumerator PlantSeed()

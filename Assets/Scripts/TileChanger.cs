@@ -1,30 +1,26 @@
-﻿using ScriptableObjects;
+﻿using Enum;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace DefaultNamespace
+public class TileChanger : MonoBehaviour
 {
-    public class TileChanger : MonoBehaviour
+    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private EnumMap<TileReplacementRuleTypes, TileReplacementRule> _rules;
+
+    private bool isSwapped;
+
+    public void ChangeTiles(TileReplacementRuleTypes ruleType)
     {
-        [SerializeField] private Tilemap tilemap;
-        [SerializeField] private TileReplacementRule _rule;
+        var rule = _rules[ruleType];
 
-        private bool reverse;
+        var from = isSwapped ? rule.to : rule.from;
+        var to   = isSwapped ? rule.from : rule.to;
 
+        int length = Mathf.Min(from.Length, to.Length);
+        for (int i = 0; i < length; i++)
+            tilemap.SwapTile(from[i], to[i]);
 
-        public void ChangeTiles()
-        {
-            for (int i = 0; i < _rule.from.Length; i++)
-            {
-                if (reverse)
-                    tilemap.SwapTile(_rule.from[i], _rule.to[i]);
-                else
-                {
-                    tilemap.SwapTile(_rule.to[i], _rule.from[i]);
-                }
-            }
-            
-            reverse = !reverse;
-        }
+        isSwapped = !isSwapped;
     }
 }

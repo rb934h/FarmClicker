@@ -13,10 +13,7 @@ public class PointerObject : MonoBehaviour
     public Collider2D Collider => pointerObjectCollider;
     public Transform PointForInteraction => pointForInteraction;
     
-    public virtual void ChangeState()
-    {
-      
-    }
+    public virtual void ChangeState() { }
 
     protected void ShowStateInfo(string text)
     {

@@ -143,11 +143,6 @@ public class Player : MonoBehaviour
                             Debug.LogWarning("Нужно что-то положить в машину");
                             return;
                         }
-                        // else if (car.State == DeliveryCarState.Loaded && _harvestedScriptableObjects[0] != null)
-                        // {
-                        //     Debug.LogWarning("Уже занято");
-                        //     return;
-                        // }
                         
                         itemsInHandCount = 0;
                         _playerInventory.ClearItem();
@@ -182,7 +177,6 @@ public class Player : MonoBehaviour
         }
     }
     
-
     private void PutCargoToCar(DeliveryCar deliveryCar, CollectableItemData cargo)
     {
         deliveryCar.PutCargo(cargo);
