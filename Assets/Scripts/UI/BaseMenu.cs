@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System.Collections.Generic;
+using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,57 +9,77 @@ public abstract class BaseMenu : MonoBehaviour
     [SerializeField] protected float _fadeDuration = 0.1f;
     
     private CanvasGroup _canvasGroup;
+    protected static List<BaseMenu> BaseMenus = new();
+    private static int _openMenusCount = 0;
 
-    protected bool _isOpen = false;
-    
-    public bool IsOpen => _isOpen;
+    private bool _isOpen = false;
+    protected bool IsOpen => _isOpen;
 
     protected virtual void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
+        BaseMenus.Add(this);
     }
-    
-    public virtual void Show(bool postProcessEffects = false)
+
+    protected virtual void OnDestroy()
     {
+        BaseMenus.Remove(this);
+    }
+
+    protected virtual void Show()
+    {
+        if (_isOpen) return;
+
         _isOpen = true;
-        _canvasGroup.DOFade(1, _fadeDuration);
+        _canvasGroup.DOFade(1, _fadeDuration).SetUpdate(true);
         _canvasGroup.interactable = true;
         _canvasGroup.blocksRaycasts = true;
+
+        _openMenusCount++;
         
-        if (postProcessEffects)
-            OnShow();
+        if (_openMenusCount == 1) 
+        {
+            ToggleEffects();
+            Time.timeScale = 0f;
+        }
     }
 
-    public virtual void Hide(bool postProcessEffects = false)
+    protected virtual void Hide()
     {
+        if (!_isOpen) return;
+
         _isOpen = false;
-        _canvasGroup.DOFade(0, _fadeDuration);
+        _canvasGroup.DOFade(0, _fadeDuration).SetUpdate(true);
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
+
+        _openMenusCount--;
         
-        if (postProcessEffects)
-            OnHide();
+        if (_openMenusCount == 0)
+        {
+            ToggleEffects();
+            Time.timeScale = 1f;
+        }
     }
 
-    protected virtual void OnShow()
-    {
-        ToggleEffects();
-    }
-
-    protected virtual void OnHide()
-    {
-        ToggleEffects();
-    }
-    
     private void ToggleEffects()
     {
+        if (_urpVolume == null) return;
+        
         _urpVolume.ChangeChromaticAberrationValue(_fadeDuration);
         _urpVolume.ChangeDepthOfFieldValue(_fadeDuration);
     }
-    
-    public void Toggle()
+
+    protected void Toggle()
     {
-        if (_isOpen) Hide(true);
-        else Show(true);
+        if (_isOpen) Hide();
+        else Show();
     }
+
+    protected void SwitchTo(BaseMenu target)
+    {
+        target.Show();
+        Hide();
+    }
+
 }

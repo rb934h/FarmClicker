@@ -300,7 +300,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1248635885}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -802,7 +802,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1248635885}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -1201,6 +1201,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1694582163}
     m_Modifications:
+    - target: {fileID: 504591786921743053, guid: 5d799669efc0cda4a84a58e8a3c764a7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504591786921743053, guid: 5d799669efc0cda4a84a58e8a3c764a7, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1425329674003623585, guid: 5d799669efc0cda4a84a58e8a3c764a7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -119751,6 +119759,11 @@ MonoBehaviour:
   - {x: 2.5238607, y: -5.54616, z: 0}
   - {x: 6.0588717, y: -4.1413875, z: 0}
   - {x: -6.2477665, y: 6.031887, z: 0}
+--- !u!82 &1248635885 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8956766850684639360, guid: dfccce4f5fea5c946a679d6c39b82b7c, type: 3}
+  m_PrefabInstance: {fileID: 655555211}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1353995638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5102088051798338171, guid: fc9be7bcd750b4f428c4ab6f15fe443e, type: 3}
@@ -124207,6 +124220,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1694582163}
     m_Modifications:
+    - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 889928333225473488, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -124313,6 +124342,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8387684927941041562, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387684927941041562, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387684927941041562, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_BlocksRaycasts
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9024216339554838367, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
@@ -125130,7 +125167,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1248635885}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1

@@ -36,7 +36,8 @@ namespace DefaultNamespace
                 x => parameter.value = x,
                 target,
                 duration
-            ).SetEase(Ease.InOutSine);
+            ).SetEase(Ease.InOutSine)
+                .SetUpdate(true);;
         }
     }
 }

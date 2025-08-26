@@ -7,25 +7,34 @@ public class SettingsMenu : BaseMenu
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _exitButton;
     
-    [Header("Menu")]
-    [SerializeField] private PauseMenu _pauseMenu;
+    private PauseMenu _pauseMenu;
     
     void Start()
     {
+        foreach (var menu in BaseMenus)
+        {
+            if (menu is PauseMenu pause)
+            {
+                _pauseMenu = pause;
+                break;
+            }
+        }
+      
         _resumeButton.onClick.AddListener(ShowPauseMenu);
-        _exitButton.onClick.AddListener(Toggle);
+        _exitButton.onClick.AddListener(Toggle);    
     }
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && IsOpen)
-            Toggle();
+        {
+            ShowPauseMenu();
+        } 
     }
 
     private void ShowPauseMenu()
     {
-        Hide();
-        _pauseMenu.Show();
-        
+        SwitchTo(_pauseMenu);
     }
+
 }
