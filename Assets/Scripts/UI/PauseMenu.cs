@@ -1,48 +1,36 @@
-using DefaultNamespace;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : BaseMenu
 {
-    [SerializeField] private float _fadeDuration = 0.1f;
-    [SerializeField] private URPVolume _urpVolume;
-    
-    private CanvasGroup _canvasGroup;
-    private bool _isOpen = false;
-    
-    void Start()
+    [Header("Buttons")] 
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _settingsButton;
+    [SerializeField] private Button _exitButton;
+
+    [Header("Menu")]
+    [SerializeField] private SettingsMenu _settingsMenu;
+
+    private void Start()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
+        _resumeButton.onClick.AddListener(Toggle);
+        _exitButton.onClick.AddListener(Exit);
+        _settingsButton.onClick.AddListener(ShowSettingsMenu);
     }
-    
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_isOpen)
-                Hide();
-            else
-                Show();
-        }
+        if (Input.GetKeyDown(KeyCode.Escape) && !_settingsMenu.IsOpen)
+            Toggle();
+    }
+    private void Exit()
+    {
+        SceneManager.LoadScene(0);
     }
 
-    private void Show()
+    private void ShowSettingsMenu()
     {
-        _isOpen = true;
-        _canvasGroup.DOFade(1, _fadeDuration);
-        ToggleEffects();
-    }
-
-    private void Hide()
-    {
-        _isOpen = false;
-        _canvasGroup.DOFade(0, _fadeDuration);
-        ToggleEffects();
-    }
-
-    private void ToggleEffects()
-    {
-        _urpVolume.ChangeChromaticAberrationValue(_fadeDuration);
-        _urpVolume.ChangeDepthOfFieldValue(_fadeDuration);
+        _settingsMenu.Show();
+        Hide();
     }
 }
