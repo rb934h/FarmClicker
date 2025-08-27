@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace DefaultNamespace
+namespace PostProcessing
 {
     public class URPVolume : MonoBehaviour
     {

@@ -1,19 +1,27 @@
 ﻿using System.Collections.Generic;
-using DefaultNamespace;
 using DG.Tweening;
+using PostProcessing;
 using UnityEngine;
+using VContainer;
 
 public abstract class BaseMenu : MonoBehaviour
 {
-    [SerializeField] protected URPVolume _urpVolume;
     [SerializeField] protected float _fadeDuration = 0.1f;
     
+    private URPVolume _urpVolume;
     private CanvasGroup _canvasGroup;
     protected static List<BaseMenu> BaseMenus = new();
     private static int _openMenusCount = 0;
 
     private bool _isOpen = false;
     protected bool IsOpen => _isOpen;
+    
+    [Inject]
+    public void Construct(URPVolume urpVolume)
+    {
+        _urpVolume = urpVolume;
+    }
+    
 
     protected virtual void Awake()
     {
