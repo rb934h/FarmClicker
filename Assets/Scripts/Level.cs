@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Enum;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class Level : MonoBehaviour
 {
@@ -22,6 +24,15 @@ public class Level : MonoBehaviour
     private Timer _levelTimer;
     private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
+    
+    private PlayerInventoryData _playerInventory;
+
+    [Inject]
+    public void Construct(PlayerInventoryData playerInventoryData)
+    {
+        _playerInventory = playerInventoryData;
+    }
+
 
     private void Start()
     {
@@ -41,11 +52,13 @@ public class Level : MonoBehaviour
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
         _player.WorkCompleted += ChangeState;
+        
         _deliveryCar.IsLoaded += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
-        _deliveryCar.IsSolded += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
+        _deliveryCar.IsDeparted += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
         _waterTank.IsReadyToCollect += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
         _waterTank.IsCollected += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
-        _deliveryCar.IsDeparted += AddDeliveredItem;
+        
+        _deliveryCar.IsSolded += AddDeliveredItem;
      
         foreach (var screen in ScreenBase.Screens)
         {
@@ -70,20 +83,13 @@ public class Level : MonoBehaviour
         if (pointerObject is Garden garden)
         {
             garden.SetSeedingData(_player.SeedingData);
-            _player.InteractWithGarden(positionForInteract, garden);
         }
-        else if (pointerObject is WaterTank waterTank)
-        {
-            _player.InteractWithWaterTank(positionForInteract, waterTank);
-        }
-        else if (pointerObject is DeliveryCar deliveryCar)
-        {
-            _player.InteractWithDeliveryCar(positionForInteract, deliveryCar);
-        }
-        else
-        {
-            Debug.LogWarning("Unknown PointerObject type clicked.");
-        }
+        
+        _player.InteractWithPointerObject(positionForInteract, pointerObject,
+            async _ =>
+            {
+                await UniTask.WaitForSeconds(0);
+            });
       
     }
 
@@ -97,7 +103,12 @@ public class Level : MonoBehaviour
         foreach (var item in items)
         {
             if (!_deliveredItems.TryAdd(item, 1))
+            {
                 _deliveredItems[item]++;
+                
+            }
+            
+            _playerInventory.AddCoins(item.price);
         }
        
         CheckLevelGoals();

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -14,7 +13,7 @@ namespace DefaultNamespace
         private void Start()
         {
             _musicSlider.onValueChanged.AddListener(SetMusicVolume);
-            _sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+            _sfxSlider.onValueChanged.AddListener(SetSfxVolume);
 
             _musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
             _sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
@@ -26,7 +25,7 @@ namespace DefaultNamespace
             PlayerPrefs.SetFloat("MusicVolume", value);
         }
 
-        private void SetSFXVolume(float value)
+        private void SetSfxVolume(float value)
         {
             _mixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20);
             PlayerPrefs.SetFloat("SFXVolume", value);

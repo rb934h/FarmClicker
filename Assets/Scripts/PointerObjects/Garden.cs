@@ -2,6 +2,7 @@
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
+using VContainer;
 
 public class Garden : PointerObject
     {
@@ -12,35 +13,56 @@ public class Garden : PointerObject
         private CollectableItemData seedingScriptableObject; 
         private CollectableItemData harvestScriptableObject; 
         
+        
         private GardenState currentState = GardenState.Empty;
         
         public CollectableItemData SeedingScriptableObject => seedingScriptableObject;
         public GardenState State => currentState;
         
+        private PlayerInventoryData _playerInventory;
+
+        [Inject]
+        public void Construct(PlayerInventoryData playerInventoryData)
+        {
+            _playerInventory = playerInventoryData;
+        }
+        
         public CollectableItemData GetHarvestObject()
         {
             return harvestScriptableObject;
         }
+        
         public override void ChangeState()
         {
-            if(!IsAvailable)
-                return;
-            
-            IsAvailable = false;
-            
-            switch (currentState)
+            switch (State)
             {
                 case GardenState.Empty:
-                    StartCoroutine(PlantSeed());
+                    if (_playerInventory.currentSeed != null)
+                        StartCoroutine(PlantSeed());
                     break;
                 case GardenState.Planted:
+                    if (!_playerInventory.hasWater)
+                    {
+                        Debug.LogWarning("Нет воды для полива");
+                        return;
+                    }
+                    _playerInventory.UseWater();
                     StartCoroutine(WaterAndGrow());
+                    OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
                     break;
+
                 case GardenState.ReadyToHarvest:
+                    if (!_playerInventory.CanAddItem)
+                    {
+                        Debug.LogWarning("Руки уже заняты");
+                        return;
+                    }
+                    
+                    _playerInventory.AddHarvestObject(harvestScriptableObject);
+                    
                     Harvest();
-                    break;
-                default:
-                    Debug.Log("Нет доступного действия для текущего состояния: " + currentState);
+                    OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWeeding);
+                    
                     break;
             }
         }

@@ -1,6 +1,7 @@
 using System;
 using Enum;
 using UnityEngine;
+using VContainer;
 
 public class WaterTank : PointerObject
 {
@@ -10,14 +11,17 @@ public class WaterTank : PointerObject
     
     public event Action IsReadyToCollect; 
     public event Action IsCollected; 
+    
+    private PlayerInventoryData _playerInventory;
+
+    [Inject]
+    public void Construct(PlayerInventoryData playerInventoryData)
+    {
+        _playerInventory = playerInventoryData;
+    }
    
     public override void ChangeState()
     {
-        if(!IsAvailable)
-            return;
-            
-        IsAvailable = false;
-        
         switch (currentState)
         { 
             case WaterTankState.Empty:
@@ -26,8 +30,12 @@ public class WaterTank : PointerObject
                 IsReadyToCollect?.Invoke();
                 break;
             case WaterTankState.ReadyToCollect:
+                if(_playerInventory.hasWater)
+                    return;
                 ShowStateInfo("Воду забрали, нужно наполнить снова.");
                 currentState = WaterTankState.Empty;
+                _playerInventory.FillWater();
+                OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
                 IsCollected?.Invoke();
                 break;
             default:
