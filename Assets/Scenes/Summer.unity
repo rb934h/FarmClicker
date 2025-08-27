@@ -124355,6 +124355,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1694582163}
     m_Modifications:
+    - target: {fileID: 210674690392284337, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_Value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 210674690392284337, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_MinValue
+      value: 0.0001
+      objectReference: {fileID: 0}
     - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -124370,6 +124378,14 @@ PrefabInstance:
     - target: {fileID: 347951001519758594, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 841396035068776164, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_Value
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 841396035068776164, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_MinValue
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 889928333225473488, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_Pivot.x
@@ -124480,7 +124496,15 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2961289218399151610, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961289218399151610, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961289218399151610, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3732515135558851652, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
@@ -124538,6 +124562,10 @@ PrefabInstance:
     - target: {fileID: 8628357555989627867, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024216339554838367, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9024216339554838367, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
       propertyPath: m_AnchorMax.y
