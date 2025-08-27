@@ -27,7 +27,7 @@ namespace DefaultNamespace
 
         private void PlayEffect()
         {
-            sequence = DOTween.Sequence();
+            sequence = DOTween.Sequence().SetUpdate(true);
 
             sequence.Append(transform.DORotate(new Vector3(0, 0, rotationAngle), rotationDuration)
                 .SetEase(Ease.InOutSine));

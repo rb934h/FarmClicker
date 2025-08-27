@@ -33,7 +33,6 @@ public class DeliveryCar : PointerObject
                 IsLoaded?.Invoke();
                 break;
             case DeliveryCarState.Loaded:
-                currentState = DeliveryCarState.Departed;
                 var defaultPosition = transform.position.x;
                 transform.DOMoveX(defaultPosition+20, 2f).OnComplete(() =>
                 {
@@ -51,8 +50,6 @@ public class DeliveryCar : PointerObject
                             IsSolded?.Invoke();
                         }));
                 });
-                break;
-            case DeliveryCarState.Departed:
                 break;
             case DeliveryCarState.WithMoney:
                 ShowStateInfo("Забрали деньги");

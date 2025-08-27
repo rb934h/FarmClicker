@@ -39,11 +39,6 @@ public class Player : MonoBehaviour
         get => _seedingData;
     }
 
-    public float CheckWallet()
-    {
-        return playerWallet.GetMoney();
-    }
-
     public void SetSeedingData(CollectableItemData seedingData)
     {
         _seedingData = seedingData;

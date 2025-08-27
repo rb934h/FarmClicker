@@ -7,7 +7,7 @@ public class Garden : PointerObject
     {
         [SerializeField] private SpriteRenderer[] seedingPointsSpriteRenderers;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
-        [SerializeField] private HintData hintData;
+        [SerializeField] private GardenHintData hintData;
 
         private CollectableItemData seedingScriptableObject; 
         private CollectableItemData harvestScriptableObject; 

@@ -4,7 +4,6 @@
     {
         Empty,          
         Loaded,        
-        Departed,      
         WithMoney  
     }
 }

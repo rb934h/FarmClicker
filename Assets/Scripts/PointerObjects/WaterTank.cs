@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterTank : PointerObject
 {
-    private WaterTankState currentState = WaterTankState.NeedToRefill;
+    private WaterTankState currentState = WaterTankState.Empty;
     
     public WaterTankState State => currentState;
     
@@ -21,15 +21,13 @@ public class WaterTank : PointerObject
         switch (currentState)
         { 
             case WaterTankState.Empty:
-                break;
-            case WaterTankState.NeedToRefill:
                 ShowStateInfo("Ведро воды готово, можно забрать");
                 currentState = WaterTankState.ReadyToCollect;
                 IsReadyToCollect?.Invoke();
                 break;
             case WaterTankState.ReadyToCollect:
                 ShowStateInfo("Воду забрали, нужно наполнить снова.");
-                currentState = WaterTankState.NeedToRefill;
+                currentState = WaterTankState.Empty;
                 IsCollected?.Invoke();
                 break;
             default:
