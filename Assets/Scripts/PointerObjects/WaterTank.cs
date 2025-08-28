@@ -5,9 +5,7 @@ using VContainer;
 
 public class WaterTank : PointerObject
 {
-    private WaterTankState currentState = WaterTankState.Empty;
-    
-    public WaterTankState State => currentState;
+    public WaterTankState State = WaterTankState.Empty;
     
     public event Action IsReadyToCollect; 
     public event Action IsCollected; 
@@ -22,18 +20,18 @@ public class WaterTank : PointerObject
    
     public override void ChangeState()
     {
-        switch (currentState)
+        switch (State)
         { 
             case WaterTankState.Empty:
-                ShowStateInfo("Ведро воды готово, можно забрать");
-                currentState = WaterTankState.ReadyToCollect;
+                // ShowStateInfo("Ведро воды готово, можно забрать");
+                // State = WaterTankState.ReadyToCollect;
                 IsReadyToCollect?.Invoke();
                 break;
             case WaterTankState.ReadyToCollect:
                 if(_playerInventory.hasWater)
                     return;
                 ShowStateInfo("Воду забрали, нужно наполнить снова.");
-                currentState = WaterTankState.Empty;
+                State = WaterTankState.Empty;
                 _playerInventory.FillWater();
                 OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
                 IsCollected?.Invoke();

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Enum;
 using ScriptableObjects;
+using Strategies;
 using VContainer;
 
 public class Player : MonoBehaviour
@@ -24,22 +25,25 @@ public class Player : MonoBehaviour
     
     public event Action<PointerObject> WorkCompleted;
 
-    private PlayerInventoryData _playerInventory;
+    public PlayerInventoryData Inventory { get; private set; }
+    
+    private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
 
     [Inject]
-    public void Construct(PlayerInventoryData playerInventoryData)
+    public void Construct(PlayerInventoryData playerInventoryData, IEnumerable<IPointerObjectInteractStrategy> interactStrategies)
     {
-        _playerInventory = playerInventoryData;
+        Inventory = playerInventoryData;
+        _interactStrategy = interactStrategies;
     }
     
     public CollectableItemData SeedingData
     {
-        get => _playerInventory.currentSeed;
+        get => Inventory.currentSeed;
     }
 
     public void SetSeedingData(CollectableItemData seedingData)
     {
-        _playerInventory.currentSeed = seedingData;
+        Inventory.currentSeed = seedingData;
     }
     
     public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject,  Func<T, UniTask> work)
@@ -53,7 +57,7 @@ public class Player : MonoBehaviour
             _busyPointerObjects.Add(pointerObject);
             try
             {
-                float yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
+                var yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
                 
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
                 _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
@@ -66,7 +70,10 @@ public class Player : MonoBehaviour
 
                 await work(pointerObject);
                 
-                WorkCompleted?.Invoke(pointerObject);
+                foreach (var strategy in _interactStrategy)
+                {
+                    strategy.Interact(this, pointerObject);
+                }
             }
             finally
             {

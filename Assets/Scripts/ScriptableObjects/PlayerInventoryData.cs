@@ -9,7 +9,7 @@ public class PlayerInventoryData : ScriptableObject
     public CollectableItemData currentSeed;
     public List<CollectableItemData> harvestObjects;
     public bool hasWater;
-    public int maxItemsInHand = 2;
+    [SerializeField] private int maxItemsInHand = 2;
     public float coins = 0;
 
     public event Action<Sprite> HarvestObjectAdded; 

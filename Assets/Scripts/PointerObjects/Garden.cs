@@ -32,40 +32,39 @@ public class Garden : PointerObject
             return harvestScriptableObject;
         }
         
-        public override void ChangeState()
-        {
-            switch (State)
-            {
-                case GardenState.Empty:
-                    if (_playerInventory.currentSeed != null)
-                        StartCoroutine(PlantSeed());
-                    break;
-                case GardenState.Planted:
-                    if (!_playerInventory.hasWater)
-                    {
-                        Debug.LogWarning("Нет воды для полива");
-                        return;
-                    }
-                    _playerInventory.UseWater();
-                    StartCoroutine(WaterAndGrow());
-                    OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
-                    break;
-
-                case GardenState.ReadyToHarvest:
-                    if (!_playerInventory.CanAddItem)
-                    {
-                        Debug.LogWarning("Руки уже заняты");
-                        return;
-                    }
-                    
-                    _playerInventory.AddHarvestObject(harvestScriptableObject);
-                    
-                    Harvest();
-                    OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWeeding);
-                    
-                    break;
-            }
-        }
+        // public override void ChangeState()
+        // {
+        //     switch (State)
+        //     {
+        //         case GardenState.Empty:
+        //             StartCoroutine(PlantSeed());
+        //             break;
+        //         case GardenState.Planted:
+        //             if (!_playerInventory.hasWater)
+        //             {
+        //                 Debug.LogWarning("Нет воды для полива");
+        //                 return;
+        //             }
+        //             _playerInventory.UseWater();
+        //             StartCoroutine(WaterAndGrow());
+        //             OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
+        //             break;
+        //
+        //         case GardenState.ReadyToHarvest:
+        //             if (!_playerInventory.CanAddItem)
+        //             {
+        //                 Debug.LogWarning("Руки уже заняты");
+        //                 return;
+        //             }
+        //             
+        //             _playerInventory.AddHarvestObject(harvestScriptableObject);
+        //             
+        //             Harvest();
+        //             OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWeeding);
+        //             
+        //             break;
+        //     }
+        // }
         
         public void SetSeedingData(CollectableItemData seedingData)
         {
@@ -73,7 +72,7 @@ public class Garden : PointerObject
                 seedingScriptableObject = seedingData;
         }
         
-        private IEnumerator PlantSeed()
+        public IEnumerator PlantSeed()
         {
             if (seedingScriptableObject == null)
             {
@@ -98,7 +97,7 @@ public class Garden : PointerObject
             Debug.Log(IsAvailable);
         }
 
-        private IEnumerator WaterAndGrow()
+        public IEnumerator WaterAndGrow()
         {
             if (seedingScriptableObject == null)
             {
