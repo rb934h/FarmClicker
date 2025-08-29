@@ -1,6 +1,7 @@
 ﻿using Enum;
+using PointerObjects;
 
-namespace Strategies
+namespace Strategies.GardenStrategy
 {
     public class GardenSeedStrategy : IPointerObjectInteractStrategy
     {

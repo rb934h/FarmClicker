@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using PointerObjects;
 
 public class PointerInteractor : MonoBehaviour
 {

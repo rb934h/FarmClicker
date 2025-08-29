@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Enum;
+using PointerObjects;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -64,11 +65,7 @@ public class Level : MonoBehaviour
 
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
-        _player.InteractWithPointerObject(positionForInteract, pointerObject,
-            async _ =>
-            {
-                await UniTask.WaitForSeconds(1f);
-            });
+        _player.InteractWithPointerObject(positionForInteract, pointerObject);
       
     }
 

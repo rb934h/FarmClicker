@@ -2,9 +2,10 @@
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
-using VContainer;
 
-public class Garden : PointerObject
+namespace PointerObjects
+{
+    public class Garden : PointerObject
     {
         [SerializeField] private SpriteRenderer[] seedingPointsSpriteRenderers;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
@@ -101,4 +102,5 @@ public class Garden : PointerObject
             }
         }
     }
+}
 

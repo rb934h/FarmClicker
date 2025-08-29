@@ -1,4 +1,6 @@
-﻿namespace Strategies
+﻿using PointerObjects;
+
+namespace Strategies
 {
     public interface IPointerObjectInteractStrategy
     {

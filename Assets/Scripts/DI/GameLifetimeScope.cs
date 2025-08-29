@@ -1,7 +1,9 @@
 ﻿using PostProcessing;
 using Strategies;
+using Strategies.DeliveryCarStrategy;
+using Strategies.GardenStrategy;
+using Strategies.WaterTankStrategy;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,6 +17,7 @@ namespace DI.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(urpVolume);
+            
             // ------------ Garden ------------------
             builder.Register<IPointerObjectInteractStrategy, GardenSeedStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, GardenPlantedStrategy>(Lifetime.Singleton);

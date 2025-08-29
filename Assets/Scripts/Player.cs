@@ -4,6 +4,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Enum;
+using PointerObjects;
 using ScriptableObjects;
 using Strategies;
 using VContainer;
@@ -12,7 +13,6 @@ public class Player : MonoBehaviour
 {
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float workTime;
 
     private PlayerAnimator _playerAnimator;
     private PointerObject _pointerObject;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         Inventory.currentSeed = seedingData;
     }
     
-    public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject,  Func<T, UniTask> work)
+    public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject)
         where T : PointerObject
     {
         if (_busyPointerObjects.Contains(pointerObject))
@@ -63,13 +63,14 @@ public class Player : MonoBehaviour
                 await MoveTo(targetPosition);
 
                 _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
-
-                await work(pointerObject);
                 
                 foreach (var strategy in _interactStrategy)
                 {
-                    if(strategy.Interact(this, pointerObject))
+                    if (strategy.Interact(this, pointerObject))
+                    {
                         break;
+                    }
+                        
                 }
             }
             finally

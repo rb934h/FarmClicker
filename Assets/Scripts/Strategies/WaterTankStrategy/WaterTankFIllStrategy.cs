@@ -1,7 +1,7 @@
 ﻿using Enum;
-using UnityEngine;
+using PointerObjects;
 
-namespace Strategies
+namespace Strategies.WaterTankStrategy
 {
     public class WaterTankFIllStrategy : IPointerObjectInteractStrategy
     {

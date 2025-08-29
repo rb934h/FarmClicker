@@ -6,70 +6,73 @@ using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DeliveryCar : PointerObject
+namespace PointerObjects
 {
-    [SerializeField] private DeliveryCarData deliveryCarData;
+    public class DeliveryCar : PointerObject
+    {
+        [SerializeField] private DeliveryCarData deliveryCarData;
     
-    [Header("Tile changer")]
-    [SerializeField] private Tilemap _tilemap;
-    [SerializeField] private TileReplacementRule _rule;
+        [Header("Tile changer")]
+        [SerializeField] private Tilemap _tilemap;
+        [SerializeField] private TileReplacementRule _rule;
     
-    [HideInInspector]
-    public DeliveryCarState State = DeliveryCarState.Empty;
+        [HideInInspector]
+        public DeliveryCarState State = DeliveryCarState.Empty;
     
-    public event Action<List<CollectableItemData>> IsSolded;
+        public event Action<List<CollectableItemData>> IsSolded;
     
-    private TileChanger _tileChanger;
-    private List<CollectableItemData> cargo = new ();
+        private TileChanger _tileChanger;
+        private List<CollectableItemData> cargo = new ();
 
-    private void Start()
-    {
-        _tileChanger = new TileChanger(_tilemap, _rule);
-    }
-    
-    public void PutCargo(List<CollectableItemData> objectsFromPlayer)
-    {
-        cargo.AddRange(objectsFromPlayer);
-    }
-
-    public void ClearCargo()
-    {
-        IsSolded?.Invoke(cargo);
-        cargo.Clear();
-    }
-
-    public float GetCargoPrice()
-    {
-        foreach (var collectableItemData in cargo)
+        private void Start()
         {
-            return collectableItemData.price;
+            _tileChanger = new TileChanger(_tilemap, _rule);
+        }
+    
+        public void PutCargo(List<CollectableItemData> objectsFromPlayer)
+        {
+            cargo.AddRange(objectsFromPlayer);
         }
 
-        return 0;
-    }
-
-    public void Send()
-    {
-        var defaultPosition = transform.position.x;
-        
-        transform.DOMoveX(defaultPosition+20, 2f).OnComplete(() =>
+        public void ClearCargo()
         {
-            ShowStateInfo("Машина отправлена");
+            IsSolded?.Invoke(cargo);
+            cargo.Clear();
+        }
+
+        public float GetCargoPrice()
+        {
             foreach (var collectableItemData in cargo)
             {
-                Debug.Log(collectableItemData.name);
+                return collectableItemData.price;
             }
-            DOVirtual.DelayedCall(deliveryCarData.deliveryTime,
-                () => transform.DOMoveX(defaultPosition, 2f).OnComplete(() =>
+
+            return 0;
+        }
+
+        public void Send()
+        {
+            var defaultPosition = transform.position.x;
+        
+            transform.DOMoveX(defaultPosition+20, 2f).OnComplete(() =>
+            {
+                ShowStateInfo("Машина отправлена");
+                foreach (var collectableItemData in cargo)
                 {
-                    State = DeliveryCarState.WithMoney;
-                    ChangeTile();
-                }));
-        });
-    }
+                    Debug.Log(collectableItemData.name);
+                }
+                DOVirtual.DelayedCall(deliveryCarData.deliveryTime,
+                    () => transform.DOMoveX(defaultPosition, 2f).OnComplete(() =>
+                    {
+                        State = DeliveryCarState.WithMoney;
+                        ChangeTile();
+                    }));
+            });
+        }
     
-    public void ChangeTile()
-    {
-        _tileChanger.ChangeTiles();
+        public void ChangeTile()
+        {
+            _tileChanger.ChangeTiles();
+        }
     }
 }

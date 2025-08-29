@@ -1,6 +1,7 @@
 ﻿using Enum;
+using PointerObjects;
 
-namespace Strategies
+namespace Strategies.WaterTankStrategy
 {
     public class WaterTankTakeStrategy : IPointerObjectInteractStrategy
     {
