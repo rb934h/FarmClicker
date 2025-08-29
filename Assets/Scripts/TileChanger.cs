@@ -3,24 +3,27 @@ using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileChanger : MonoBehaviour
+public class TileChanger
 {
-    [SerializeField] private Tilemap tilemap;
-    [SerializeField] private EnumMap<TileReplacementRuleTypes, TileReplacementRule> _rules;
+    private Tilemap _tilemap;
+    private TileReplacementRule _rule;
 
-    private bool isSwapped;
+    private bool isSwapped = false;
 
-    public void ChangeTiles(TileReplacementRuleTypes ruleType)
+    public TileChanger(Tilemap tilemap, TileReplacementRule rule)
     {
-        var rule = _rules[ruleType];
-
-        var from = isSwapped ? rule.to : rule.from;
-        var to   = isSwapped ? rule.from : rule.to;
+        _tilemap = tilemap;
+        _rule = rule;
+    }
+    public void ChangeTiles()
+    {
+        var from = isSwapped ? _rule.to : _rule.from;
+        var to   = isSwapped ? _rule.from : _rule.to;
 
         int length = Mathf.Min(from.Length, to.Length);
         for (int i = 0; i < length; i++)
-            tilemap.SwapTile(from[i], to[i]);
-
+            _tilemap.SwapTile(from[i], to[i]);
+        
         isSwapped = !isSwapped;
     }
 }

@@ -1,22 +1,17 @@
-using System;
 using DG.Tweening;
-using Enum;
 using TMPro;
 using UnityEngine;
 
 public class PointerObject : MonoBehaviour
 {
+    [Header("Pointer object settings")]
     [SerializeField] private Collider2D pointerObjectCollider;
     [SerializeField] private Transform pointForInteraction;
     [SerializeField] protected TMP_Text _stateInfoText;
     
-    public bool IsAvailable = true;
-    
-    public event Action<PlayerAnimationState> PlayerAnimationStateChanged;
     public Collider2D Collider => pointerObjectCollider;
     public Transform PointForInteraction => pointForInteraction;
     
-    public virtual void ChangeState() { }
 
     protected void ShowStateInfo(string text)
     {
@@ -27,10 +22,5 @@ public class PointerObject : MonoBehaviour
     protected void HideStateInfo()
     {
         _stateInfoText.DOFade(0, 0.3f);
-    }
-
-    protected void OnPlayerAnimationStateChanged(PlayerAnimationState playerAnimationState)
-    {
-        PlayerAnimationStateChanged?.Invoke(playerAnimationState);
     }
 }

@@ -27,7 +27,6 @@ public class Timer {
         _timeRemaining = seconds;
         _isRunning = true;
         StartFillAmount(0);
-        
     }
 
     public void CheckTimer()
@@ -43,15 +42,10 @@ public class Timer {
         }
     }
 
-    public void StopTimer()
+    private void StopTimer()
     {
         _isRunning = false;
         _timeRemaining = 0;
-    }
-
-    public float GetTimeRemaining()
-    {
-        return _timeRemaining;
     }
 
     private void StartFillAmount(float amount)

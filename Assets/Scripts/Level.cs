@@ -25,15 +25,6 @@ public class Level : MonoBehaviour
     private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     
-    private PlayerInventoryData _playerInventory;
-
-    [Inject]
-    public void Construct(PlayerInventoryData playerInventoryData)
-    {
-        _playerInventory = playerInventoryData;
-    }
-
-
     private void Start()
     {
         _inputSystem.DownTouched += StartLevel;
@@ -51,13 +42,6 @@ public class Level : MonoBehaviour
     {
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
-        _player.WorkCompleted += ChangeState;
-        
-        _deliveryCar.IsLoaded += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
-        _deliveryCar.IsDeparted += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.Chest);
-        _waterTank.IsReadyToCollect += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
-        _waterTank.IsCollected += () => _tileChanger.ChangeTiles(TileReplacementRuleTypes.WaterTank);
-        
         _deliveryCar.IsSolded += AddDeliveredItem;
      
         foreach (var screen in ScreenBase.Screens)
@@ -80,22 +64,12 @@ public class Level : MonoBehaviour
 
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
-        if (pointerObject is Garden garden)
-        {
-            garden.SetSeedingData(_player.SeedingData);
-        }
-        
         _player.InteractWithPointerObject(positionForInteract, pointerObject,
             async _ =>
             {
-                await UniTask.WaitForSeconds(0);
+                await UniTask.WaitForSeconds(1f);
             });
       
-    }
-
-    private void ChangeState(PointerObject pointerObject)
-    {
-        pointerObject.ChangeState();
     }
 
     private void AddDeliveredItem(List<CollectableItemData> items)
@@ -108,7 +82,7 @@ public class Level : MonoBehaviour
                 
             }
             
-            _playerInventory.AddCoins(item.price);
+            _player.Inventory.AddCoins(item.price);
         }
        
         CheckLevelGoals();

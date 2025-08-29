@@ -23,8 +23,7 @@ public class PointerInteractor : MonoBehaviour
 
             foreach (var pointerObject in pointerObjects)
             {
-                if (pointerObject.IsAvailable && 
-                    pointerObject.Collider != null &&
+                if (pointerObject.Collider != null &&
                     pointerObject.Collider.OverlapPoint(worldPoint))
                 {
                     OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);

@@ -1,4 +1,5 @@
 ﻿using Enum;
+using UnityEngine;
 
 namespace Strategies
 {
@@ -8,6 +9,7 @@ namespace Strategies
         {
             if (pointerObject is not WaterTank waterTank) return false;
             if (waterTank.State is not WaterTankState.Empty) return false;
+            waterTank.ChangeTile();
             waterTank.State = WaterTankState.ReadyToCollect;
             return true;
         }

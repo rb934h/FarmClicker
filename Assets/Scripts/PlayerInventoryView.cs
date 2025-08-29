@@ -17,8 +17,6 @@ namespace DefaultNamespace
         public void Construct(PlayerInventoryData playerInventoryData)
         {
             _playerInventory = playerInventoryData;
-            
-           
         }
 
         private void Start()

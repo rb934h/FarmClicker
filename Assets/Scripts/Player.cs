@@ -12,20 +12,16 @@ public class Player : MonoBehaviour
 {
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float workTime = 5f;
-    
-    
-    [Header("Анимация")] 
-    [SerializeField] private PlayerAnimator _playerAnimator;
-    
+    [SerializeField] private float workTime;
+
+    private PlayerAnimator _playerAnimator;
     private PointerObject _pointerObject;
     private readonly ActionQueue _actionQueue = new();
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
-    
-    public event Action<PointerObject> WorkCompleted;
 
     public PlayerInventoryData Inventory { get; private set; }
+    public PlayerAnimator Animator => _playerAnimator;
     
     private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
 
@@ -35,11 +31,13 @@ public class Player : MonoBehaviour
         Inventory = playerInventoryData;
         _interactStrategy = interactStrategies;
     }
-    
-    public CollectableItemData SeedingData
+
+    private void Start()
     {
-        get => Inventory.currentSeed;
+        var animator = GetComponentInChildren<Animator>();
+        _playerAnimator = new PlayerAnimator(animator);
     }
+    
 
     public void SetSeedingData(CollectableItemData seedingData)
     {
@@ -66,13 +64,12 @@ public class Player : MonoBehaviour
 
                 _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
 
-                pointerObject.PlayerAnimationStateChanged += _playerAnimator.PlayAnimation;
-
                 await work(pointerObject);
                 
                 foreach (var strategy in _interactStrategy)
                 {
-                    strategy.Interact(this, pointerObject);
+                    if(strategy.Interact(this, pointerObject))
+                        break;
                 }
             }
             finally

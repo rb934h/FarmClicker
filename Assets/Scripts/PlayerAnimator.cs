@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class PlayerAnimator : MonoBehaviour
+    public class PlayerAnimator
     {
         private Animator _animator;
 
-        private void Awake()
+        public PlayerAnimator(Animator animator)
         {
-            _animator = GetComponent<Animator>();
+            _animator = animator;
         }
 
         public void PlayAnimation(PlayerAnimationState state)

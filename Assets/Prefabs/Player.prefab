@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 483009541663067245}
   - component: {fileID: 6730269787088674482}
   - component: {fileID: 7217186198666473616}
-  - component: {fileID: 7572339901088009179}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -114,7 +113,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1599549777
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -1298897427, guid: c4d5b74a8fa62bb4c8379209f73d909a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -149,18 +148,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7572339901088009179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704175881357845989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67d8328ab81485f84f6fb85afb5bf15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1985639256225013904
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +225,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -73739155
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -360,7 +347,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1599549777
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: acd9c94cca41fb044bf1201ea1cc7bd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -450,7 +437,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -73739155
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -511,10 +498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   workTime: 1
-  playerWallet: {fileID: 0}
-  _playerAnimator: {fileID: 7572339901088009179}
-  _playerInventory: {fileID: 629001438874570088}
-  isHaveWater: 0
 --- !u!114 &629001438874570088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandItem: {fileID: 7790338009400734570}
   rightHandItem: {fileID: 5700905806119407283}
+  coinsCountText: {fileID: 0}
 --- !u!1 &8980704105869183672
 GameObject:
   m_ObjectHideFlags: 0

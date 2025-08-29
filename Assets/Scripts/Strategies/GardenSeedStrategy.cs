@@ -8,7 +8,7 @@ namespace Strategies
         {
             if (pointerObject is not Garden garden) return false;
             if (garden.State is not GardenState.Empty || player.Inventory.currentSeed is null) return false;
-            garden.StartCoroutine(garden.PlantSeed());
+            garden.StartCoroutine(garden.PlantSeed(player.Inventory.currentSeed));
             return true;
         }
     }

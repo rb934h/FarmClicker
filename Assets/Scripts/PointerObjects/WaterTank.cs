@@ -1,46 +1,27 @@
 using System;
 using Enum;
+using ScriptableObjects;
 using UnityEngine;
-using VContainer;
+using UnityEngine.Tilemaps;
 
 public class WaterTank : PointerObject
 {
+    [Header("Tile changer")]
+    [SerializeField] private Tilemap _tilemap;
+    [SerializeField] private TileReplacementRule _rule;
+    
+    [HideInInspector]
     public WaterTankState State = WaterTankState.Empty;
     
-    public event Action IsReadyToCollect; 
-    public event Action IsCollected; 
-    
-    private PlayerInventoryData _playerInventory;
+    private TileChanger _tileChanger;
 
-    [Inject]
-    public void Construct(PlayerInventoryData playerInventoryData)
+    private void Start()
     {
-        _playerInventory = playerInventoryData;
+        _tileChanger = new TileChanger(_tilemap, _rule);
     }
-   
-    public override void ChangeState()
+    
+    public void ChangeTile()
     {
-        switch (State)
-        { 
-            case WaterTankState.Empty:
-                // ShowStateInfo("Ведро воды готово, можно забрать");
-                // State = WaterTankState.ReadyToCollect;
-                IsReadyToCollect?.Invoke();
-                break;
-            case WaterTankState.ReadyToCollect:
-                if(_playerInventory.hasWater)
-                    return;
-                ShowStateInfo("Воду забрали, нужно наполнить снова.");
-                State = WaterTankState.Empty;
-                _playerInventory.FillWater();
-                OnPlayerAnimationStateChanged(PlayerAnimationState.PlayerWatering);
-                IsCollected?.Invoke();
-                break;
-            default:
-                Debug.LogWarning("Unknown WaterTank state.");
-                break;
-        }
-        
-        IsAvailable = true;
+        _tileChanger.ChangeTiles();
     }
 }
