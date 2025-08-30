@@ -16,7 +16,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private Image _timerImage;
-    [SerializeField] private DeliveryCar _deliveryCar;
+    [SerializeField] private Chest _chest;
     [SerializeField] private Transform _levelGoalsUITransform;
     [SerializeField] private TMP_Text _levelGoalsText;
     [SerializeField] private TileChanger _tileChanger;
@@ -43,7 +43,7 @@ public class Level : MonoBehaviour
     {
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
-        _deliveryCar.IsSolded += AddDeliveredItem;
+        _chest.IsSolded += AddDeliveredItem;
      
         foreach (var screen in ScreenBase.Screens)
         {

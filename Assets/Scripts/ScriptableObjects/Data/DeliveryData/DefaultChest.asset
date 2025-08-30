@@ -10,6 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e57687b5b75c4d5b9848e9720cb0cdda, type: 3}
-  m_Name: Truck
+  m_Name: DefaultChest
   m_EditorClassIdentifier: 
-  deliveryTime: 1
+  deliveryTime: 5
+  saleBoard: {fileID: 371100081, guid: 0a30f02a2fb5bc142ae89f1dff60c590, type: 3}
+  fallDistance: 0.1
+  duration: 1
+  impactScale: 0.85
+  wobbleAngle: 10

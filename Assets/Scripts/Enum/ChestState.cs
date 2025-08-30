@@ -1,6 +1,6 @@
 ﻿namespace Enum
 {
-    public enum DeliveryCarState
+    public enum ChestState
     {
         Empty,          
         Loaded,        

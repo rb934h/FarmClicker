@@ -1,6 +1,6 @@
 ﻿using PostProcessing;
 using Strategies;
-using Strategies.DeliveryCarStrategy;
+using Strategies.ChestStrategy;
 using Strategies.GardenStrategy;
 using Strategies.WaterTankStrategy;
 using UnityEngine;
@@ -25,10 +25,10 @@ namespace DI.Scopes
             // ------------ WaterTank ------------------
             builder.Register<IPointerObjectInteractStrategy, WaterTankFIllStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, WaterTankTakeStrategy>(Lifetime.Singleton);
-            // ------------ DeliveryCar ------------------
-            builder.Register<IPointerObjectInteractStrategy, DeliveryCarLoadStrategy>(Lifetime.Singleton);
-            builder.Register<IPointerObjectInteractStrategy, DeliveryCarSendStrategy>(Lifetime.Singleton);
-            builder.Register<IPointerObjectInteractStrategy, DeliveryCarWithMoneyStrategy>(Lifetime.Singleton);
+            // ------------ Chest ------------------
+            builder.Register<IPointerObjectInteractStrategy, ChestLoadStrategy>(Lifetime.Singleton);
+            builder.Register<IPointerObjectInteractStrategy, ChestSendStrategy>(Lifetime.Singleton);
+            builder.Register<IPointerObjectInteractStrategy, ChestWithMoneyStrategy>(Lifetime.Singleton);
             
             var runtimeInventory = Instantiate(playerInventory);
             builder.RegisterInstance(runtimeInventory).AsSelf();
