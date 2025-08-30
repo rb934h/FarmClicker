@@ -53,9 +53,18 @@ namespace PointerObjects
         {
             cargo.AddRange(objectsFromPlayer);
             
-            for (var i = 0; i < objectsFromPlayer.Count; i++)
+            int playerIndex = 0;
+
+            for (int chestIndex = 0; chestIndex < objectsInChest.Length; chestIndex++)
             {
-                objectsInChest[i].sprite = objectsFromPlayer[i].spriteForHands;
+                if (objectsInChest[chestIndex].sprite == null && playerIndex < objectsFromPlayer.Count)
+                {
+                    objectsInChest[chestIndex].sprite = objectsFromPlayer[playerIndex].spriteForHands;
+                    playerIndex++;
+                }
+                
+                if (playerIndex >= objectsFromPlayer.Count)
+                    break;
             }
         }
 
@@ -79,6 +88,11 @@ namespace PointerObjects
             }
 
             return 0;
+        }
+        
+        public int GetCargoCount()
+        {
+            return cargo.Count;
         }
 
         public void Send()

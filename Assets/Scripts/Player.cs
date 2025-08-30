@@ -66,11 +66,8 @@ public class Player : MonoBehaviour
                 
                 foreach (var strategy in _interactStrategy)
                 {
-                    if (strategy.Interact(this, pointerObject))
-                    {
-                        break;
-                    }
-                        
+                    if(strategy.Interact(this, pointerObject))
+                        return;
                 }
             }
             finally
