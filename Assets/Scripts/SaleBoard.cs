@@ -7,7 +7,6 @@ public class SaleBoard
     private readonly SpriteRenderer _spriteRenderer;
     private readonly float _fallDistance;
     private readonly float _duration;
-    private readonly float _impactScale;
     private readonly float _wobbleAngle;
 
     private Sequence _sequence;
@@ -20,7 +19,6 @@ public class SaleBoard
         _spriteRenderer.sprite = chestData.saleBoard;
         _fallDistance = chestData.saleBoardFallDistance;
         _duration = chestData.saleBoardDuration;
-        _impactScale = chestData.saleBoardImpactScale;
         _wobbleAngle = chestData.saleBoardWobbleAngle;
     }
 

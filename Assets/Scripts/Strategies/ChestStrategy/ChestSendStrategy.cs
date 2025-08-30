@@ -9,6 +9,7 @@ namespace Strategies.ChestStrategy
         {
             if (pointerObject is not Chest chest) return false;
             if (chest.State is not ChestState.Loaded) return false;
+            chest.ChangeTile();
             chest.Send();
             return true;
         }

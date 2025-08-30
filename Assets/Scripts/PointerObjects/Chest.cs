@@ -11,7 +11,8 @@ namespace PointerObjects
     public class Chest : PointerObject
     {
         [SerializeField] private ChestData chestData;
-
+        [SerializeField] private SpriteRenderer[] objectsInChest;
+            
         [Header("Coin Spin")] 
         [SerializeField] private Transform _coinsParent;
 
@@ -23,7 +24,8 @@ namespace PointerObjects
 
         [SerializeField] private TileReplacementRule _rule;
 
-        [HideInInspector] public ChestState State = ChestState.Empty;
+        [HideInInspector] 
+        public ChestState State = ChestState.Empty;
 
         public event Action<List<CollectableItemData>> IsSolded;
 
@@ -50,11 +52,17 @@ namespace PointerObjects
         public void PutCargo(List<CollectableItemData> objectsFromPlayer)
         {
             cargo.AddRange(objectsFromPlayer);
+            
+            for (var i = 0; i < objectsFromPlayer.Count; i++)
+            {
+                objectsInChest[i].sprite = objectsFromPlayer[i].spriteForHands;
+            }
         }
 
         public void ClearCargo()
         {
             IsSolded?.Invoke(cargo);
+            
             foreach (var spin in _spins)
             {
                 spin.Stop();
@@ -81,6 +89,11 @@ namespace PointerObjects
             foreach (var collectableItemData in cargo)
             {
                 Debug.Log(collectableItemData.name);
+            }
+            
+            foreach (var spriteRenderer in objectsInChest)
+            {
+                spriteRenderer.sprite = null;
             }
 
             DOVirtual.DelayedCall(chestData.deliveryTime,

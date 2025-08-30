@@ -11,7 +11,6 @@ namespace Strategies.ChestStrategy
             if (chest.State is not ChestState.Empty || !player.Inventory.CanAddCargo) return false;
             chest.State = ChestState.Loaded;
             chest.PutCargo(player.Inventory.harvestObjects);
-            chest.ChangeTile();
             player.Inventory.UseWater();
             player.Inventory.ClearItems();
             return true;
