@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using ScriptableObjects;
 
 public class CoinSpin
 {
@@ -12,20 +13,18 @@ public class CoinSpin
 
     private Sequence _sequence;
 
+    private Vector3 _defaultScale;
+
     public CoinSpin(
         SpriteRenderer spriteRenderer, 
-        Sprite front, 
-        Sprite back, 
-        float duration = 0.6f, 
-        bool loop = true,
-        float scaleMultiplier = 1.25f)
+        ChestData chestData)
     {
         _spriteRenderer = spriteRenderer;
-        _frontSprite = front;
-        _backSprite = back;
-        _duration = duration;
-        _loop = loop;
-        _scaleMultiplier = scaleMultiplier;
+        _frontSprite = chestData.coinFront;
+        _backSprite = chestData.coinBack;
+        _duration = chestData.coinSpinDuration;
+        _loop = chestData.coinSpinAminationLoop;
+        _scaleMultiplier = chestData.coinSpinScaleMultiplier;
     }
 
     public void Play()
@@ -34,6 +33,7 @@ public class CoinSpin
 
         _spriteRenderer.enabled = true;
         Transform t = _spriteRenderer.transform;
+        _defaultScale = t.localScale;
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
@@ -69,5 +69,7 @@ public class CoinSpin
 
         if (_spriteRenderer != null)
             _spriteRenderer.enabled = false;
+        
+        _spriteRenderer.transform.localScale = _defaultScale;
     }
 }

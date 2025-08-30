@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deliveryTime: 5
   saleBoard: {fileID: 371100081, guid: 0a30f02a2fb5bc142ae89f1dff60c590, type: 3}
-  fallDistance: 0.1
-  duration: 1
-  impactScale: 0.85
-  wobbleAngle: 10
+  saleBoardFallDistance: 0.1
+  saleBoardDuration: 1
+  saleBoardImpactScale: 0.85
+  saleBoardWobbleAngle: 10
+  coinFront: {fileID: -204321330, guid: c52439be0dceeb141adbec4630146525, type: 3}
+  coinBack: {fileID: -1694543099, guid: c52439be0dceeb141adbec4630146525, type: 3}
+  coinSpinDuration: 0.6
+  coinSpinAminationLoop: 1
+  coinSpinScaleMultiplier: 1.25

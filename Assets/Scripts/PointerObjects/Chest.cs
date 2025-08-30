@@ -13,8 +13,6 @@ namespace PointerObjects
         [SerializeField] private ChestData chestData;
 
         [Header("Coin Spin")] 
-        [SerializeField] private Sprite front;
-        [SerializeField] private Sprite back;
         [SerializeField] private Transform _coinsParent;
 
         [Header("Sale board")] 
@@ -42,7 +40,7 @@ namespace PointerObjects
 
             foreach (var coin in coins)
             {
-                var spin = new CoinSpin(coin, front, back);
+                var spin = new CoinSpin(coin, chestData);
                 _spins.Add(spin);
             }
 

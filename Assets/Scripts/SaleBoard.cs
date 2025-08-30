@@ -18,10 +18,10 @@ public class SaleBoard
     {
         _spriteRenderer = spriteRenderer;
         _spriteRenderer.sprite = chestData.saleBoard;
-        _fallDistance = chestData.fallDistance;
-        _duration = chestData.duration;
-        _impactScale = chestData.impactScale;
-        _wobbleAngle = chestData.wobbleAngle;
+        _fallDistance = chestData.saleBoardFallDistance;
+        _duration = chestData.saleBoardDuration;
+        _impactScale = chestData.saleBoardImpactScale;
+        _wobbleAngle = chestData.saleBoardWobbleAngle;
     }
 
     public void Play()
@@ -39,12 +39,14 @@ public class SaleBoard
 
         _sequence.AppendCallback(() => _spriteRenderer.enabled = !_spriteRenderer.enabled);
         
-        _sequence.Append(t.DOLocalMove(targetPos, _duration)
-            .SetEase(Ease.InOutBack)); 
-
         _sequence.Append(t.DORotate(new Vector3(0, 0, _wobbleAngle), 0.2f)
             .SetEase(Ease.InOutSine)
             .SetLoops(2, LoopType.Yoyo));
+        
+        _sequence.Append(t.DOLocalMove(targetPos, _duration)
+            .SetEase(Ease.InOutBack)); 
+
+        
     }
 
     public void Stop() => Clear();
