@@ -119458,8 +119458,8 @@ MonoBehaviour:
   - {fileID: 1853430088}
   - {fileID: 1830244217}
   - {fileID: 1614508047}
-  - {fileID: 1353995640}
   - {fileID: 417983399}
+  - {fileID: 1353995640}
 --- !u!1 &928246223
 GameObject:
   m_ObjectHideFlags: 0
@@ -121472,6 +121472,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: tileMap
+      value: 
+      objectReference: {fileID: 1647789220}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: gardenTileMap
+      value: 
+      objectReference: {fileID: 1647789220}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: _stateInfoText
       value: 
@@ -125121,6 +125129,14 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: tileMap
+      value: 
+      objectReference: {fileID: 1647789220}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: gardenTileMap
+      value: 
+      objectReference: {fileID: 1647789220}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: _stateInfoText
       value: 
       objectReference: {fileID: 1877064681}
@@ -126170,6 +126186,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: tileMap
+      value: 
+      objectReference: {fileID: 1647789220}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: gardenTileMap
       value: 

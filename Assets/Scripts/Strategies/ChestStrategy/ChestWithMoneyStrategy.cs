@@ -10,7 +10,6 @@ namespace Strategies.ChestStrategy
         {
             if (pointerObject is not Chest chest) return false;
             if (chest.State is not ChestState.WithMoney) return false;
-            player.Inventory.AddCoins(chest.GetCargoPrice());
             chest.ClearCargo();
             chest.State = ChestState.Empty;
             return true;

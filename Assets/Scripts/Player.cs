@@ -58,7 +58,9 @@ public class Player : MonoBehaviour
                 var yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
                 
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
-                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
+                
+                if(Vector3.Distance(transform.position, targetPosition) > 0.1f)
+                    _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
                 
                 await MoveTo(targetPosition);
 
