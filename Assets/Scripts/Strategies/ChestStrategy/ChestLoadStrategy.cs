@@ -1,4 +1,5 @@
-﻿using Enum;
+﻿using System.Linq;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.ChestStrategy
@@ -8,10 +9,17 @@ namespace Strategies.ChestStrategy
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
-            if (chest.State is not ChestState.Empty || chest.GetCargoCount() == 2 || !player.Inventory.CanAddCargo) return false;
-
-            chest.PutCargo(player.Inventory.harvestObjects);
-            player.Inventory.ClearItems();
+            if (chest.State is not ChestState.Empty || chest.GetCargoCount() >= 2 || !player.Inventory.handsNotEmpty) return false;
+            
+            foreach (var inventoryHarvestObject in player
+                         .Inventory
+                         .harvestObjects
+                         .ToList()
+                         .Where(inventoryHarvestObject => chest.PutCargo(inventoryHarvestObject)))
+            {
+                player.Inventory.ClearItem(inventoryHarvestObject);
+            }
+            
             chest.State = ChestState.Loaded;
 
             return true;

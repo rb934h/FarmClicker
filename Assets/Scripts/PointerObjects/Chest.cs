@@ -49,23 +49,20 @@ namespace PointerObjects
             _saleBoard = new SaleBoard(_saleBoardSpriteRenderer, chestData);
         }
 
-        public void PutCargo(List<CollectableItemData> objectsFromPlayer)
+        public bool PutCargo(CollectableItemData objectsFromPlayer)
         {
-            cargo.AddRange(objectsFromPlayer);
+            if(cargo.Count > 1)
+                return false;
             
-            int playerIndex = 0;
-
-            for (int chestIndex = 0; chestIndex < objectsInChest.Length; chestIndex++)
+            cargo.Add(objectsFromPlayer);
+            
+            for (int chestIndex = 0; chestIndex < cargo.Count; chestIndex++)
             {
-                if (objectsInChest[chestIndex].sprite == null && playerIndex < objectsFromPlayer.Count)
-                {
-                    objectsInChest[chestIndex].sprite = objectsFromPlayer[playerIndex].spriteForHands;
-                    playerIndex++;
-                }
-                
-                if (playerIndex >= objectsFromPlayer.Count)
-                    break;
+               if(objectsInChest[chestIndex].sprite == null)
+                    objectsInChest[chestIndex].sprite = objectsFromPlayer.spriteForHands;
             }
+            
+            return true;
         }
 
         public void ClearCargo()

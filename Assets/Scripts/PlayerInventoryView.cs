@@ -38,8 +38,12 @@ namespace DefaultNamespace
         
         private void ClearItem()
         {
-            leftHandItem.sprite = null;
-            rightHandItem.sprite = null;
+            if(leftHandItem.sprite != null)
+                leftHandItem.sprite = null;
+            else
+            {
+                rightHandItem.sprite = null;
+            }
         }
         
         private void UpdateCoinsCountText()

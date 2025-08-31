@@ -15,8 +15,8 @@ public class PlayerInventoryData : ScriptableObject
     public event Action<Sprite> HarvestObjectAdded; 
     public event Action HarvestObjectsClear; 
     public event Action CoinsChanged; 
-    public bool CanAddItem => harvestObjects.Count < maxItemsInHand;
-    public bool CanAddCargo => harvestObjects.Count > 0;
+    public bool canAddItem => harvestObjects.Count < maxItemsInHand;
+    public bool handsNotEmpty => harvestObjects.Count > 0;
     
     public void AddHarvestObject(CollectableItemData harvestObject)
     {
@@ -32,9 +32,9 @@ public class PlayerInventoryData : ScriptableObject
         CoinsChanged?.Invoke();
     }
 
-    public void ClearItems()
+    public void ClearItem(CollectableItemData item)
     {
-        harvestObjects.Clear();
+        harvestObjects.Remove(item);
         HarvestObjectsClear?.Invoke();
     }
 }

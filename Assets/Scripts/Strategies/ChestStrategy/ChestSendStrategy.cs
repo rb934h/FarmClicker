@@ -1,4 +1,5 @@
-﻿using Enum;
+﻿using System.Linq;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.ChestStrategy
@@ -10,10 +11,17 @@ namespace Strategies.ChestStrategy
             if (pointerObject is not Chest chest) return false;
             if (chest.State is not ChestState.Loaded) return false;
             
-            if (player.Inventory.CanAddCargo && chest.GetCargoCount() != 2)
+            if (player.Inventory.handsNotEmpty && chest.GetCargoCount() != 2)
             {
-                chest.PutCargo(player.Inventory.harvestObjects);
-                player.Inventory.ClearItems();
+                foreach (var inventoryHarvestObject in player
+                             .Inventory
+                             .harvestObjects
+                             .ToList()
+                             .Where(inventoryHarvestObject => chest.PutCargo(inventoryHarvestObject)))
+                {
+                    player.Inventory.ClearItem(inventoryHarvestObject);
+                }
+
                 return true;
             }
               
