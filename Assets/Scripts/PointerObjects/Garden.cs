@@ -22,6 +22,7 @@ namespace PointerObjects
         private TilemapAreaHighlighter _tilemapAreaHighlighter;
         private Color colorAfterWatering = new (.75f, .75f, .75f);
         private Color defaultColor = Color.white;
+        private float seedingTime = .05f;
 
 
         private void Start()
@@ -73,16 +74,18 @@ namespace PointerObjects
             
             yield return new WaitForSeconds(currentSeed.growTime);
             
-            State = GardenState.ReadyToHarvest;
-            hintSpriteRenderer.sprite = hintData.harvestSprite;
-            
-            ShowStateInfo("Рост завершен, готово к сбору.");
-            
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Mature));
             
             yield return new WaitForSeconds(currentSeed.growTime);
             
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
+            
+            yield return new WaitForSeconds(seedingTime);
+            
+            ShowStateInfo("Рост завершен, готово к сбору.");
+            
+            State = GardenState.ReadyToHarvest;
+            hintSpriteRenderer.sprite = hintData.harvestSprite;
         }
 
         public void Harvest()
@@ -106,7 +109,7 @@ namespace PointerObjects
         {
             for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
             {
-                yield return new WaitForSeconds(.05f);
+                yield return new WaitForSeconds(seedingTime);
                 seedingPointsSpriteRenderers[i].sprite = currentSeed.spritesForGarden[(int)growState];
             }
         }
