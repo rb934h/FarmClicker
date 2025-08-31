@@ -107,18 +107,20 @@ namespace PointerObjects
                 spriteRenderer.sprite = null;
             }
 
-            DOVirtual.DelayedCall(chestData.deliveryTime,
-                () =>
-                {
-                    State = ChestState.WithMoney;
-                    foreach (var spin in _spins)
-                    {
-                        spin.Play();
-                    }
+            var seq = DOTween.Sequence();
 
-                    _saleBoard.Stop();
-                    ChangeTile();
-                });
+            seq.AppendInterval(chestData.deliveryTime);  
+            seq.AppendCallback(() => _saleBoard.Stop()); 
+            seq.AppendInterval(chestData.saleBoardDuration);                    
+            seq.AppendCallback(() =>
+            {
+                State = ChestState.WithMoney;
+                ChangeTile();
+                foreach (var spin in _spins)
+                {
+                    spin.Play();
+                }
+            });
         }
 
         public void ChangeTile()

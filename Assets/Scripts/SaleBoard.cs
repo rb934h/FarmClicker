@@ -37,7 +37,7 @@ public class SaleBoard
 
         _sequence.AppendCallback(() => _spriteRenderer.enabled = !_spriteRenderer.enabled);
         
-        _sequence.Append(t.DORotate(new Vector3(0, 0, _wobbleAngle), 0.2f)
+        _sequence.Append(t.DORotate(new Vector3(0, 0, _wobbleAngle), _duration*.25f)
             .SetEase(Ease.InOutSine)
             .SetLoops(2, LoopType.Yoyo));
         
