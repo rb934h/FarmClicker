@@ -7,7 +7,7 @@ namespace PointerObjects
     public class PointerObject : MonoBehaviour
     {
         [Header("Pointer object settings")]
-        [SerializeField] private Collider2D pointerObjectCollider;
+        [SerializeField] protected Collider2D pointerObjectCollider;
         [SerializeField] private Transform pointForInteraction;
         [SerializeField] protected TMP_Text _stateInfoText;
     

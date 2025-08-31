@@ -126171,6 +126171,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: gardenTileMap
+      value: 
+      objectReference: {fileID: 1647789220}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: _stateInfoText
       value: 
       objectReference: {fileID: 1877064681}
@@ -126555,6 +126559,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.539
       objectReference: {fileID: 0}
+    - target: {fileID: 1196548816712577256, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4125676033680053561, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
       propertyPath: _tilemap
       value: 
@@ -126582,6 +126590,14 @@ PrefabInstance:
     - target: {fileID: 6897578883030524151, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
       propertyPath: m_Name
       value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499626552919757936, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499626552919757936, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.749
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
