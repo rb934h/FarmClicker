@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea4aa3083544829b056636ab3d25898, type: 3}
   m_Name: GardenHints
   m_EditorClassIdentifier: 
-  waterSprite: {fileID: 21300000, guid: b5cc2e15338c0a44899c8bb28085cb3d, type: 3}
-  harvestSprite: {fileID: 21300000, guid: 4ff9c3554fe63eb4eb0542c33dbeee4f, type: 3}
+  waterSprite: {fileID: 21300000, guid: 12e18e0196232b24f98c3e6e668c3eaf, type: 3}
+  harvestSprite: {fileID: 21300000, guid: eda7e1a90294fcb4eac773bb714bf236, type: 3}

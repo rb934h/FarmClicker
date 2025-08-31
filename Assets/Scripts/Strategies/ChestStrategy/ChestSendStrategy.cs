@@ -9,7 +9,7 @@ namespace Strategies.ChestStrategy
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
-            if (chest.State is not ChestState.Loaded) return false;
+            if (chest.State is not ChestState.Loaded || chest.WaitForSale) return false;
             
             if (player.Inventory.handsNotEmpty && chest.GetCargoCount() != 2)
             {

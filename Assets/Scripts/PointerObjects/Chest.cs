@@ -33,6 +33,9 @@ namespace PointerObjects
         private List<CollectableItemData> cargo = new();
         private List<CoinSpin> _spins = new();
         private SaleBoard _saleBoard;
+        private bool _waitForSale;
+
+        public bool WaitForSale => _waitForSale;
 
 
         private void Start()
@@ -76,16 +79,6 @@ namespace PointerObjects
 
             cargo.Clear();
         }
-
-        public float GetCargoPrice()
-        {
-            foreach (var collectableItemData in cargo)
-            {
-                return collectableItemData.price;
-            }
-
-            return 0;
-        }
         
         public int GetCargoCount()
         {
@@ -94,6 +87,7 @@ namespace PointerObjects
 
         public void Send()
         {
+            _waitForSale = true;
             _saleBoard.Play();
 
             ShowStateInfo("Машина отправлена");
@@ -114,6 +108,7 @@ namespace PointerObjects
             seq.AppendInterval(chestData.saleBoardDuration);                    
             seq.AppendCallback(() =>
             {
+                _waitForSale = false;
                 State = ChestState.WithMoney;
                 ChangeTile();
                 foreach (var spin in _spins)
