@@ -2,6 +2,7 @@
 using System.Collections;
 using Enum;
 using ScriptableObjects;
+using Scripts;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -53,7 +54,9 @@ namespace PointerObjects
             
             State = GardenState.Planted;
             ShowStateInfo("Семя посажено, требуется полив.");
+            
             hintSpriteRenderer.sprite = hintData.waterSprite;
+            HintAnimator.Show(hintSpriteRenderer);
             
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
         }
@@ -85,7 +88,9 @@ namespace PointerObjects
             ShowStateInfo("Рост завершен, готово к сбору.");
             
             State = GardenState.ReadyToHarvest;
+            
             hintSpriteRenderer.sprite = hintData.harvestSprite;
+            HintAnimator.Show(hintSpriteRenderer);
         }
 
         public void Harvest()
@@ -99,7 +104,7 @@ namespace PointerObjects
             
             State = GardenState.Empty;
             
-            hintSpriteRenderer.sprite = null;
+            HintAnimator.Hide(hintSpriteRenderer, true);
             harvestedSeed = null;
             
             _tilemapAreaHighlighter.ChangeTilesColor(1, defaultColor);

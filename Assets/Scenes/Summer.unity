@@ -2177,6 +2177,11 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!212 &770208547 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8914413953689331700, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+  m_PrefabInstance: {fileID: 7266406902286313842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &782192210
 GameObject:
   m_ObjectHideFlags: 0
@@ -121497,6 +121502,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -125153,6 +125170,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -126244,15 +126273,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9039506486327449284, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -126462,6 +126491,18 @@ PrefabInstance:
       propertyPath: coinsCountText
       value: 
       objectReference: {fileID: 856851341}
+    - target: {fileID: 2809144587700528109, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809144587700528109, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809144587700528109, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: wallet
       value: 
@@ -126479,6 +126520,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7266406902286313844}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: _playerHint
+      value: 
+      objectReference: {fileID: 770208547}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: playerWallet
       value: 
       objectReference: {fileID: 0}
@@ -126486,6 +126531,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: _playerHintData
+      value: 
+      objectReference: {fileID: 11400000, guid: e52b54f753f29a84499e672c120f5d34, type: 2}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: playerInventory
       value: 

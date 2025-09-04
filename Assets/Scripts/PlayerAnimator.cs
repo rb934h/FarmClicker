@@ -6,7 +6,7 @@ namespace DefaultNamespace
     public class PlayerAnimator
     {
         private Animator _animator;
-
+        
         public PlayerAnimator(Animator animator)
         {
             _animator = animator;
@@ -16,5 +16,6 @@ namespace DefaultNamespace
         {
             _animator.Play(state.ToString());
         }
+
     }
 }

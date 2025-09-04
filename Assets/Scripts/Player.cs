@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -6,6 +5,7 @@ using DefaultNamespace;
 using Enum;
 using PointerObjects;
 using ScriptableObjects;
+using Scripts;
 using Strategies;
 using VContainer;
 
@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
 {
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
+    
+    [Header("Эмоции")] 
+    [SerializeField] private SpriteRenderer _playerHint;
+    [SerializeField] private PlayerHintData _playerHintData;
+
 
     private PlayerAnimator _playerAnimator;
     private PointerObject _pointerObject;
@@ -50,6 +55,7 @@ public class Player : MonoBehaviour
         if (_busyPointerObjects.Contains(pointerObject))
             return;
         
+        
         _actionQueue.Enqueue(async () =>
         {
             _busyPointerObjects.Add(pointerObject);
@@ -71,12 +77,22 @@ public class Player : MonoBehaviour
                     if(strategy.Interact(this, pointerObject))
                         return;
                 }
+                
+                MakeMistake();
             }
             finally
             {
                 _busyPointerObjects.Remove(pointerObject);
             }
         });
+        
+        
+    }
+
+    private void MakeMistake()
+    {
+        _playerHint.sprite = _playerHintData.mistakeSprite;
+        HintAnimator.Show(_playerHint, true);
     }
 
     private async UniTask MoveTo(Vector3 target)
