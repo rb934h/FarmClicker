@@ -65,12 +65,7 @@ public class Player : MonoBehaviour
                 
                 transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
                 
-                if(Vector3.Distance(transform.position, targetPosition) > 0.1f)
-                    _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
-                
                 await MoveTo(targetPosition);
-
-                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
                 
                 foreach (var strategy in _interactStrategy)
                 {
@@ -99,8 +94,11 @@ public class Player : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, target) > 0.1f)
         {
+            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // ITS OK?🤔
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             await UniTask.Yield();
         }
+        
+        _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
     }
 }
