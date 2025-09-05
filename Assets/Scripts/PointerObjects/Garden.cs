@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace;
 using Enum;
 using ScriptableObjects;
 using Scripts;
@@ -12,6 +13,7 @@ namespace PointerObjects
     {
         [SerializeField] private SpriteRenderer[] seedingPointsSpriteRenderers;
         [SerializeField] private SpriteRenderer hintSpriteRenderer;
+        [SerializeField] private FillBar _fillBar;
         [SerializeField] private GardenHintData hintData;
         [SerializeField] private Tilemap tileMap;
         
@@ -29,6 +31,8 @@ namespace PointerObjects
         private void Start()
         {
             _tilemapAreaHighlighter = new TilemapAreaHighlighter(tileMap, pointerObjectCollider);
+            _fillBar.OnFill += _fillBar.Hide;
+            _fillBar.OnEmpty += _fillBar.Hide;
         }
 
         public CollectableItemData GetHarvestObject()
@@ -47,8 +51,12 @@ namespace PointerObjects
             }
             
             harvestedSeed = currentSeed;
+            
+            _fillBar.Show();
 
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
+            
+            _fillBar.Filling(currentSeed.growTime + seedingTime);
             
             yield return new WaitForSeconds(currentSeed.growTime);
             
@@ -74,6 +82,9 @@ namespace PointerObjects
             _tilemapAreaHighlighter.ChangeTilesColor(1, colorAfterWatering);
             
             ShowStateInfo("Полив начат, идет рост...");
+            
+            _fillBar.Show();
+            _fillBar.Filling(currentSeed.growTime*2+seedingTime);
             
             yield return new WaitForSeconds(currentSeed.growTime);
             

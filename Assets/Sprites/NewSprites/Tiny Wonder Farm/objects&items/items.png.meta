@@ -1187,7 +1187,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1258,6 +1258,7 @@ TextureImporter:
       items_46: 1829740111
       items_47: -1694543099
       items_48: -204321330
+      items_49: 1140643008
       items_5: -1669415859
       items_6: 523383999
       items_7: -549767045
