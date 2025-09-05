@@ -11,7 +11,7 @@ namespace Strategies.GardenStrategy
             if (garden.State is not GardenState.ReadyToHarvest || !player.Inventory.canAddItem) return false;
             player.Inventory.AddHarvestObject(garden.GetHarvestObject());
             player.Animator.PlayAnimation(PlayerAnimationState.PlayerWeeding);
-            garden.Harvest();
+            garden.Remove();
             return true;
         }
     }

@@ -31,8 +31,9 @@ namespace PointerObjects
         private void Start()
         {
             _tilemapAreaHighlighter = new TilemapAreaHighlighter(tileMap, pointerObjectCollider);
-            _fillBar.OnFill += _fillBar.Hide;
-            _fillBar.OnEmpty += _fillBar.Hide;
+            
+            _fillBar.OnFill += () => _fillBar.Emptying(currentSeed.ruinTime);
+            _fillBar.OnEmpty += Remove;
         }
 
         public CollectableItemData GetHarvestObject()
@@ -104,14 +105,14 @@ namespace PointerObjects
             HintAnimator.Show(hintSpriteRenderer);
         }
 
-        public void Harvest()
+        public void Remove()
         {
             if (currentSeed != null)
             {
                 ClearSpritesFromSeedingPoints();
             }
             
-            ShowStateInfo("Урожай собран!");
+            _fillBar.Hide();
             
             State = GardenState.Empty;
             

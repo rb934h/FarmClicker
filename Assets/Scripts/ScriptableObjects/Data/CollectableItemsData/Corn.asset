@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Corn
   price: 5
   growTime: 1
+  ruinTime: 15
   spriteForHands: {fileID: 1700330473, guid: c52439be0dceeb141adbec4630146525, type: 3}
   spritesForGarden:
   - {fileID: -170433902, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}

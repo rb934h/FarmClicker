@@ -7,6 +7,7 @@ namespace ScriptableObjects
         public string itemName;
         public int price;
         public float growTime;
+        public float ruinTime;
         public Sprite spriteForHands;
         public Sprite[] spritesForGarden;
         
