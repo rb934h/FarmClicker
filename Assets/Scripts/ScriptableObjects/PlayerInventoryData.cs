@@ -26,9 +26,9 @@ public class PlayerInventoryData : ScriptableObject
 
     public void UseWater() => hasWater = false;
     public void FillWater() => hasWater = true;
-    public void AddCoins(float coins)
+    public void AddCoins(float coinsCount)
     {
-        this.coins += coins;
+        coins += coinsCount;
         CoinsChanged?.Invoke();
     }
 

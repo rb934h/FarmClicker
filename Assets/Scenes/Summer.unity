@@ -232,10 +232,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.681
   m_Color: {r: 1, g: 0.6156863, b: 0.07843137, a: 0.6}
-  m_Intensity: 1.35
+  m_Intensity: 0.75
   m_LightVolumeIntensity: 0.13
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e179
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e17947139382
   m_LightCookieSprite: {fileID: 21300000, guid: 23751f07b5670be4bab02e60e190a440, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -439,7 +439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 268937547}
-  - component: {fileID: 268937546}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -447,27 +446,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &268937546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268937545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ddc8e8357b05b4085ec08c35d003b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelData: {fileID: 11400000, guid: b62a3b761f9549b48ab20d07d0e7416b, type: 2}
-  _pointerClicker: {fileID: 860680403}
-  _player: {fileID: 752859350}
-  _inputSystem: {fileID: 1027432370}
-  _timerImage: {fileID: 1672161548}
-  _chest: {fileID: 417983399}
-  _levelGoalsUITransform: {fileID: 1989559544}
-  _levelGoalsText: {fileID: 3346904989797125999, guid: c304d8ac6e3b8e84291121ef942124fb, type: 3}
-  _waterTank: {fileID: 1353995640}
 --- !u!4 &268937547
 Transform:
   m_ObjectHideFlags: 0
@@ -983,7 +961,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873afcea8a06dd49afbab8908ffb9ac5119d9f2a4af1ff5e179
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873afcea8a06dd49afbab8908ffb9ac5119d9f2a4af1ff5e17947139382
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1939,7 +1917,7 @@ MonoBehaviour:
   m_Intensity: 0.7
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e179
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e17947139382
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -120033,10 +120011,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.6156863, b: 0.078431375, a: 0.56078434}
-  m_Intensity: 1.35
+  m_Intensity: 0.75
   m_LightVolumeIntensity: 0.13
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e179
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e17947139382
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -120103,6 +120081,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363250655}
+  - component: {fileID: 1363250656}
+  - component: {fileID: 1363250657}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -120128,6 +120108,41 @@ Transform:
   - {fileID: 433816046}
   m_Father: {fileID: 268937547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363250656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363250654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ddc8e8357b05b4085ec08c35d003b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelData: {fileID: 11400000, guid: b62a3b761f9549b48ab20d07d0e7416b, type: 2}
+  _pointerClicker: {fileID: 860680403}
+  _player: {fileID: 752859350}
+  _inputSystem: {fileID: 1027432370}
+  _timerImage: {fileID: 1672161548}
+  _chest: {fileID: 417983399}
+  _levelGoalsUITransform: {fileID: 1989559544}
+  _levelGoalsText: {fileID: 3346904989797125999, guid: c304d8ac6e3b8e84291121ef942124fb, type: 3}
+  _weatherManager: {fileID: 1363250657}
+--- !u!114 &1363250657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363250654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a0dcd7281041f28129f54e28bde0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeatherManager
+  weatherEffects:
+  - {fileID: 11400000, guid: 7072374ec14d858488dc5bfc418c20bf, type: 2}
 --- !u!1 &1386543688
 GameObject:
   m_ObjectHideFlags: 0
@@ -121731,7 +121746,7 @@ MonoBehaviour:
   m_Intensity: 0.7
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e179
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e17947139382
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -121841,7 +121856,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -653527479
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

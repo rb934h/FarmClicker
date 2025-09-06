@@ -32,8 +32,7 @@ namespace DefaultNamespace
 
             _fillSequence = DOTween.Sequence()
                 .Append(_fillSprite.DOColor(Color.green, time))
-                .Join(_fillSprite.transform.DOScaleY(_initialScale.y, time))
-                .SetEase(Ease.Linear)
+                .Join(_fillSprite.transform.DOScaleY(_initialScale.y, time)).SetEase(Ease.Linear)
                 .OnComplete(() => OnFill?.Invoke());
         }
 
@@ -43,7 +42,7 @@ namespace DefaultNamespace
 
             _fillSequence = DOTween.Sequence()
                 .Append(_fillSprite.DOColor(Color.red, time))
-                .Join(_fillSprite.transform.DOScaleY(0, time))
+                .Join(_fillSprite.transform.DOScaleY(0, time)).SetEase(Ease.Linear)
                 .OnComplete(() => OnEmpty?.Invoke());
         }
 

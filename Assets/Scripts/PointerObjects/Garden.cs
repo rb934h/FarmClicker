@@ -32,10 +32,10 @@ namespace PointerObjects
         {
             _tilemapAreaHighlighter = new TilemapAreaHighlighter(tileMap, pointerObjectCollider);
             
-            _fillBar.OnFill += () => _fillBar.Emptying(currentSeed.ruinTime);
+            _fillBar.OnFill += StartRuinGarden;
             _fillBar.OnEmpty += Remove;
         }
-
+        
         public CollectableItemData GetHarvestObject()
         {
             return harvestedSeed;
@@ -121,6 +121,11 @@ namespace PointerObjects
             
             _tilemapAreaHighlighter.ChangeTilesColor(1, defaultColor);
         }
+        
+        private void StartRuinGarden()
+        {
+            _fillBar.Emptying(currentSeed.ruinTime);
+        }
 
         private IEnumerator SetSpritesSeedingPoints(GrowStates growState)
         {
@@ -140,4 +145,5 @@ namespace PointerObjects
         }
     }
 }
+
 

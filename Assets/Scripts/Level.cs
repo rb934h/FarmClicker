@@ -19,8 +19,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Chest _chest;
     [SerializeField] private Transform _levelGoalsUITransform;
     [SerializeField] private TMP_Text _levelGoalsText;
-    [SerializeField] private TileChanger _tileChanger;
-    [SerializeField] private WaterTank _waterTank;
+    [SerializeField] private WeatherManager _weatherManager;
     
     private Timer _levelTimer;
     private LevelGoalsView _levelGoalsView;
@@ -28,6 +27,7 @@ public class Level : MonoBehaviour
     
     private void Start()
     {
+        _weatherManager.SetWeather(_levelData.weatherType);
         _inputSystem.DownTouched += StartLevel;
         _levelTimer = new Timer(_timerImage);
         _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);

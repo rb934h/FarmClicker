@@ -44,11 +44,11 @@ TagManager:
   - name: Ground
     uniqueID: 176498069
     locked: 0
-  - name: ParticleEffects
-    uniqueID: 2044851487
-    locked: 0
   - name: UpperGround
     uniqueID: 3641439817
+    locked: 0
+  - name: RainSplash
+    uniqueID: 2190676807
     locked: 0
   - name: Gardens
     uniqueID: 2946822873
@@ -67,6 +67,9 @@ TagManager:
     locked: 0
   - name: ObjectsInHands
     uniqueID: 424783033
+    locked: 0
+  - name: Rain
+    uniqueID: 2044851487
     locked: 0
   m_RenderingLayers:
   - Default
