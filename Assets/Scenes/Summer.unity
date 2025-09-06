@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Intensity: 1.35
   m_LightVolumeIntensity: 0.13
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e179
   m_LightCookieSprite: {fileID: 21300000, guid: 23751f07b5670be4bab02e60e190a440, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -565,7 +565,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -73739155
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873afcea8a06dd49afbab8908ffb9ac5119d9f2a4af
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873afcea8a06dd49afbab8908ffb9ac5119d9f2a4af1ff5e179
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1588,7 +1588,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -16217685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
@@ -1939,7 +1939,7 @@ MonoBehaviour:
   m_Intensity: 0.7
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e179
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -119564,7 +119564,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -16217685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
@@ -120036,7 +120036,7 @@ MonoBehaviour:
   m_Intensity: 1.35
   m_LightVolumeIntensity: 0.13
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9991d3873ab8908ff6dd49afbafcea8a0b9ac5119d9f2a4af1ff5e179
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -120362,7 +120362,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1933057433
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -121731,7 +121731,7 @@ MonoBehaviour:
   m_Intensity: 0.7
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af
+  m_ApplyToSortingLayers: 000000009525850a49f60bd9afcea8a0b9ac5119991d3873d9f2a4af1ff5e179
   m_LightCookieSprite: {fileID: 21300000, guid: 119f93d0bcbf1e743bf5fcf237507d39, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -121841,7 +121841,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -653527479
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -124539,7 +124539,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1599549777
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 497600982, guid: db22d05e4e15fca49bca28136710c021, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126597,7 +126597,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -16217685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
