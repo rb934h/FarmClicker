@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DefaultNamespace;
 using Enum;
 using ScriptableObjects;
@@ -19,6 +18,7 @@ namespace PointerObjects
         
         [HideInInspector]
         public GardenState State = GardenState.Empty;
+        public bool canPlantSeed => currentSeed!=null;
         
         private CollectableItemData currentSeed; 
         private CollectableItemData harvestedSeed; 
@@ -40,17 +40,15 @@ namespace PointerObjects
         {
             return harvestedSeed;
         }
-        
-        public IEnumerator PlantSeed(CollectableItemData seed)
+
+        public void SetSeed(CollectableItemData seed)
         {
-            currentSeed = seed;
-            
-            if (currentSeed == null)
-            {
-                ShowStateInfo("Невозможно посадить: нет данных о семени.");
-                yield break;
-            }
-            
+            if(harvestedSeed == null)
+                currentSeed = seed;
+        }
+        
+        public IEnumerator PlantSeed()
+        {
             harvestedSeed = currentSeed;
             
             _fillBar.Show();
@@ -117,6 +115,8 @@ namespace PointerObjects
             State = GardenState.Empty;
             
             HintAnimator.Hide(hintSpriteRenderer, true);
+            
+            currentSeed = null;
             harvestedSeed = null;
             
             _tilemapAreaHighlighter.ChangeTilesColor(1, defaultColor);

@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+
 namespace PointerObjects
 {
     public class PointerObject : MonoBehaviour
@@ -13,8 +14,7 @@ namespace PointerObjects
     
         public Collider2D Collider => pointerObjectCollider;
         public Transform PointForInteraction => pointForInteraction;
-    
-
+        
         protected void ShowStateInfo(string text)
         {
             _stateInfoText.text = text;

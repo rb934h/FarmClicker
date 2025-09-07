@@ -24,6 +24,13 @@ public class Level : MonoBehaviour
     private Timer _levelTimer;
     private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
+    private PlayerInventoryData _playerInventory;
+   
+    [Inject]
+    public void Construct(PlayerInventoryData playerInventoryData)
+    {
+        _playerInventory = playerInventoryData;
+    }
     
     private void Start()
     {
@@ -65,7 +72,13 @@ public class Level : MonoBehaviour
 
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
+        if (pointerObject is Garden garden && _playerInventory.currentSeed != null)
+        {
+            garden.SetSeed(_playerInventory.currentSeed); // TODO Hmm..
+        }
+        
         _player.InteractWithPointerObject(positionForInteract, pointerObject);
+        _playerInventory.currentSeed = null;
       
     }
 
@@ -79,7 +92,7 @@ public class Level : MonoBehaviour
                 
             }
             
-            _player.Inventory.AddCoins(item.price);
+            _playerInventory.AddCoins(item.price);
         }
        
         CheckLevelGoals();

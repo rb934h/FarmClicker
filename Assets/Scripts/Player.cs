@@ -43,22 +43,16 @@ public class Player : MonoBehaviour
         _playerAnimator = new PlayerAnimator(animator);
     }
     
-
-    public void SetSeedingData(CollectableItemData seedingData)
-    {
-        Inventory.currentSeed = seedingData;
-    }
-    
     public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject)
         where T : PointerObject
     {
         if (_busyPointerObjects.Contains(pointerObject))
             return;
         
-        
         _actionQueue.Enqueue(async () =>
         {
             _busyPointerObjects.Add(pointerObject);
+                
             try
             {
                 var yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
