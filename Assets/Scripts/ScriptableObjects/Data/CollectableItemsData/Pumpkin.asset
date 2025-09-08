@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VegetableData
   itemName: Pumpkin
   price: 20
-  growTime: 5
-  ruinTime: 10
+  growTime: 2
+  ruinTime: 20
   spriteForHands: {fileID: 1621195056, guid: c52439be0dceeb141adbec4630146525, type: 3}
   spritesForGarden:
   - {fileID: 1518154373, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}

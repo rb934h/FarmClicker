@@ -11,12 +11,15 @@ using VContainer;
 
 public class Player : MonoBehaviour
 {
+    [Header("Спрайт игрока")] 
+    [SerializeField] private SpriteRenderer playerSprite;
+    
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
     
     [Header("Эмоции")] 
-    [SerializeField] private SpriteRenderer _playerHint;
-    [SerializeField] private PlayerHintData _playerHintData;
+    [SerializeField] private SpriteRenderer playerHint;
+    [SerializeField] private PlayerHintData playerHintData;
 
 
     private PlayerAnimator _playerAnimator;
@@ -25,15 +28,15 @@ public class Player : MonoBehaviour
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
 
-    public PlayerInventoryData Inventory { get; private set; }
-    public PlayerAnimator Animator => _playerAnimator;
+    public PlayerInventoryData inventory { get; private set; }
+    public PlayerAnimator animator => _playerAnimator;
     
     private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
 
     [Inject]
     public void Construct(PlayerInventoryData playerInventoryData, IEnumerable<IPointerObjectInteractStrategy> interactStrategies)
     {
-        Inventory = playerInventoryData;
+        inventory = playerInventoryData;
         _interactStrategy = interactStrategies;
     }
 
@@ -55,9 +58,8 @@ public class Player : MonoBehaviour
                 
             try
             {
-                var yRotation = transform.position.x >= targetPosition.x ? 0f : -180f;
-                
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yRotation, transform.rotation.eulerAngles.z);
+                var flip = transform.position.x > targetPosition.x;
+                playerSprite.flipX = flip;
                 
                 await MoveTo(targetPosition);
                 
@@ -84,22 +86,29 @@ public class Player : MonoBehaviour
 
     private void MakeMistake()
     {
-        _playerHint.sprite = _playerHintData.mistakeSprite;
-        HintAnimator.Show(_playerHint, 1);
+        playerHint.sprite = playerHintData.mistakeSprite;
+        HintAnimator.Show(playerHint, 1);
     }
     
     private async UniTask WaitWork(float time)
     {
-        _playerHint.sprite = _playerHintData.workSprite;
-        HintAnimator.Show(_playerHint, time);
-        await UniTask.WaitForSeconds(time);
+        int count = playerHintData.workSprites.Length;
+        float part = time / count;
+
+        HintAnimator.Show(playerHint, time);
+
+        for (int i = 0; i < count; i++)
+        {
+            playerHint.sprite = playerHintData.workSprites[i];
+            await UniTask.WaitForSeconds(part);
+        }
     }
 
     private async UniTask MoveTo(Vector3 target)
     {
         while (Vector3.Distance(transform.position, target) > 0.1f)
         {
-            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // ITS OK?🤔
+            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // OK?🤔
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             await UniTask.Yield();
         }

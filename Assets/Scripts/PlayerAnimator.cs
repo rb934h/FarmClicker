@@ -14,7 +14,7 @@ namespace DefaultNamespace
 
         public void PlayAnimation(PlayerAnimationState state)
         {
-            _animator.Play(state.ToString());
+            _animator.Play(state.ToString()); 
         }
 
     }

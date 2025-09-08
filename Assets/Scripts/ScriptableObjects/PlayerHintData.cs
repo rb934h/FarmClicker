@@ -6,6 +6,6 @@ namespace ScriptableObjects
     public class PlayerHintData : ScriptableObject
     {
         public Sprite mistakeSprite;
-        public Sprite workSprite;
+        public Sprite[] workSprites;
     }
 }

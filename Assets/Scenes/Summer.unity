@@ -125793,6 +125793,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7217186198666473616, guid: 79129ceb912bf08439db7061552ef590, type: 3}
   m_PrefabInstance: {fileID: 7266406902286313842}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &1946202298 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6730269787088674482, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+  m_PrefabInstance: {fileID: 7266406902286313842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1963056193
 GameObject:
   m_ObjectHideFlags: 0
@@ -126821,6 +126826,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2809144587700528109, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: speed
       value: 5
@@ -126842,17 +126851,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7266406902286313844}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: playerHint
+      value: 
+      objectReference: {fileID: 770208547}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: _playerHint
       value: 
       objectReference: {fileID: 770208547}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 1946202298}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: playerWallet
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: _playerSprite
+      value: 
+      objectReference: {fileID: 1946202298}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: playerHintData
+      value: 
+      objectReference: {fileID: 11400000, guid: e52b54f753f29a84499e672c120f5d34, type: 2}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: _playerHintData
       value: 
@@ -126950,6 +126975,14 @@ PrefabInstance:
       value: 424783033
       objectReference: {fileID: 0}
     - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914413953689331700, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914413953689331700, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}

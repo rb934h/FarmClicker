@@ -11,15 +11,15 @@ namespace Strategies.ChestStrategy
             if (pointerObject is not Chest chest) return false;
             if (chest.State is not ChestState.Loaded || chest.WaitForSale) return false;
             
-            if (player.Inventory.handsNotEmpty && chest.GetCargoCount() != 2)
+            if (player.inventory.handsNotEmpty && chest.GetCargoCount() != 2)
             {
                 foreach (var inventoryHarvestObject in player
-                             .Inventory
+                             .inventory
                              .harvestObjects
                              .ToList()
                              .Where(inventoryHarvestObject => chest.PutCargo(inventoryHarvestObject)))
                 {
-                    player.Inventory.ClearItem(inventoryHarvestObject);
+                    player.inventory.ClearItem(inventoryHarvestObject);
                 }
 
                 return true;

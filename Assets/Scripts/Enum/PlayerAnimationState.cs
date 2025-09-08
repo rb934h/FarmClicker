@@ -5,6 +5,7 @@
         PlayerIdle,
         PlayerRun,
         PlayerWatering,
+        PlayerWateringReverse,
         PlayerWeeding,
         PlayerMows
     }

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: PlayerHints
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.PlayerHintData
   mistakeSprite: {fileID: 21300000, guid: 29632f114aeb75c4eb12a5c40190f957, type: 3}
-  workSprite: {fileID: 21300000, guid: 357e453ae322ed14da270650ebc1eaf4, type: 3}
+  workSprites:
+  - {fileID: 21300000, guid: 7c0e37adddbde7a4f8afa992c4f3fa07, type: 3}
+  - {fileID: 21300000, guid: 427ca068b6a52ff4aa6195a8687a1210, type: 3}
+  - {fileID: 21300000, guid: 43e957728953fc44097f05613a12ba29, type: 3}

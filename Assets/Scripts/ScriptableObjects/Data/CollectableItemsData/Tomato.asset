@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Tomato
   price: 10
   growTime: 1
-  ruinTime: 20
+  ruinTime: 40
   spriteForHands: {fileID: 523383999, guid: c52439be0dceeb141adbec4630146525, type: 3}
   spritesForGarden:
   - {fileID: -1931543912, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}

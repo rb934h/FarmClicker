@@ -9,15 +9,15 @@ namespace Strategies.ChestStrategy
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
-            if (chest.State is not ChestState.Empty || chest.GetCargoCount() >= 2 || !player.Inventory.handsNotEmpty) return false;
+            if (chest.State is not ChestState.Empty || chest.GetCargoCount() >= 2 || !player.inventory.handsNotEmpty) return false;
             
             foreach (var inventoryHarvestObject in player
-                         .Inventory
+                         .inventory
                          .harvestObjects
                          .ToList()
                          .Where(inventoryHarvestObject => chest.PutCargo(inventoryHarvestObject)))
             {
-                player.Inventory.ClearItem(inventoryHarvestObject);
+                player.inventory.ClearItem(inventoryHarvestObject);
             }
             
             chest.State = ChestState.Loaded;
