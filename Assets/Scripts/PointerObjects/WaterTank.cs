@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
@@ -19,11 +20,17 @@ namespace PointerObjects
         private void Start()
         {
             _tileChanger = new TileChanger(_tilemap, _rule);
+            _workTime = 1f;
         }
     
         public void ChangeTile()
         {
-            _tileChanger.ChangeTiles();
+            DOVirtual.DelayedCall(_workTime, () =>
+            {
+                _tileChanger.ChangeTiles();
+            });
         }
+        
+        
     }
 }

@@ -25,7 +25,7 @@ namespace PointerObjects
         private TilemapAreaHighlighter _tilemapAreaHighlighter;
         private Color colorAfterWatering = new (.75f, .75f, .75f);
         private Color defaultColor = Color.white;
-        private float seedingTime = .05f;
+        private float seedingTime = .1f;
 
 
         private void Start()
@@ -55,7 +55,8 @@ namespace PointerObjects
 
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
             
-            _fillBar.Filling(currentSeed.growTime + seedingTime);
+            _workTime = seedingTime * seedingPointsSpriteRenderers.Length;
+            _fillBar.Filling(_workTime);
             
             yield return new WaitForSeconds(currentSeed.growTime);
             
@@ -83,7 +84,8 @@ namespace PointerObjects
             ShowStateInfo("Полив начат, идет рост...");
             
             _fillBar.Show();
-            _fillBar.Filling(currentSeed.growTime*2+seedingTime);
+            _workTime = currentSeed.growTime * 2 + seedingTime;
+            _fillBar.Filling(_workTime);
             
             yield return new WaitForSeconds(currentSeed.growTime);
             
@@ -107,9 +109,10 @@ namespace PointerObjects
         {
             if (currentSeed != null)
             {
-                ClearSpritesFromSeedingPoints();
+                StartCoroutine(ClearSpritesFromSeedingPoints());
             }
             
+            _workTime = seedingTime * seedingPointsSpriteRenderers.Length;
             _fillBar.Hide();
             
             State = GardenState.Empty;
@@ -136,10 +139,11 @@ namespace PointerObjects
             }
         }
         
-        private void ClearSpritesFromSeedingPoints()
+        private IEnumerator ClearSpritesFromSeedingPoints()
         {
             for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
             {
+                yield return new WaitForSeconds(seedingTime);
                 seedingPointsSpriteRenderers[i].sprite = null;
             }
         }

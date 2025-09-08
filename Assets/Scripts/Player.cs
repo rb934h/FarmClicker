@@ -63,8 +63,12 @@ public class Player : MonoBehaviour
                 
                 foreach (var strategy in _interactStrategy)
                 {
-                    if(strategy.Interact(this, pointerObject))
+                    if (strategy.Interact(this, pointerObject))
+                    {
+                        await WaitWork(pointerObject.WorkTime);
                         return;
+                    }
+                       
                 }
                 
                 MakeMistake();
@@ -81,7 +85,14 @@ public class Player : MonoBehaviour
     private void MakeMistake()
     {
         _playerHint.sprite = _playerHintData.mistakeSprite;
-        HintAnimator.Show(_playerHint, true);
+        HintAnimator.Show(_playerHint, 1);
+    }
+    
+    private async UniTask WaitWork(float time)
+    {
+        _playerHint.sprite = _playerHintData.workSprite;
+        HintAnimator.Show(_playerHint, time);
+        await UniTask.WaitForSeconds(time);
     }
 
     private async UniTask MoveTo(Vector3 target)
@@ -95,4 +106,6 @@ public class Player : MonoBehaviour
         
         _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
     }
+    
+    
 }

@@ -121550,6 +121550,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1149050282}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: _workTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: fillBarSprite
       value: 
       objectReference: {fileID: 1423314585}
@@ -125310,6 +125314,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 387861423}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: _workTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: fillBarSprite
       value: 
       objectReference: {fileID: 1327595326}
@@ -126458,6 +126466,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 88253435}
     - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
+      propertyPath: _workTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632665436209571174, guid: d638541b3d5d621429328112b9f6cf6c, type: 3}
       propertyPath: fillBarSprite
       value: 
       objectReference: {fileID: 1584639717}
@@ -126810,6 +126822,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: wallet
       value: 
       objectReference: {fileID: 0}
@@ -126890,6 +126906,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5700905806119407283, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700905806119407283, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700905806119407283, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700905806119407283, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_SortingLayer
       value: 9
       objectReference: {fileID: 0}
@@ -126898,12 +126926,32 @@ PrefabInstance:
       value: 424783033
       objectReference: {fileID: 0}
     - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_SortingLayer
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_SortingLayerID
       value: 424783033
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790338009400734570, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8969587582317750436, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_Name

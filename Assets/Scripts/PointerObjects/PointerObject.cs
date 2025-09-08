@@ -11,9 +11,12 @@ namespace PointerObjects
         [SerializeField] protected Collider2D pointerObjectCollider;
         [SerializeField] private Transform pointForInteraction;
         [SerializeField] protected TMP_Text _stateInfoText;
+        
+        protected float _workTime;
     
         public Collider2D Collider => pointerObjectCollider;
         public Transform PointForInteraction => pointForInteraction;
+        public float WorkTime => _workTime;
         
         protected void ShowStateInfo(string text)
         {
