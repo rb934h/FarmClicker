@@ -1,46 +1,54 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 namespace Scripts
 {
     public static class HintAnimator
     {
-        private static Sequence _currentSequence;
+        private static readonly Dictionary<SpriteRenderer, Sequence> _sequences = new();
 
         public static void Show(SpriteRenderer hintSprite)
         {
-            StopSequence();
+            StopSequence(hintSprite);
 
-            _currentSequence = DOTween.Sequence()
+            Sequence seq = DOTween.Sequence()
                 .Append(hintSprite.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack));
+
+            _sequences[hintSprite] = seq;
         }
 
         public static void Show(SpriteRenderer hintSprite, float interval)
         {
-            StopSequence();
+            StopSequence(hintSprite);
 
-            _currentSequence = DOTween.Sequence()
+            Sequence seq = DOTween.Sequence()
                 .Append(hintSprite.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack))
                 .AppendInterval(interval)
                 .Append(hintSprite.transform.DOScale(0f, 0.25f).SetEase(Ease.InBack));
+
+            _sequences[hintSprite] = seq;
         }
 
-        public static void Hide(SpriteRenderer hintSprite, bool clearSprite = false)
+        public static void Hide(SpriteRenderer hintSprite, bool clearSprite = false, float duration = 0.25f)
         {
-            StopSequence();
+            StopSequence(hintSprite);
 
-            _currentSequence = DOTween.Sequence()
-                .Append(hintSprite.transform.DOScale(0f, 0.25f).SetEase(Ease.OutBack));
+            Sequence seq = DOTween.Sequence()
+                .Append(hintSprite.transform.DOScale(0f, duration).SetEase(Ease.OutBack));
 
             if (clearSprite)
-                _currentSequence.OnComplete(() => hintSprite.sprite = null);
+                seq.OnComplete(() => hintSprite.sprite = null);
+
+            _sequences[hintSprite] = seq;
         }
 
-        private static void StopSequence()
+        private static void StopSequence(SpriteRenderer hintSprite)
         {
-            if (_currentSequence != null && _currentSequence.IsActive())
+            if (_sequences.TryGetValue(hintSprite, out Sequence seq) && seq.IsActive())
             {
-                _currentSequence.Kill(true);
+                seq.Kill(true);
+                _sequences.Remove(hintSprite);
             }
         }
     }

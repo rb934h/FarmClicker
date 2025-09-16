@@ -52,16 +52,21 @@ public class Player : MonoBehaviour
         if (_busyPointerObjects.Contains(pointerObject))
             return;
         
+        if(Vector3.Distance(transform.position, targetPosition) > 0.1f)
+            HintAnimator.Show(pointerObject.SelectedSpriteRenderer);
+        
         _actionQueue.Enqueue(async () =>
         {
             _busyPointerObjects.Add(pointerObject);
-                
+            
             try
             {
                 var flip = transform.position.x > targetPosition.x;
                 playerSprite.flipX = flip;
                 
                 await MoveTo(targetPosition);
+                
+                HintAnimator.Hide(pointerObject.SelectedSpriteRenderer, false, 0);
                 
                 foreach (var strategy in _interactStrategy)
                 {

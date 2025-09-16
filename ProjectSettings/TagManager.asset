@@ -47,6 +47,9 @@ TagManager:
   - name: UpperGround
     uniqueID: 3641439817
     locked: 0
+  - name: Animals
+    uniqueID: 348314021
+    locked: 0
   - name: RainSplash
     uniqueID: 2190676807
     locked: 0
