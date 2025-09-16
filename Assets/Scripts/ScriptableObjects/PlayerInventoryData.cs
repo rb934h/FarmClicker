@@ -12,8 +12,8 @@ public class PlayerInventoryData : ScriptableObject
     [SerializeField] private int maxItemsInHand = 2;
     public float coins = 0;
 
-    public event Action<Sprite> HarvestObjectAdded; 
-    public event Action HarvestObjectsClear; 
+    public event Action<CollectableItemData> HarvestObjectAdded; 
+    public event Action<CollectableItemData> HarvestObjectsClear; 
     public event Action CoinsChanged; 
     public bool canAddItem => harvestObjects.Count < maxItemsInHand;
     public bool handsNotEmpty => harvestObjects.Count > 0;
@@ -21,7 +21,7 @@ public class PlayerInventoryData : ScriptableObject
     public void AddHarvestObject(CollectableItemData harvestObject)
     {
         harvestObjects.Add(harvestObject);
-        HarvestObjectAdded?.Invoke(harvestObject.spriteForHands);
+        HarvestObjectAdded?.Invoke(harvestObject);
     }
 
     public void UseWater() => hasWater = false;
@@ -35,6 +35,6 @@ public class PlayerInventoryData : ScriptableObject
     public void ClearItem(CollectableItemData item)
     {
         harvestObjects.Remove(item);
-        HarvestObjectsClear?.Invoke();
+        HarvestObjectsClear?.Invoke(item);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using VContainer;
@@ -12,6 +13,8 @@ namespace DefaultNamespace
         [SerializeField] private TMP_Text coinsCountText;
 
         private PlayerInventoryData _playerInventory;
+        private CollectableItemData _leftHandItemData;
+        private CollectableItemData _rightHandItemData;
 
         [Inject]
         public void Construct(PlayerInventoryData playerInventoryData)
@@ -26,23 +29,32 @@ namespace DefaultNamespace
             _playerInventory.CoinsChanged += UpdateCoinsCountText;
         }
 
-        private void SetItem(Sprite item)
-        {   
-            if(leftHandItem.sprite == null)
-                leftHandItem.sprite = item;
+        private void SetItem(CollectableItemData item)
+        {
+            if (leftHandItem.sprite == null)
+            {
+                leftHandItem.sprite = item.spriteForHands;
+                _leftHandItemData = item;
+            }
+                
             else
             {
-                rightHandItem.sprite = item;
+                rightHandItem.sprite = item.spriteForHands;
+                _rightHandItemData = item;
             }
         }
         
-        private void ClearItem()
+        private void ClearItem(CollectableItemData item)
         {
-            if(leftHandItem.sprite != null)
+            if (_leftHandItemData == item)
+            {
                 leftHandItem.sprite = null;
-            else
+                _leftHandItemData = null;
+            }
+            else if (_rightHandItemData == item)
             {
                 rightHandItem.sprite = null;
+                _rightHandItemData = null;
             }
         }
         

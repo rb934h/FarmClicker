@@ -1,6 +1,7 @@
 ﻿using PostProcessing;
 using Strategies;
 using Strategies.ChestStrategy;
+using Strategies.EnclosureStrategy;
 using Strategies.GardenStrategy;
 using Strategies.WaterTankStrategy;
 using UnityEngine;
@@ -29,6 +30,9 @@ namespace DI.Scopes
             builder.Register<IPointerObjectInteractStrategy, ChestLoadStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, ChestSendStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, ChestWithMoneyStrategy>(Lifetime.Singleton);
+            // ------------ Enclosure ------------------
+            builder.Register<IPointerObjectInteractStrategy, EnclosureSetFoodStrategy>(Lifetime.Singleton);
+            builder.Register<IPointerObjectInteractStrategy, EnclosureSetWaterStrategy>(Lifetime.Singleton);
             
             var runtimeInventory = Instantiate(playerInventory);
             builder.RegisterInstance(runtimeInventory).AsSelf();
