@@ -236,7 +236,7 @@ SpriteRenderer:
   m_SortingLayerID: 1933057433
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d98e19fb009a0d049ac24d9e1c0209af, type: 3}
+  m_Sprite: {fileID: -1568048149, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -611,7 +611,7 @@ SpriteRenderer:
   m_SortingLayerID: 1933057433
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d98e19fb009a0d049ac24d9e1c0209af, type: 3}
+  m_Sprite: {fileID: -1568048149, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120091,10 +120091,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1933057433
-  m_SortingLayer: 6
+  m_SortingLayerID: -653527479
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d98e19fb009a0d049ac24d9e1c0209af, type: 3}
+  m_Sprite: {fileID: -1568048149, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120181,10 +120181,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1933057433
-  m_SortingLayer: 6
+  m_SortingLayerID: -653527479
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d98e19fb009a0d049ac24d9e1c0209af, type: 3}
+  m_Sprite: {fileID: -1568048149, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127233,7 +127233,7 @@ GameObject:
   - component: {fileID: 2139953672}
   - component: {fileID: 2139953671}
   m_Layer: 0
-  m_Name: EnclosureSheep (1)
+  m_Name: EnclosureSheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

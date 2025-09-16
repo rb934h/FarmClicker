@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7374d107f694d9a8aee930d178dce52, type: 3}
   m_Name: BowlSprites
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.Data.Enclosure.BowlSpritesData
-  emptyBowl: {fileID: 21300000, guid: d98e19fb009a0d049ac24d9e1c0209af, type: 3}
-  foodBowl: {fileID: 21300000, guid: 02be26be3bd9080468e6695041dd48bc, type: 3}
-  waterBowl: {fileID: 21300000, guid: da46e059025a22d48944238236815b96, type: 3}
+  emptyBowl: {fileID: -1568048149, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
+  foodBowl: {fileID: 771767221, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
+  waterBowl: {fileID: -1168841291, guid: 9a931437603607c41a49f8cc0eac4ee1, type: 3}
