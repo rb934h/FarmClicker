@@ -109,9 +109,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private async UniTask MoveTo(Vector3 target)
+    private async UniTask MoveTo(Vector2 target)
     {
-        while (Vector3.Distance(transform.position, target) > 0.1f)
+        while (Vector2.Distance(transform.position, target) > 0.1f)
         {
             _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // OK?🤔
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);

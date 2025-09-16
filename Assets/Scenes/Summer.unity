@@ -370,12 +370,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 48398062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f3a11b57e747754595477db06d501e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d33c763acc84222b8b134c50a533147, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalWalker
-  speed: 0.25
-  minBounds: {x: 2, y: -1}
-  maxBounds: {x: -2, y: -3}
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Animal
+  _spriteRenderer: {fileID: 48398064}
+  _speed: 0.5
+  _minBounds: {x: -1.5, y: -4}
+  _maxBounds: {x: 2, y: -1}
 --- !u!1 &60276128
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 634376068}
   m_Layer: 0
-  m_Name: Sprites
+  m_Name: Sheeps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2196,6 +2197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 48398065}
+  - {fileID: 1178717713}
   m_Father: {fileID: 1485765004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &655555211
@@ -2291,8 +2293,7 @@ Transform:
   m_LocalPosition: {x: 0.33, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1178717713}
+  m_Children: []
   m_Father: {fileID: 2139953670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &700238058
@@ -120537,7 +120538,7 @@ GameObject:
   - component: {fileID: 1178717713}
   - component: {fileID: 1178717716}
   - component: {fileID: 1178717715}
-  - component: {fileID: 1178717714}
+  - component: {fileID: 1178717717}
   m_Layer: 0
   m_Name: BabySheep
   m_TagString: Untagged
@@ -120554,27 +120555,12 @@ Transform:
   m_GameObject: {fileID: 1178717712}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.26, y: -1.6, z: -26}
+  m_LocalPosition: {x: 3.51, y: -0.72, z: -26}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 687207617}
+  m_Father: {fileID: 634376068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1178717714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178717712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f3a11b57e747754595477db06d501e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalWalker
-  speed: 0
-  minBounds: {x: 0, y: 0}
-  maxBounds: {x: 0, y: 0}
 --- !u!95 &1178717715
 Animator:
   serializedVersion: 7
@@ -120655,6 +120641,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1178717717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178717712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d33c763acc84222b8b134c50a533147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Animal
+  _spriteRenderer: {fileID: 1178717716}
+  _speed: 0.5
+  _minBounds: {x: -1.5, y: -3}
+  _maxBounds: {x: 2, y: -1}
 --- !u!1 &1216096616
 GameObject:
   m_ObjectHideFlags: 0
@@ -121171,6 +121173,11 @@ MonoBehaviour:
   _bowlForFood: {fileID: 981509667}
   _bowlForWater: {fileID: 953439166}
   _bowlSpritesData: {fileID: 11400000, guid: 540c8f50d91a6f54e8ddf441e5ecb00b, type: 2}
+  _animals:
+  - {fileID: 48398066}
+  - {fileID: 1178717717}
+  HasWater: 0
+  HasFood: 0
 --- !u!1 &1486012218
 GameObject:
   m_ObjectHideFlags: 0
@@ -127271,6 +127278,9 @@ MonoBehaviour:
   _bowlForFood: {fileID: 18741474}
   _bowlForWater: {fileID: 128353766}
   _bowlSpritesData: {fileID: 11400000, guid: 540c8f50d91a6f54e8ddf441e5ecb00b, type: 2}
+  _animals: []
+  HasWater: 0
+  HasFood: 0
 --- !u!61 &2139953672
 BoxCollider2D:
   m_ObjectHideFlags: 0
