@@ -14,6 +14,8 @@ public class PlayerInventoryData : ScriptableObject
 
     public event Action<CollectableItemData> HarvestObjectAdded; 
     public event Action<CollectableItemData> HarvestObjectsClear; 
+    public event Action OnWaterFilled; 
+    public event Action OnWaterUsed; 
     public event Action CoinsChanged; 
     public bool canAddItem => harvestObjects.Count < maxItemsInHand;
     public bool handsNotEmpty => harvestObjects.Count > 0;
@@ -24,8 +26,20 @@ public class PlayerInventoryData : ScriptableObject
         HarvestObjectAdded?.Invoke(harvestObject);
     }
 
-    public void UseWater() => hasWater = false;
-    public void FillWater() => hasWater = true;
+    public void UseWater()
+    {
+        hasWater = false;
+        maxItemsInHand++;
+        OnWaterUsed?.Invoke();
+    }
+
+    public void FillWater()
+    {
+        hasWater = true;
+        maxItemsInHand--;
+        OnWaterFilled?.Invoke();
+    }
+
     public void AddCoins(float coinsCount)
     {
         coins += coinsCount;

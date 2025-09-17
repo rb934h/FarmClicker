@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
             try
             {
                 var flip = transform.position.x > targetPosition.x;
-                playerSprite.flipX = flip;
+                transform.rotation = Quaternion.Euler(0, flip ? 180 : 0f, 0);
                 
                 await MoveTo(targetPosition);
                 

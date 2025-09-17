@@ -25,10 +25,7 @@ namespace PointerObjects
     
         public void ChangeTile()
         {
-            DOVirtual.DelayedCall(_workTime, () =>
-            {
-                _tileChanger.ChangeTiles();
-            });
+            _tileChanger.ChangeTiles();
         }
         
         

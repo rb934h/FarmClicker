@@ -1,4 +1,5 @@
-﻿using Enum;
+﻿using DG.Tweening;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.WaterTankStrategy
@@ -8,11 +9,15 @@ namespace Strategies.WaterTankStrategy
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not WaterTank waterTank) return false;
-            if (waterTank.State is not WaterTankState.ReadyToCollect || player.inventory.hasWater) return false;
+            if (waterTank.State is not WaterTankState.ReadyToCollect || player.inventory.hasWater || !player.inventory.canAddItem) return false;
             player.animator.PlayAnimation(PlayerAnimationState.PlayerWateringReverse);
-            waterTank.ChangeTile();
-            player.inventory.FillWater();
-            waterTank.State = WaterTankState.Empty;
+            DOVirtual.DelayedCall(waterTank.WorkTime, () =>
+            {
+                player.inventory.FillWater();
+                waterTank.ChangeTile();
+                waterTank.State = WaterTankState.Empty;
+            });
+            
             return true;
         }
     }

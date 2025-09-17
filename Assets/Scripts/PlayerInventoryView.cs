@@ -10,6 +10,7 @@ namespace DefaultNamespace
     {
         [SerializeField] private SpriteRenderer leftHandItem;
         [SerializeField] private SpriteRenderer rightHandItem;
+        [SerializeField] private SpriteRenderer wateringCan;
         [SerializeField] private TMP_Text coinsCountText;
 
         private PlayerInventoryData _playerInventory;
@@ -24,23 +25,34 @@ namespace DefaultNamespace
 
         private void Start()
         {
+            _playerInventory.OnWaterFilled += ShowWateringCan;
+            _playerInventory.OnWaterUsed += HideWateringCan;
             _playerInventory.HarvestObjectAdded += SetItem;
             _playerInventory.HarvestObjectsClear += ClearItem;
             _playerInventory.CoinsChanged += UpdateCoinsCountText;
         }
 
+        private void HideWateringCan()
+        {
+            wateringCan.enabled = false;
+        }
+
+        private void ShowWateringCan()
+        {
+            wateringCan.enabled = true;
+        }
+
         private void SetItem(CollectableItemData item)
         {
-            if (leftHandItem.sprite == null)
-            {
-                leftHandItem.sprite = item.spriteForHands;
-                _leftHandItemData = item;
-            }
-                
-            else
+            if (rightHandItem.sprite == null)
             {
                 rightHandItem.sprite = item.spriteForHands;
                 _rightHandItemData = item;
+            }
+            else
+            {
+                leftHandItem.sprite = item.spriteForHands;
+                _leftHandItemData = item;
             }
         }
         
