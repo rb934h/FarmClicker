@@ -1,4 +1,5 @@
-﻿using Enum;
+﻿using DG.Tweening;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.WaterTankStrategy
@@ -9,7 +10,7 @@ namespace Strategies.WaterTankStrategy
         {
             if (pointerObject is not WaterTank waterTank) return false;
             if (waterTank.State is not WaterTankState.Empty) return false;
-            waterTank.ChangeTile();
+            DOVirtual.DelayedCall(waterTank.WorkTime, waterTank.ChangeTile);
             waterTank.State = WaterTankState.ReadyToCollect;
             return true;
         }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885c106ed9f14e768acd7864346a7a4f, type: 3}
+  m_Name: Sheep
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.AnimalData
+  _babySprite: {fileID: 2138399492, guid: 61d88e80065edc144b4207b7b978c442, type: 3}
+  _adultSprite: {fileID: 1244058731, guid: 4f6275d35c58a534baa1cb4dbebf42fe, type: 3}
+  _withWoolSprite: {fileID: -264922975, guid: 6e07ea0b50d013c4e9e02ba0c10ed755, type: 3}
+  _speed: 0.25

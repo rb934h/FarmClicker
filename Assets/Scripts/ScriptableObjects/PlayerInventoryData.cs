@@ -14,6 +14,7 @@ public class PlayerInventoryData : ScriptableObject
 
     public event Action<CollectableItemData> HarvestObjectAdded; 
     public event Action<CollectableItemData> HarvestObjectsClear; 
+    public event Action OnClearAllItems; 
     public event Action OnWaterFilled; 
     public event Action OnWaterUsed; 
     public event Action CoinsChanged; 
@@ -50,5 +51,12 @@ public class PlayerInventoryData : ScriptableObject
     {
         harvestObjects.Remove(item);
         HarvestObjectsClear?.Invoke(item);
+    }
+
+    public void ClearAllItems()
+    {
+        UseWater();
+        harvestObjects.Clear();
+        OnClearAllItems?.Invoke();
     }
 }

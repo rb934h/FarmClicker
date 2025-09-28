@@ -27,15 +27,22 @@ namespace PointerObjects
             foreach (var animal in _animals)
             {
                 animal.OnReachedTarget += CleanBowl;
+                animal.OnReachedTarget += (_) => animal.TryGrowUp();
             }
         }
 
         private void CleanBowl(Vector2 position)
         {
             if ((Vector2)_bowlForFood.transform.position == position)
+            {
                 _bowlForFood.sprite = _bowlSpritesData.emptyBowl;
+                HasFood = false;
+            }
             else
+            {
                 _bowlForWater.sprite = _bowlSpritesData.emptyBowl;
+                HasWater = false;
+            }
         }
 
         public void SetWaterToBowl()
@@ -45,7 +52,12 @@ namespace PointerObjects
             
             foreach (var animal in _animals)
             {
-                animal.GoTo(_bowlForWater.transform.position);
+                if (animal.NeedWater)
+                {
+                    animal.GoTo(_bowlForWater.transform.position); 
+                    animal.SetWater();
+                    return;
+                }
             }
         }
         
@@ -56,7 +68,13 @@ namespace PointerObjects
             
             foreach (var animal in _animals)
             {
-                animal.GoTo(_bowlForFood.transform.position);
+                if (animal.NeedFood)
+                {
+                    animal.GoTo(_bowlForFood.transform.position);
+                    animal.SetFood();
+                    return;
+                }
+                
             }
         }
         

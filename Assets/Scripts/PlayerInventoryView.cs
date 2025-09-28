@@ -29,6 +29,7 @@ namespace DefaultNamespace
             _playerInventory.OnWaterUsed += HideWateringCan;
             _playerInventory.HarvestObjectAdded += SetItem;
             _playerInventory.HarvestObjectsClear += ClearItem;
+            _playerInventory.OnClearAllItems += ClearAllItems;
             _playerInventory.CoinsChanged += UpdateCoinsCountText;
         }
 
@@ -68,6 +69,14 @@ namespace DefaultNamespace
                 rightHandItem.sprite = null;
                 _rightHandItemData = null;
             }
+        }
+
+        private void ClearAllItems()
+        {
+            leftHandItem.sprite = null;
+            _leftHandItemData = null;
+            rightHandItem.sprite = null;
+            _rightHandItemData = null;
         }
         
         private void UpdateCoinsCountText()

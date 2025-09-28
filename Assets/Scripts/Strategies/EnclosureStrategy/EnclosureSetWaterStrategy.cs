@@ -1,4 +1,6 @@
-﻿using PointerObjects;
+﻿using DG.Tweening;
+using Enum;
+using PointerObjects;
 
 namespace Strategies.EnclosureStrategy
 {
@@ -8,8 +10,9 @@ namespace Strategies.EnclosureStrategy
         {
             if (pointerObject is not Enclosure enclosure) return false;
             if (enclosure.HasWater || !player.inventory.hasWater) return false;
-            enclosure.SetWaterToBowl();
             player.inventory.UseWater();
+            player.animator.PlayAnimation(PlayerAnimationState.PlayerWatering);
+            DOVirtual.DelayedCall(enclosure.WorkTime, enclosure.SetWaterToBowl);
             return true;
         }
     }

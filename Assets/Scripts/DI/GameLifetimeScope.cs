@@ -19,6 +19,8 @@ namespace DI.Scopes
         {
             builder.RegisterComponent(urpVolume);
             
+            // ------------ Pig ------------------
+            builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);
             // ------------ Garden ------------------
             builder.Register<IPointerObjectInteractStrategy, GardenSeedStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, GardenPlantedStrategy>(Lifetime.Singleton);
