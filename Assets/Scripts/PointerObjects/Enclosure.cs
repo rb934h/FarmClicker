@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using ScriptableObjects.Data.Enclosure;
@@ -39,6 +38,16 @@ namespace PointerObjects
             StartCoroutine(CheckAnimalsRoutine());
         }
 
+        public void SetWaterToBowl()
+        {
+            _bowlForWater.sprite = _bowlSpritesData.waterBowl;
+            HasWater = true;
+        }
+        public void SetFoodToBowl()
+        {
+            _bowlForFood.sprite = _bowlSpritesData.foodBowl;
+            HasFood = true;
+        }
         private IEnumerator CheckAnimalsRoutine()
         {
             while (true)
@@ -49,7 +58,7 @@ namespace PointerObjects
                     {
                         foreach (var animal in _animals)
                         {
-                            if (animal.NeedFood)
+                            if (animal.NeedFood && !animal.IsGoingToTarget)
                                 _foodQueue.Enqueue(animal);
                         }
                     }
@@ -63,7 +72,7 @@ namespace PointerObjects
                     {
                         foreach (var animal in _animals)
                         {
-                            if (animal.NeedWater)
+                            if (animal.NeedWater && !animal.IsGoingToTarget)
                                 _waterQueue.Enqueue(animal);
                         }
                     }
@@ -74,7 +83,6 @@ namespace PointerObjects
                 yield return _checkAnimalsDelay;
             }
         }
-
         private void CleanBowl(Vector2 position)
         {
             if ((Vector2)_bowlForFood.transform.position == position)
@@ -88,42 +96,54 @@ namespace PointerObjects
                 HasWater = false;
             }
         }
-
-        public void SetWaterToBowl()
-        {
-            _bowlForWater.sprite = _bowlSpritesData.waterBowl;
-            HasWater = true;
-        }
-
-        public void SetFoodToBowl()
-        {
-            _bowlForFood.sprite = _bowlSpritesData.foodBowl;
-            HasFood = true;
-        }
-
         private void TrySendNextFoodAnimal()
         {
-            if (!HasFood || _foodQueue.Count == 0 || _foodInUse)
+            if (!HasFood || _foodInUse || _foodQueue.Count == 0)
                 return;
 
-            var animal = _foodQueue.Dequeue();
+            Animal animal = null;
+
+            while (_foodQueue.Count > 0)
+            {
+                var next = _foodQueue.Dequeue();
+                if (!next.IsGoingToTarget)  // ✅ защита от переключения
+                {
+                    animal = next;
+                    break;
+                }
+            }
+
+            if (animal == null)
+                return;
+
             _foodInUse = true;
             animal.GoTo(_bowlForFood.transform.position);
             animal.SetFood();
         }
-
         private void TrySendNextWaterAnimal()
         {
-            if (!HasWater || _waterQueue.Count == 0 || _waterInUse)
+            if (!HasWater || _waterInUse || _waterQueue.Count == 0)
                 return;
 
-            var animal = _waterQueue.Dequeue();
-            _waterInUse = true; 
+            Animal animal = null;
+
+            while (_waterQueue.Count > 0)
+            {
+                var next = _waterQueue.Dequeue();
+                if (!next.IsGoingToTarget)
+                {
+                    animal = next;
+                    break;
+                }
+            }
+
+            if (animal == null)
+                return;
+
+            _waterInUse = true;
             animal.GoTo(_bowlForWater.transform.position);
             animal.SetWater();
         }
-
-
         private void OnAnimalReached(Vector2 position)
         {
             if ((Vector2)_bowlForFood.transform.position == position)

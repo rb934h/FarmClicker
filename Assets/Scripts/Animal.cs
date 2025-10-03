@@ -24,6 +24,7 @@ namespace DefaultNamespace
         protected Animator _animator;
         
         public AnimalGrowStates _currentGrowState;
+        public bool IsGoingToTarget { get; private set; }
             
         public event Action<Vector2> OnReachedTarget;
         
@@ -43,6 +44,7 @@ namespace DefaultNamespace
         
         public void GoTo(Vector2 target)
         {
+            IsGoingToTarget = true;
             var distance = Vector2.Distance(transform.position, target);
             var duration = distance / _animalData._speed;
 
@@ -54,6 +56,7 @@ namespace DefaultNamespace
                 {
                     Wander();
                     OnReachedTarget?.Invoke(target);
+                    IsGoingToTarget = false;
                 });
 
             FlipSprite(target);
@@ -73,10 +76,12 @@ namespace DefaultNamespace
         {
             if(_needFood || _needWater)
                 return;
-            
+
             if (_currentGrowState == AnimalGrowStates.Adult)
+            {
                 DoSomethingWhenAdult();
-            
+                return;
+            }
             
             _currentGrowState = AnimalGrowStates.Adult;
             
