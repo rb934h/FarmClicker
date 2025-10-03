@@ -16,18 +16,17 @@ namespace PointerObjects
         [SerializeField] private GardenHintData hintData;
         [SerializeField] private Tilemap tileMap;
         
+        private CollectableItemData _currentSeed; 
+        private CollectableItemData _harvestedSeed; 
+        private TilemapAreaHighlighter _tilemapAreaHighlighter;
+        private readonly Color _colorAfterWatering = new (.75f, .75f, .75f);
+        private readonly Color _defaultColor = Color.white;
+        private readonly float _seedingTime = .1f;
+        
         [HideInInspector]
         public GardenState State = GardenState.Empty;
-        public bool canPlantSeed => currentSeed!=null;
+        public bool canPlantSeed => _currentSeed!=null;
         
-        private CollectableItemData currentSeed; 
-        private CollectableItemData harvestedSeed; 
-        private TilemapAreaHighlighter _tilemapAreaHighlighter;
-        private Color colorAfterWatering = new (.75f, .75f, .75f);
-        private Color defaultColor = Color.white;
-        private float seedingTime = .1f;
-
-
         private void Start()
         {
             _tilemapAreaHighlighter = new TilemapAreaHighlighter(tileMap, pointerObjectCollider);
@@ -38,27 +37,27 @@ namespace PointerObjects
         
         public CollectableItemData GetHarvestObject()
         {
-            return harvestedSeed;
+            return _harvestedSeed;
         }
 
         public void SetSeed(CollectableItemData seed)
         {
-            if(harvestedSeed == null)
-                currentSeed = seed;
+            if(_harvestedSeed == null)
+                _currentSeed = seed;
         }
         
         public IEnumerator PlantSeed()
         {
-            harvestedSeed = currentSeed;
+            _harvestedSeed = _currentSeed;
             
             _fillBar.Show();
 
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
             
-            _workTime = seedingTime * seedingPointsSpriteRenderers.Length;
+            _workTime = _seedingTime * seedingPointsSpriteRenderers.Length;
             _fillBar.Filling(_workTime);
             
-            yield return new WaitForSeconds(currentSeed.growTime);
+            yield return new WaitForSeconds(_currentSeed.growTime);
             
             State = GardenState.Planted;
             ShowStateInfo("Семя посажено, требуется полив.");
@@ -71,7 +70,7 @@ namespace PointerObjects
 
         public IEnumerator WaterAndGrow()
         {
-            if (currentSeed == null)
+            if (_currentSeed == null)
             {
                 ShowStateInfo("Нет посаженного растения для полива.");
                 yield break;
@@ -79,23 +78,23 @@ namespace PointerObjects
 
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Young));
             
-            _tilemapAreaHighlighter.ChangeTilesColor(1, colorAfterWatering);
+            _tilemapAreaHighlighter.ChangeTilesColor(1, _colorAfterWatering);
             
             ShowStateInfo("Полив начат, идет рост...");
             
             _fillBar.Show();
-            _workTime = currentSeed.growTime * 2 + seedingTime;
+            _workTime = _currentSeed.growTime * 2 + _seedingTime;
             _fillBar.Filling(_workTime);
             
-            yield return new WaitForSeconds(currentSeed.growTime);
+            yield return new WaitForSeconds(_currentSeed.growTime);
             
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Mature));
             
-            yield return new WaitForSeconds(currentSeed.growTime);
+            yield return new WaitForSeconds(_currentSeed.growTime);
             
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
             
-            yield return new WaitForSeconds(seedingTime);
+            yield return new WaitForSeconds(_seedingTime);
             
             ShowStateInfo("Рост завершен, готово к сбору.");
             
@@ -107,44 +106,44 @@ namespace PointerObjects
 
         public void Remove()
         {
-            if (currentSeed != null)
+            if (_currentSeed != null)
             {
                 StartCoroutine(ClearSpritesFromSeedingPoints());
             }
             
-            _workTime = seedingTime * seedingPointsSpriteRenderers.Length;
+            _workTime = _seedingTime * seedingPointsSpriteRenderers.Length;
             _fillBar.Hide();
             
             State = GardenState.Empty;
             
             HintAnimator.Hide(hintSpriteRenderer, true);
             
-            currentSeed = null;
-            harvestedSeed = null;
+            _currentSeed = null;
+            _harvestedSeed = null;
             
-            _tilemapAreaHighlighter.ChangeTilesColor(1, defaultColor);
+            _tilemapAreaHighlighter.ChangeTilesColor(1, _defaultColor);
         }
         
         private void StartRuinGarden()
         {
-            _fillBar.Emptying(currentSeed.ruinTime);
+            _fillBar.Emptying(_currentSeed.ruinTime);
         }
 
         private IEnumerator SetSpritesSeedingPoints(GrowStates growState)
         {
-            for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
+            foreach (var seedingPointSpriteRenderer in seedingPointsSpriteRenderers)
             {
-                yield return new WaitForSeconds(seedingTime);
-                seedingPointsSpriteRenderers[i].sprite = currentSeed.spritesForGarden[(int)growState];
+                yield return new WaitForSeconds(_seedingTime);
+                seedingPointSpriteRenderer.sprite = _currentSeed.spritesForGarden[(int)growState];
             }
         }
         
         private IEnumerator ClearSpritesFromSeedingPoints()
         {
-            for (var i = 0; i < seedingPointsSpriteRenderers.Length; i++)
+            foreach (var seedingPointSpriteRenderer in seedingPointsSpriteRenderers)
             {
-                yield return new WaitForSeconds(seedingTime);
-                seedingPointsSpriteRenderers[i].sprite = null;
+                yield return new WaitForSeconds(_seedingTime);
+                seedingPointSpriteRenderer.sprite = null;
             }
         }
     }
