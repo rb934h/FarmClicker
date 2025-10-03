@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace;
 using ScriptableObjects.Data.Enclosure;
 using UnityEngine;
@@ -15,10 +17,14 @@ namespace PointerObjects
         [Header("Animals settings")] 
         [SerializeField] private Animal[] _animals;
 
-        [HideInInspector]
-        public bool HasWater;
-        [HideInInspector]
-        public bool HasFood;
+        [HideInInspector] public bool HasWater;
+        [HideInInspector] public bool HasFood;
+        private bool _foodInUse = false;
+        private bool _waterInUse = false;
+        private float _checkAnimalsDelay = 5f;
+        
+        private Queue<Animal> _foodQueue = new Queue<Animal>();
+        private Queue<Animal> _waterQueue = new Queue<Animal>();
 
         private void Start()
         {
@@ -26,8 +32,46 @@ namespace PointerObjects
 
             foreach (var animal in _animals)
             {
-                animal.OnReachedTarget += CleanBowl;
+                animal.OnReachedTarget += OnAnimalReached;
                 animal.OnReachedTarget += (_) => animal.TryGrowUp();
+            }
+            
+            StartCoroutine(CheckAnimalsRoutine());
+        }
+
+        private IEnumerator CheckAnimalsRoutine()
+        {
+            while (true)
+            {
+                if (HasFood)
+                {
+                    if (_foodQueue.Count == 0)
+                    {
+                        foreach (var animal in _animals)
+                        {
+                            if (animal.NeedFood)
+                                _foodQueue.Enqueue(animal);
+                        }
+                    }
+
+                    TrySendNextFoodAnimal();
+                }
+
+                if (HasWater)
+                {
+                    if (_waterQueue.Count == 0)
+                    {
+                        foreach (var animal in _animals)
+                        {
+                            if (animal.NeedWater)
+                                _waterQueue.Enqueue(animal);
+                        }
+                    }
+
+                    TrySendNextWaterAnimal();
+                }
+
+                yield return _checkAnimalsDelay;
             }
         }
 
@@ -49,35 +93,51 @@ namespace PointerObjects
         {
             _bowlForWater.sprite = _bowlSpritesData.waterBowl;
             HasWater = true;
-            
-            foreach (var animal in _animals)
-            {
-                if (animal.NeedWater)
-                {
-                    animal.GoTo(_bowlForWater.transform.position); 
-                    animal.SetWater();
-                    return;
-                }
-            }
         }
-        
+
         public void SetFoodToBowl()
         {
             _bowlForFood.sprite = _bowlSpritesData.foodBowl;
             HasFood = true;
-            
-            foreach (var animal in _animals)
+        }
+
+        private void TrySendNextFoodAnimal()
+        {
+            if (!HasFood || _foodQueue.Count == 0 || _foodInUse)
+                return;
+
+            var animal = _foodQueue.Dequeue();
+            _foodInUse = true;
+            animal.GoTo(_bowlForFood.transform.position);
+            animal.SetFood();
+        }
+
+        private void TrySendNextWaterAnimal()
+        {
+            if (!HasWater || _waterQueue.Count == 0 || _waterInUse)
+                return;
+
+            var animal = _waterQueue.Dequeue();
+            _waterInUse = true; 
+            animal.GoTo(_bowlForWater.transform.position);
+            animal.SetWater();
+        }
+
+
+        private void OnAnimalReached(Vector2 position)
+        {
+            if ((Vector2)_bowlForFood.transform.position == position)
             {
-                if (animal.NeedFood)
-                {
-                    animal.GoTo(_bowlForFood.transform.position);
-                    animal.SetFood();
-                    return;
-                }
-                
+                _foodInUse = false;
+                CleanBowl(position);
+                TrySendNextFoodAnimal();
+            }
+            else if ((Vector2)_bowlForWater.transform.position == position)
+            {
+                _waterInUse = false;
+                CleanBowl(position);
+                TrySendNextWaterAnimal();
             }
         }
-        
-        
     }
 }

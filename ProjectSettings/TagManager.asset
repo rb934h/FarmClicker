@@ -74,5 +74,8 @@ TagManager:
   - name: Rain
     uniqueID: 2044851487
     locked: 0
+  - name: Clouds
+    uniqueID: 1592779689
+    locked: 0
   m_RenderingLayers:
   - Default

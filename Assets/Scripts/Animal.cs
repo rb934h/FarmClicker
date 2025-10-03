@@ -14,10 +14,14 @@ namespace DefaultNamespace
         [SerializeField] private Vector2 _minBounds;
         [SerializeField] private Vector2 _maxBounds;
         
-        protected SpriteRenderer _spriteRenderer;
-        protected Animator _animator;
+        private static readonly int GrowUp = Animator.StringToHash("GrowUp");
+        private static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
+      
         private bool _needFood;
         private bool _needWater;
+        
+        protected SpriteRenderer _spriteRenderer;
+        protected Animator _animator;
         
         public AnimalGrowStates _currentGrowState;
             
@@ -73,16 +77,20 @@ namespace DefaultNamespace
             if (_currentGrowState == AnimalGrowStates.Adult)
                 DoSomethingWhenAdult();
             
+            
             _currentGrowState = AnimalGrowStates.Adult;
             
-            _spriteRenderer.sprite = _currentGrowState == AnimalGrowStates.Baby ? _animalData._babySprite : _animalData._adultSprite;
-            _animator.Play(_currentGrowState == AnimalGrowStates.Baby ? "BabySheepRun" : "AdultSheepRun");
+            _spriteRenderer.sprite = _animalData._adultSprite;
+            _animator.SetBool(GrowUp, true);
 
             _needFood = true;
             _needWater = true;
         }
 
-        protected virtual void DoSomethingWhenAdult() { }
+        protected virtual void DoSomethingWhenAdult()
+        {
+            _animator.SetBool(SpecialPerk, true);
+        }
 
         private void Wander()
         {
