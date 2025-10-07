@@ -121438,6 +121438,7 @@ GameObject:
   - component: {fileID: 1363250655}
   - component: {fileID: 1363250656}
   - component: {fileID: 1363250657}
+  - component: {fileID: 1363250658}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -121480,18 +121481,8 @@ MonoBehaviour:
   _pointerClicker: {fileID: 860680403}
   _player: {fileID: 752859350}
   _inputSystem: {fileID: 1027432370}
-  _timerImages:
-  - {fileID: 396834566}
-  - {fileID: 11318464}
-  - {fileID: 563698776}
-  - {fileID: 2143569267}
-  _timerText: {fileID: 882238421}
-  globalLight: {fileID: 384668564}
-  freeformLights:
-  - {fileID: 1216161351}
-  - {fileID: 78733597}
-  - {fileID: 1637044793}
-  - {fileID: 702649780}
+  _levelTimer: {fileID: 1672161547}
+  _lightController: {fileID: 1363250658}
   _chest: {fileID: 417983399}
   _levelGoalsUITransform: {fileID: 1989559544}
   _levelGoalsText: {fileID: 3346904989797125999, guid: c304d8ac6e3b8e84291121ef942124fb, type: 3}
@@ -121511,6 +121502,24 @@ MonoBehaviour:
   weatherEffects:
   - {fileID: 11400000, guid: 7072374ec14d858488dc5bfc418c20bf, type: 2}
   - {fileID: 11400000, guid: 342eb67a8452ca149b7f628ce41d283a, type: 2}
+--- !u!114 &1363250658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363250654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b884803bdef346f1a2d68bfc9db70611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  _globalLight: {fileID: 384668564}
+  _freeformLights:
+  - {fileID: 1216161351}
+  - {fileID: 78733597}
+  - {fileID: 1637044793}
+  - {fileID: 702649780}
 --- !u!1 &1386543688
 GameObject:
   m_ObjectHideFlags: 0
@@ -126112,6 +126121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1672161546}
+  - component: {fileID: 1672161547}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -126143,6 +126153,24 @@ RectTransform:
   m_AnchoredPosition: {x: -847.26306, y: 444.265}
   m_SizeDelta: {x: 129.4739, y: 123.47}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1672161547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672161545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc382b78d5b17e43ad7dfbc3559d85a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  _images:
+  - {fileID: 396834566}
+  - {fileID: 11318464}
+  - {fileID: 563698776}
+  - {fileID: 2143569267}
+  _timeText: {fileID: 882238421}
 --- !u!1 &1694582162
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,22 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer
+public class Timer : MonoBehaviour
 {
-    public event Action OnTimerComplete;
-
+    [SerializeField] private List<Image> _images = new List<Image>();
+    [SerializeField] private TMP_Text _timeText;
+    
     private float _timeRemaining;
     private bool _isRunning;
-    private List<Image> _images = new List<Image>();
-    private TMP_Text _timeText;
     private Sequence _sequence;
-
-    public Timer(Image[] images, TMP_Text timeText)
-    {
-        _images.AddRange(images);
-        _timeText = timeText;
-    }
-
+    
+    public event Action OnTimerComplete;
+    
     public void StartTimer(float seconds)
     {
         if (seconds <= 0)

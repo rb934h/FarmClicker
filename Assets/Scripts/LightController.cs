@@ -2,26 +2,15 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class LightController
+public class LightController : MonoBehaviour
 {
-    private Light2D _globalLight;
-    private Light2D[] _freeformLights;
-    private Transform[] _freeformTransforms; // для движения света
+    [SerializeField] private Light2D _globalLight;
+    [SerializeField] private Light2D[] _freeformLights;
+
 
     private Sequence _sequence;
 
-    public LightController(Light2D globalLight, Light2D[] freeformLights)
-    {
-        _globalLight = globalLight;
-        _freeformLights = freeformLights;
-
-        // Получаем трансформы для движения
-        _freeformTransforms = new Transform[freeformLights.Length];
-        for (int i = 0; i < freeformLights.Length; i++)
-        {
-            _freeformTransforms[i] = freeformLights[i].transform;
-        }
-    }
+   
     
     /// <summary>
     /// Заход солнца: уменьшаем intensity и двигаем свет, одновременно увеличивая радиус/фалл оф
@@ -48,7 +37,7 @@ public class LightController
             for (int i = 0; i < _freeformLights.Length; i++)
             {
                 Light2D light = _freeformLights[i];
-                Transform t = _freeformTransforms[i];
+                Transform t = _freeformLights[i].transform;
                 if (light == null || t == null) continue;
 
                 // уменьшаем intensity

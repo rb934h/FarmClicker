@@ -4,8 +4,6 @@ using PointerObjects;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 using VContainer;
 
 public class Level : MonoBehaviour
@@ -14,17 +12,14 @@ public class Level : MonoBehaviour
     [SerializeField] private PointerInteractor _pointerClicker;
     [SerializeField] private Player _player;
     [SerializeField] private InputSystem _inputSystem;
-    [SerializeField] private Image[] _timerImages;
-    [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private Light2D globalLight;
-    [SerializeField] private Light2D[] freeformLights;
+    [SerializeField] private Timer _levelTimer;
+    [SerializeField] private LightController _lightController;
     [SerializeField] private Chest _chest;
     [SerializeField] private Transform _levelGoalsUITransform;
     [SerializeField] private TMP_Text _levelGoalsText;
     [SerializeField] private WeatherManager _weatherManager;
     
-    private Timer _levelTimer;
-    private LightController _lightController;
+    
     private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     private PlayerInventoryData _playerInventory;
@@ -39,8 +34,6 @@ public class Level : MonoBehaviour
     {
         _weatherManager.SetWeather(_levelData.weatherType);
         _inputSystem.DownTouched += StartLevel;
-        _levelTimer = new Timer(_timerImages, _timerText);
-        _lightController = new LightController(globalLight, freeformLights);
         
         _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
         
