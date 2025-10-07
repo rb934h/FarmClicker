@@ -24,6 +24,8 @@ namespace PointerObjects
         
         private Queue<Animal> _foodQueue = new Queue<Animal>();
         private Queue<Animal> _waterQueue = new Queue<Animal>();
+        
+        public Animal[] Animals => _animals;
 
         private void Start()
         {
@@ -106,7 +108,7 @@ namespace PointerObjects
             while (_foodQueue.Count > 0)
             {
                 var next = _foodQueue.Dequeue();
-                if (!next.IsGoingToTarget)  // ✅ защита от переключения
+                if (!next.IsGoingToTarget)
                 {
                     animal = next;
                     break;

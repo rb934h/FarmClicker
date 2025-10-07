@@ -40,7 +40,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &-4184253410515238367
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -420,10 +420,10 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   response:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 1
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -1041,10 +1041,10 @@ MonoBehaviour:
     m_Value: 10
   aperture:
     m_OverrideState: 1
-    m_Value: 5.6
+    m_Value: 5.1
   focalLength:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 120
   bladeCount:
     m_OverrideState: 1
     m_Value: 5

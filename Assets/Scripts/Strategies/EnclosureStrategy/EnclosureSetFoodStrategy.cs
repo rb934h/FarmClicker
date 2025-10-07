@@ -12,7 +12,7 @@ namespace Strategies.EnclosureStrategy
 
             foreach (var inventoryHarvestObject in player.inventory.harvestObjects)
             {
-                if (inventoryHarvestObject.type == CollectableTypes.Plant)
+                if (inventoryHarvestObject as PlantData)
                 {
                     enclosure.SetFoodToBowl();
                     player.inventory.ClearItem(inventoryHarvestObject);

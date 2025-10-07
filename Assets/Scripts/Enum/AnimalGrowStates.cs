@@ -3,6 +3,7 @@
     public enum AnimalGrowStates
     {
         Baby,
-        Adult
+        Adult,
+        Special
     }
 }

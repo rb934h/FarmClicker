@@ -71,12 +71,19 @@ namespace DefaultNamespace
         {
             _needWater = false;
         }
-        
+
+        public CollectableItemData GetSpecialItem()
+        {
+            _spriteRenderer.sprite = _animalData._adultSprite;
+            _animator.SetBool(SpecialPerk, false);
+            
+            return _animalData._specialItemData;
+        }
         public virtual void TryGrowUp()
         {
-            if(_needFood || _needWater)
+            if(_needFood || _needWater || _currentGrowState == AnimalGrowStates.Special)
                 return;
-
+            
             if (_currentGrowState == AnimalGrowStates.Adult)
             {
                 DoSomethingWhenAdult();
@@ -95,6 +102,7 @@ namespace DefaultNamespace
         protected virtual void DoSomethingWhenAdult()
         {
             _animator.SetBool(SpecialPerk, true);
+            _currentGrowState = AnimalGrowStates.Special;
         }
 
         private void Wander()

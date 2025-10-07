@@ -1,5 +1,4 @@
-﻿using Enum;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -11,7 +10,5 @@ namespace ScriptableObjects
         public float ruinTime;
         public Sprite spriteForHands;
         public Sprite[] spritesForGarden;
-        public CollectableTypes type;
-        
     }
 }

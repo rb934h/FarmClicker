@@ -15,4 +15,5 @@ MonoBehaviour:
   _babySprite: {fileID: 2138399492, guid: 61d88e80065edc144b4207b7b978c442, type: 3}
   _adultSprite: {fileID: 1244058731, guid: 4f6275d35c58a534baa1cb4dbebf42fe, type: 3}
   _withWoolSprite: {fileID: -264922975, guid: 6e07ea0b50d013c4e9e02ba0c10ed755, type: 3}
+  _specialItemData: {fileID: 11400000, guid: 6ec8a87fe713fd349890dfff3ebb4b76, type: 2}
   _speed: 0.25

@@ -35,6 +35,7 @@ namespace DI.Scopes
             // ------------ Enclosure ------------------
             builder.Register<IPointerObjectInteractStrategy, EnclosureSetFoodStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, EnclosureSetWaterStrategy>(Lifetime.Singleton);
+            builder.Register<IPointerObjectInteractStrategy, EnclosureGetSpecialItemStrategy>(Lifetime.Singleton);
             
             var runtimeInventory = Instantiate(playerInventory);
             builder.RegisterInstance(runtimeInventory).AsSelf();
