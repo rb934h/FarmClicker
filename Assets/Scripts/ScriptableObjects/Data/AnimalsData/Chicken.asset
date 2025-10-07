@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 885c106ed9f14e768acd7864346a7a4f, type: 3}
-  m_Name: Sheep
+  m_Name: Chicken
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.AnimalData
-  _babySprite: {fileID: 2138399492, guid: 61d88e80065edc144b4207b7b978c442, type: 3}
-  _adultSprite: {fileID: 1244058731, guid: 4f6275d35c58a534baa1cb4dbebf42fe, type: 3}
-  _specialStateSprite: {fileID: -264922975, guid: 6e07ea0b50d013c4e9e02ba0c10ed755, type: 3}
-  _specialItemData: {fileID: 11400000, guid: 6ec8a87fe713fd349890dfff3ebb4b76, type: 2}
-  _speed: 0.25
+  _babySprite: {fileID: 209566202, guid: bd78e2793459c854587e65e1b7246864, type: 3}
+  _adultSprite: {fileID: -699513448, guid: 5e1b272122050c44eaaeddc9c10ce1c6, type: 3}
+  _specialStateSprite: {fileID: 0}
+  _specialItemData: {fileID: 11400000, guid: b27e89db2ed1843438ef3f5af3267159, type: 2}
+  _speed: 0.15

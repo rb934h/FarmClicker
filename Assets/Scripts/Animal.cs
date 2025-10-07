@@ -14,8 +14,8 @@ namespace DefaultNamespace
         [SerializeField] private Vector2 _minBounds;
         [SerializeField] private Vector2 _maxBounds;
         
-        private static readonly int GrowUp = Animator.StringToHash("GrowUp");
-        private static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
+        protected static readonly int GrowUp = Animator.StringToHash("GrowUp");
+        protected static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
       
         private bool _needFood;
         private bool _needWater;
@@ -72,7 +72,7 @@ namespace DefaultNamespace
             _needWater = false;
         }
 
-        public CollectableItemData GetSpecialItem()
+        public virtual CollectableItemData GetSpecialItem()
         {
             _spriteRenderer.sprite = _animalData._adultSprite;
             _animator.SetBool(SpecialPerk, false);
@@ -99,11 +99,7 @@ namespace DefaultNamespace
             _needWater = true;
         }
 
-        protected virtual void DoSomethingWhenAdult()
-        {
-            _animator.SetBool(SpecialPerk, true);
-            _currentGrowState = AnimalGrowStates.Special;
-        }
+        protected virtual void DoSomethingWhenAdult() { }
 
         private void Wander()
         {

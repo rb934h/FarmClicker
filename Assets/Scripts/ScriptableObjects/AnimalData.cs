@@ -7,7 +7,7 @@ namespace ScriptableObjects
     {
         public Sprite _babySprite;
         public Sprite _adultSprite;
-        public Sprite _withWoolSprite;
+        public Sprite _specialStateSprite;
         public SpecialItemData _specialItemData;
         public float _speed;
     }

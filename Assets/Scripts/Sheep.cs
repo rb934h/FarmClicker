@@ -1,4 +1,4 @@
-﻿
+﻿using Enum;
 
 namespace DefaultNamespace
 {
@@ -6,8 +6,9 @@ namespace DefaultNamespace
     {
         protected override void DoSomethingWhenAdult()
         {
-            base.DoSomethingWhenAdult();
-            _spriteRenderer.sprite = _animalData._withWoolSprite;
+            _animator.SetBool(SpecialPerk, true);
+            _currentGrowState = AnimalGrowStates.Special;
+            _spriteRenderer.sprite = _animalData._specialStateSprite;
         }
     }
 }
