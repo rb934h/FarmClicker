@@ -83,7 +83,7 @@ namespace DefaultNamespace
         {
             if (coinsCountText != null)
             {
-                coinsCountText.text = $"Coins: {_playerInventory.coins}";
+                coinsCountText.text = $"{_playerInventory.coins}";
             }
         }
     }

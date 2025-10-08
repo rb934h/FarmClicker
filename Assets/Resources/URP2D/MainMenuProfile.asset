@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FilmGrain
-  active: 1
+  active: 0
   type:
     m_OverrideState: 1
     m_Value: 0
@@ -1044,7 +1044,7 @@ MonoBehaviour:
     m_Value: 5.1
   focalLength:
     m_OverrideState: 1
-    m_Value: 120
+    m_Value: 110.2
   bladeCount:
     m_OverrideState: 1
     m_Value: 5

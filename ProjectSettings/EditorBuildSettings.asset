@@ -6,13 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: ba76478508eacb446863b680dd639bd1
-  - enabled: 1
     path: Assets/Scenes/Summer.unity
     guid: 6331523265303cc4bb37eeb41043e6b1
-  - enabled: 1
-    path: Assets/Scenes/Autumn.unity
-    guid: a6e79c1f4928f8c448269a2ca1c76a4c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

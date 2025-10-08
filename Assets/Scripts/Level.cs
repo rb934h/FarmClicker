@@ -37,10 +37,6 @@ public class Level : MonoBehaviour
         
         _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
         
-        foreach (var levelDataGoal in _levelData.goals)
-        {
-            _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
-        }
 
     }
     
@@ -49,7 +45,7 @@ public class Level : MonoBehaviour
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
-     
+        
         foreach (var screen in ScreenBase.Screens)
         {
             if(screen.GetType() == typeof(GameScreen))
@@ -58,8 +54,13 @@ public class Level : MonoBehaviour
             }
         }
         
+        foreach (var levelDataGoal in _levelData.goals)
+        {
+            _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
+        }
+        
         _levelTimer.StartTimer(_levelData.timeToEnd);
-        _lightController.Sunset(0.25f, 0f, _levelData.timeToEnd, -5f,10f);
+        _lightController.Sunset(0.5f, 0f, _levelData.timeToEnd, -5f,10f);
         _levelTimer.OnTimerComplete += LevelEnd;
     }
 

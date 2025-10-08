@@ -14,9 +14,10 @@ namespace Strategies.EnclosureStrategy
                 if (enclosureAnimal._currentGrowState == AnimalGrowStates.Special)
                 {
                     player.inventory.AddHarvestObject(enclosureAnimal.GetSpecialItem());
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }
