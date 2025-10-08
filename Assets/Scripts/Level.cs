@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using PointerObjects;
 using ScriptableObjects;
-using TMPro;
 using UnityEngine;
 using VContainer;
 
@@ -10,34 +9,35 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private LevelData _levelData;
     [SerializeField] private PointerInteractor _pointerClicker;
-    [SerializeField] private Player _player;
-    [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private Timer _levelTimer;
     [SerializeField] private LightController _lightController;
-    [SerializeField] private Chest _chest;
-    [SerializeField] private Transform _levelGoalsUITransform;
-    [SerializeField] private TMP_Text _levelGoalsText;
     [SerializeField] private WeatherManager _weatherManager;
     
-    
-    private LevelGoalsView _levelGoalsView;
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
-    private PlayerInventoryData _playerInventory;
+    private Player _player;
+    private Chest _chest;
+    private InputSystem _inputSystem;
    
     [Inject]
-    public void Construct(PlayerInventoryData playerInventoryData)
+    public void Construct(Player player, InputSystem inputSystem)
     {
-        _playerInventory = playerInventoryData;
+        _player = player;
+        _inputSystem = inputSystem;
     }
-    
+
+    private void Awake()
+    {
+        foreach (var pointerObject in _pointerClicker.PointerObjects)
+        {
+            if(pointerObject is Chest chest)
+                _chest = chest;
+        }
+    }
+
     private void Start()
     {
         _weatherManager.SetWeather(_levelData.weatherType);
         _inputSystem.DownTouched += StartLevel;
-        
-        _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
-        
-
     }
     
     private void StartLevel()
@@ -48,15 +48,11 @@ public class Level : MonoBehaviour
         
         foreach (var screen in ScreenBase.Screens)
         {
-            if(screen.GetType() == typeof(GameScreen))
+            if(screen is GameScreen gameScreen)
             {
-                screen.ShowScreen();
+                gameScreen.SetLevelGoals(_levelData.goals);
+                gameScreen.ShowScreen();
             }
-        }
-        
-        foreach (var levelDataGoal in _levelData.goals)
-        {
-            _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
         }
         
         _levelTimer.StartTimer(_levelData.timeToEnd);
@@ -72,14 +68,13 @@ public class Level : MonoBehaviour
 
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
-        if (pointerObject is Garden garden && _playerInventory.currentSeed != null)
+        if (pointerObject is Garden garden && _player.inventory.currentSeed != null)
         {
-            garden.SetSeed(_playerInventory.currentSeed); // TODO Hmm..
+            garden.SetSeed(_player.inventory.currentSeed); // TODO Hmm..
         }
         
         _player.InteractWithPointerObject(positionForInteract, pointerObject);
-        _playerInventory.currentSeed = null;
-      
+        _player.inventory.currentSeed = null;
     }
 
     private void AddDeliveredItem(List<CollectableItemData> items)
@@ -92,7 +87,7 @@ public class Level : MonoBehaviour
                 
             }
             
-            _playerInventory.AddCoins(item.price);
+            _player.inventory.AddCoins(item.price);
         }
        
         CheckLevelGoals();
@@ -126,7 +121,5 @@ public class Level : MonoBehaviour
                 screen.HideScreen();
             }
         }
-        
     }
-   
 }

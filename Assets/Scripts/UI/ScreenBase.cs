@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -16,12 +15,12 @@ public class ScreenBase : MonoBehaviour
         Screens.Add(GetComponent<ScreenBase>());
     }
 
-    public void ShowScreen()
+    public virtual void ShowScreen()
     {
         _canvasGroup.DOFade(1, _duration);
     }
     
-    public void HideScreen()
+    public virtual void HideScreen()
     {
         _canvasGroup.DOFade(0, _duration);
     }

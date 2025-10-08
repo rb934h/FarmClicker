@@ -8,18 +8,18 @@ public class AddToInventoryButton : MonoBehaviour
    [SerializeField] private CollectableItemData _collectableItemData;
    [SerializeField] private AudioSource _clickSound;
    
-   private Button buttonComponent;
-   private PlayerInventoryData playerInventory;
+   private Button _buttonComponent;
+   private Player _player;
    
    [Inject]
-   public void Construct(PlayerInventoryData playerInventoryData)
+   public void Construct(Player player)
    {
-      playerInventory = playerInventoryData;
+      _player = player;
    }
    private void Awake()
    {
-      buttonComponent = GetComponent<Button>();
-      buttonComponent.onClick.AddListener(()=>
+      _buttonComponent = GetComponent<Button>();
+      _buttonComponent.onClick.AddListener(()=>
       {
          _clickSound.Play();
          AddSeedToInventory(_collectableItemData);
@@ -29,6 +29,6 @@ public class AddToInventoryButton : MonoBehaviour
    
    private void AddSeedToInventory(CollectableItemData item)
    {
-      playerInventory.currentSeed = item;
+      _player.inventory.currentSeed = item;
    }
 }

@@ -8,6 +8,7 @@ public class PointerInteractor : MonoBehaviour
     private Camera _camera;
 
     public event Action<Vector2, PointerObject> OnPointerClick;
+    public PointerObject[] PointerObjects => pointerObjects;
 
     private void Start()
     {

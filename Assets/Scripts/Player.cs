@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -20,24 +21,30 @@ public class Player : MonoBehaviour
     [Header("Эмоции")] 
     [SerializeField] private SpriteRenderer playerHint;
     [SerializeField] private PlayerHintData playerHintData;
-
-
+    
+    [Header("Инвентарь")]
+    [SerializeField] private PlayerInventoryData playerInventoryData;
+    
     private PlayerAnimator _playerAnimator;
     private PointerObject _pointerObject;
     private readonly ActionQueue _actionQueue = new();
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
 
-    public PlayerInventoryData inventory { get; private set; }
+    public PlayerInventoryData inventory => playerInventoryData;
     public PlayerAnimator animator => _playerAnimator;
     
     private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
 
     [Inject]
-    public void Construct(PlayerInventoryData playerInventoryData, IEnumerable<IPointerObjectInteractStrategy> interactStrategies)
+    public void Construct(IEnumerable<IPointerObjectInteractStrategy> interactStrategies)
     {
-        inventory = playerInventoryData;
         _interactStrategy = interactStrategies;
+    }
+
+    private void Awake()
+    {
+        playerInventoryData = Instantiate(playerInventoryData);
     }
 
     private void Start()

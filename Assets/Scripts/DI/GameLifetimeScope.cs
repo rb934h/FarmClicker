@@ -13,11 +13,13 @@ namespace DI.Scopes
     public class GameLifetimeScope : LifetimeScope
     {
         [SerializeField] private URPVolume urpVolume;
-        [SerializeField] private PlayerInventoryData playerInventory;
+        [SerializeField] private Player player;
+        [SerializeField] private InputSystem inputSystem;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(urpVolume);
+            builder.RegisterComponent(player);
             
             // ------------ Pig ------------------
             builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);
@@ -37,8 +39,8 @@ namespace DI.Scopes
             builder.Register<IPointerObjectInteractStrategy, EnclosureSetWaterStrategy>(Lifetime.Singleton);
             builder.Register<IPointerObjectInteractStrategy, EnclosureGetSpecialItemStrategy>(Lifetime.Singleton);
             
-            var runtimeInventory = Instantiate(playerInventory);
-            builder.RegisterInstance(runtimeInventory).AsSelf();
+            // ------------ Other ------------------
+            builder.RegisterComponent(inputSystem);
         }
     }
 }

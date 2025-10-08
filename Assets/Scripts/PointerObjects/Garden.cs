@@ -60,7 +60,6 @@ namespace PointerObjects
             yield return new WaitForSeconds(_currentSeed.growTime);
             
             State = GardenState.Planted;
-            ShowStateInfo("Семя посажено, требуется полив.");
             
             hintSpriteRenderer.sprite = hintData.waterSprite;
             HintAnimator.Show(hintSpriteRenderer);
@@ -72,15 +71,12 @@ namespace PointerObjects
         {
             if (_currentSeed == null)
             {
-                ShowStateInfo("Нет посаженного растения для полива.");
                 yield break;
             }
 
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Young));
             
             _tilemapAreaHighlighter.ChangeTilesColor(1, _colorAfterWatering);
-            
-            ShowStateInfo("Полив начат, идет рост...");
             
             _fillBar.Show();
             _workTime = _currentSeed.growTime * 2 + _seedingTime;
@@ -95,8 +91,6 @@ namespace PointerObjects
             StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
             
             yield return new WaitForSeconds(_seedingTime);
-            
-            ShowStateInfo("Рост завершен, готово к сбору.");
             
             State = GardenState.ReadyToHarvest;
             

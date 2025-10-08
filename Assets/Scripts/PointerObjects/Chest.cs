@@ -89,8 +89,7 @@ namespace PointerObjects
         {
             _waitForSale = true;
             _saleBoard.Play();
-
-            ShowStateInfo("Машина отправлена");
+            
             foreach (var collectableItemData in cargo)
             {
                 Debug.Log(collectableItemData.name);

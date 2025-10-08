@@ -13,24 +13,24 @@ namespace DefaultNamespace
         [SerializeField] private SpriteRenderer wateringCan;
         [SerializeField] private TMP_Text coinsCountText;
 
-        private PlayerInventoryData _playerInventory;
+        private Player _player;
         private CollectableItemData _leftHandItemData;
         private CollectableItemData _rightHandItemData;
 
         [Inject]
-        public void Construct(PlayerInventoryData playerInventoryData)
+        public void Construct(Player player)
         {
-            _playerInventory = playerInventoryData;
+            _player = player;
         }
 
         private void Start()
         {
-            _playerInventory.OnWaterFilled += ShowWateringCan;
-            _playerInventory.OnWaterUsed += HideWateringCan;
-            _playerInventory.HarvestObjectAdded += SetItem;
-            _playerInventory.HarvestObjectsClear += ClearItem;
-            _playerInventory.OnClearAllItems += ClearAllItems;
-            _playerInventory.CoinsChanged += UpdateCoinsCountText;
+            _player.inventory.OnWaterFilled += ShowWateringCan;
+            _player.inventory.OnWaterUsed += HideWateringCan;
+            _player.inventory.HarvestObjectAdded += SetItem;
+            _player.inventory.HarvestObjectsClear += ClearItem;
+            _player.inventory.OnClearAllItems += ClearAllItems;
+            _player.inventory.CoinsChanged += UpdateCoinsCountText;
         }
 
         private void HideWateringCan()
@@ -83,7 +83,7 @@ namespace DefaultNamespace
         {
             if (coinsCountText != null)
             {
-                coinsCountText.text = $"{_playerInventory.coins}";
+                coinsCountText.text = $"{_player.inventory.coins}";
             }
         }
     }
