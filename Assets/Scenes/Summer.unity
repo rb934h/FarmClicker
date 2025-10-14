@@ -121653,6 +121653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363250655}
   - component: {fileID: 1363250656}
+  - component: {fileID: 1363250657}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -121696,6 +121697,23 @@ MonoBehaviour:
   _levelTimer: {fileID: 1672161547}
   _lightController: {fileID: 433816047}
   _weatherManager: {fileID: 336925602}
+--- !u!114 &1363250657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363250654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09a78a6c4a4450288d2fc6e33174c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingOrderManager
+  _renderers:
+  - {fileID: 48398064}
+  - {fileID: 1178717716}
+  - {fileID: 216309525}
+  - {fileID: 1702974527}
 --- !u!1 &1386543688
 GameObject:
   m_ObjectHideFlags: 0
@@ -121950,7 +121968,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PointerObjects.Enclosure
   pointerObjectCollider: {fileID: 1485765007}
   pointForInteraction: {fileID: 386673806}
-  _stateInfoText: {fileID: 0}
   selectedSpriteRenderer: {fileID: 1520173099}
   _bowlForFood: {fileID: 981509667}
   _bowlForWater: {fileID: 953439166}
@@ -126556,7 +126573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PointerObjects.Pig
   pointerObjectCollider: {fileID: 1701392633}
   pointForInteraction: {fileID: 1582465393}
-  _stateInfoText: {fileID: 0}
   selectedSpriteRenderer: {fileID: 523672704}
 --- !u!212 &1701490197 stripped
 SpriteRenderer:
@@ -128445,7 +128461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PointerObjects.Enclosure
   pointerObjectCollider: {fileID: 2139953672}
   pointForInteraction: {fileID: 709864464}
-  _stateInfoText: {fileID: 0}
   selectedSpriteRenderer: {fileID: 1979448560}
   _bowlForFood: {fileID: 18741474}
   _bowlForWater: {fileID: 128353766}

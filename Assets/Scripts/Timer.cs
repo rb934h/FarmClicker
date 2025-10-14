@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private List<Image> _images = new List<Image>();
+    [SerializeField] private List<Image> _images = new();
     [SerializeField] private TMP_Text _timeText;
     
     private float _timeRemaining;
@@ -54,7 +54,7 @@ public class Timer : MonoBehaviour
         _isRunning = true;
         InitializeImageAlphas();
 
-        float segmentDuration = _timeRemaining / (_images.Count - 1);
+        var segmentDuration = _timeRemaining / (_images.Count - 1);
         _sequence = DOTween.Sequence();
         
         for (int i = 0; i < _images.Count - 1; i++)
@@ -66,9 +66,9 @@ public class Timer : MonoBehaviour
         }
 
         
-        float startMinutes = 10f * 60f;
-        float endMinutes = 20f * 60f;
-        float currentMinutes = startMinutes;
+        var startMinutes = 10f * 60f;
+        var endMinutes = 20f * 60f;
+        var currentMinutes = startMinutes;
 
         Sequence timeTween = DOTween.Sequence();
         timeTween.Append(DOTween.To(() => currentMinutes, x =>
@@ -101,12 +101,11 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimeText(float totalMinutes)
     {
-        int hours = Mathf.FloorToInt(totalMinutes / 60f);
-        int minutes = Mathf.FloorToInt(totalMinutes % 60f);
+        var hours = Mathf.FloorToInt(totalMinutes / 60f);
 
-        string period = hours >= 12 ? "PM" : "AM";
+        var period = hours >= 12 ? "PM" : "AM";
         
-        int displayHours = hours % 12;
+        var displayHours = hours % 12;
         if (displayHours == 0) displayHours = 12;
 
         _timeText.text = $"{displayHours:00} {period}";

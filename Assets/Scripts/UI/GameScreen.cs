@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -21,10 +22,14 @@ namespace DefaultNamespace
         public void SetLevelGoals(List<LevelGoal> levelGoals)
         {
             _levelGoalsPanelAnimator.enabled = true;
-            foreach (var levelDataGoal in levelGoals)
+            
+            DOVirtual.DelayedCall(_levelGoalsPanelAnimator.GetCurrentAnimatorClipInfo(0).Length * .5f, () =>
             {
-                _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
-            }
+                foreach (var levelDataGoal in levelGoals)
+                {
+                    _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
+                }
+            });
         }
     }
 }
