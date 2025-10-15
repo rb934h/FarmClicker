@@ -17,3 +17,6 @@ MonoBehaviour:
   _specialStateSprite: {fileID: -264922975, guid: 6e07ea0b50d013c4e9e02ba0c10ed755, type: 3}
   _specialItemData: {fileID: 11400000, guid: 6ec8a87fe713fd349890dfff3ebb4b76, type: 2}
   _speed: 0.25
+  _hints:
+    _hungryEmotionSprite: {fileID: 21300000, guid: c79d3b564b6c61e449e90938b8288e71, type: 3}
+    _thirstyEmotionSprite: {fileID: 21300000, guid: 4ba49e3fe9e9cca4292bcfeff0c88c40, type: 3}

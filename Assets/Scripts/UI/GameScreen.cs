@@ -11,6 +11,7 @@ namespace DefaultNamespace
         [SerializeField] private Animator _levelGoalsPanelAnimator;
         [SerializeField] private Transform _levelGoalsUITransform;
         [SerializeField] private TMP_Text _levelGoalsText;
+        [SerializeField] private SelectItemPanel _selectItemPanel;
         
         private LevelGoalsView _levelGoalsView{ get; set; }
         
@@ -30,6 +31,14 @@ namespace DefaultNamespace
                     _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
                 }
             });
+        }
+
+        public void SetAvailableItems(List<CollectableItemData> availableItems)
+        {
+            foreach (var collectableItemData in availableItems)
+            {
+                _selectItemPanel.AddButton(collectableItemData);
+            }
         }
     }
 }

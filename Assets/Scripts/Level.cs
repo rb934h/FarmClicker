@@ -51,6 +51,7 @@ public class Level : MonoBehaviour
             if(screen is GameScreen gameScreen)
             {
                 gameScreen.SetLevelGoals(_levelData.goals);
+                gameScreen.SetAvailableItems(_levelData.collectableItems);
                 gameScreen.ShowScreen();
             }
         }

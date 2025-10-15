@@ -17,6 +17,10 @@ namespace ScriptableObjects
         
         [Header("Weather")]
         public WeatherType weatherType;
+        
+        [Space]
+        [Header("Available items")]
+        public List<CollectableItemData> collectableItems;
     }
 
     [System.Serializable]
