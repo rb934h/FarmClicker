@@ -1,6 +1,7 @@
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace UI
 {
@@ -12,7 +13,8 @@ namespace UI
       private CollectableItemData _collectableItemData;
       private Button _buttonComponent;
       private Player _player;
-   
+      
+      [Inject]
       public void Construct(Player player)
       {
          _player = player;
@@ -39,8 +41,6 @@ namespace UI
             // _clickSound.Play();
             AddSeedToInventory(_collectableItemData);
          });
-      
-      
       }
    
       private void AddSeedToInventory(CollectableItemData item)

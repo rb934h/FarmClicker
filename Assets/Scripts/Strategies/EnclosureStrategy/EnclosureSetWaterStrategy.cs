@@ -10,6 +10,7 @@ namespace Strategies.EnclosureStrategy
         {
             if (pointerObject is not Enclosure enclosure) return false;
             if (enclosure.HasWater || !player.inventory.hasWater) return false;
+            
             player.inventory.UseWater();
             player.animator.PlayAnimation(PlayerAnimationState.PlayerWatering);
             DOVirtual.DelayedCall(enclosure.WorkTime, enclosure.SetWaterToBowl);

@@ -2,6 +2,7 @@
 using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
+using UI;
 using UnityEngine;
 
 namespace DefaultNamespace

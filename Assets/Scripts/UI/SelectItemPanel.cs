@@ -1,23 +1,25 @@
 using ScriptableObjects;
-using UI;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
-public class SelectItemPanel : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private AddToInventoryButton addToInventoryButton;
-
-    private Player _player;
+    public class SelectItemPanel : MonoBehaviour
+    {
+        [SerializeField] private AddToInventoryButton addToInventoryButton;
+    
+        private  IObjectResolver _objectResolver;
    
-    [Inject]
-    public void Construct(Player player)
-    {
-        _player = player;
-    }
-    public void AddButton(CollectableItemData collectableItemData)
-    {
-        var instance = Instantiate(addToInventoryButton, transform);
-        instance.Construct(_player);
-        instance.SetCollectableItemData(collectableItemData);
+        [Inject]
+        public void Construct(IObjectResolver objectResolver)
+        {
+            _objectResolver = objectResolver;
+        }
+        public void AddButton(CollectableItemData collectableItemData)
+        {
+            var instance = _objectResolver.Instantiate(addToInventoryButton, transform);
+            instance.SetCollectableItemData(collectableItemData);
+        }
     }
 }

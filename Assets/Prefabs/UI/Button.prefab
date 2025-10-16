@@ -210,7 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6982ae167b7c428580dcecc0abfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _collectableItemData: {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
   _collectableItemIcon: {fileID: 6099547007936659358}
   _clickSound: {fileID: 0}
 --- !u!95 &6668894756907631693
