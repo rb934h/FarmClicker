@@ -14,6 +14,7 @@ namespace DefaultNamespace
         [SerializeField] private float scaleDuration = 1.2f;
 
         private Sequence sequence;
+        private Tween scaleTween;
 
         private void OnEnable()
         {
@@ -22,11 +23,26 @@ namespace DefaultNamespace
 
         private void OnDisable()
         {
+            KillTweens();
+        }
+
+        private void OnDestroy()
+        {
+            KillTweens();
+        }
+
+        private void KillTweens()
+        {
+            // Безопасно убиваем все анимации на объекте
             sequence?.Kill();
+            scaleTween?.Kill();
         }
 
         private void PlayEffect()
         {
+            // Если объект уничтожен или null, не запускаем анимацию
+            if (transform == null) return;
+
             sequence = DOTween.Sequence().SetUpdate(true);
 
             sequence.Append(transform.DORotate(new Vector3(0, 0, rotationAngle), rotationDuration)
@@ -37,7 +53,7 @@ namespace DefaultNamespace
 
             sequence.SetLoops(-1, LoopType.Yoyo);
 
-            transform.DOScale(transform.localScale * (1f + scaleAmount), scaleDuration)
+            scaleTween = transform.DOScale(transform.localScale * (1f + scaleAmount), scaleDuration)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(-1, LoopType.Yoyo);
         }

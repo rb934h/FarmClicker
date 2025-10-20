@@ -22,6 +22,7 @@ namespace PointerObjects
         private readonly Color _colorAfterWatering = new (.75f, .75f, .75f);
         private readonly Color _defaultColor = Color.white;
         private readonly float _seedingTime = .1f;
+        private Coroutine _seedingCoroutine;
         
         [HideInInspector]
         public GardenState State = GardenState.Empty;
@@ -52,7 +53,7 @@ namespace PointerObjects
             
             _fillBar.Show();
 
-            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
+            _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
             
             _workTime = _seedingTime * seedingPointsSpriteRenderers.Length;
             _fillBar.Filling(_workTime);
@@ -64,7 +65,7 @@ namespace PointerObjects
             hintSpriteRenderer.sprite = hintData.waterSprite;
             HintAnimator.Show(hintSpriteRenderer);
             
-            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
+            _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
         }
 
         public IEnumerator WaterAndGrow()
@@ -74,7 +75,7 @@ namespace PointerObjects
                 yield break;
             }
 
-            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Young));
+            _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Young));
             
             _tilemapAreaHighlighter.ChangeTilesColor(1, _colorAfterWatering);
             
@@ -84,11 +85,11 @@ namespace PointerObjects
             
             yield return new WaitForSeconds(_currentSeed.growTime);
             
-            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Mature));
+            _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Mature));
             
             yield return new WaitForSeconds(_currentSeed.growTime);
             
-            StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
+            _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Harvest));
             
             yield return new WaitForSeconds(_seedingTime);
             
@@ -134,6 +135,9 @@ namespace PointerObjects
         
         private IEnumerator ClearSpritesFromSeedingPoints()
         {
+            StopCoroutine(_seedingCoroutine);
+            _seedingCoroutine = null;
+            
             foreach (var seedingPointSpriteRenderer in seedingPointsSpriteRenderers)
             {
                 yield return new WaitForSeconds(_seedingTime);
