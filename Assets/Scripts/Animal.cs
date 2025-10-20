@@ -5,14 +5,12 @@ using ScriptableObjects;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 namespace DefaultNamespace
 {
     public class Animal : MonoBehaviour
     {
         [SerializeField] protected AnimalData _animalData;
-        [SerializeField] private Vector2 _minBounds;
-        [SerializeField] private Vector2 _maxBounds;
+        [SerializeField] private Transform _wanderArea;
         
         protected static readonly int GrowUp = Animator.StringToHash("GrowUp");
         protected static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
@@ -103,22 +101,28 @@ namespace DefaultNamespace
 
         private void Wander()
         {
-            Vector2 randomTarget = new Vector2(
-                Random.Range(_minBounds.x, _maxBounds.x),
-                Random.Range(_minBounds.y, _maxBounds.y)
-            );
-
+            Vector2 randomTarget = GetRandomPointInArea(_wanderArea);
+    
             var distance = Vector2.Distance(transform.position, randomTarget);
             var duration = distance / _animalData._speed;
 
-            transform
-                .DOKill();
-            transform
-                .DOMove(randomTarget, duration)
+            transform.DOKill();
+            transform.DOMove(randomTarget, duration)
                 .SetEase(Ease.Linear)
                 .OnComplete(Wander);
-        
+
             FlipSprite(randomTarget);
+        }
+
+        private Vector2 GetRandomPointInArea(Transform area)
+        {
+            var center = area.position;
+            var scale = area.localScale * 0.5f; // половина ширины и высоты
+
+            return new Vector2(
+                Random.Range(center.x - scale.x, center.x + scale.x),
+                Random.Range(center.y - scale.y, center.y + scale.y)
+            );
         }
 
         private void FlipSprite(Vector2 target)

@@ -4,7 +4,6 @@ using Strategies.ChestStrategy;
 using Strategies.EnclosureStrategy;
 using Strategies.GardenStrategy;
 using Strategies.WaterTankStrategy;
-using UI;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,11 +15,13 @@ namespace DI.Scopes
         [SerializeField] private URPVolume urpVolume;
         [SerializeField] private Player player;
         [SerializeField] private InputSystem inputSystem;
+        [SerializeField] private Timer levelTimer;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(urpVolume);
             builder.RegisterComponent(player);
+            builder.RegisterComponent(levelTimer);
             
             // ------------ Pig ------------------
             builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);

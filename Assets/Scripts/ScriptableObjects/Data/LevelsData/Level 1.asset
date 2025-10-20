@@ -16,10 +16,8 @@ MonoBehaviour:
   timeToEnd: 120
   goals:
   - itemData: {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
-    requiredCount: 3
-  requiredCoins: 4
+    requiredCount: 1
+  requiredCoins: 0
   weatherType: 0
   collectableItems:
-  - {fileID: 11400000, guid: 665c6ec204e760e4baa97b81517c33fc, type: 2}
   - {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
-  - {fileID: 11400000, guid: 45901d8c722d2774aba8ac29a930b606, type: 2}

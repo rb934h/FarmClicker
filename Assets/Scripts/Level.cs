@@ -9,7 +9,6 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private LevelData _levelData;
     [SerializeField] private PointerInteractor _pointerClicker;
-    [SerializeField] private Timer _levelTimer;
     [SerializeField] private LightController _lightController;
     [SerializeField] private WeatherManager _weatherManager;
     
@@ -17,12 +16,14 @@ public class Level : MonoBehaviour
     private Player _player;
     private Chest _chest;
     private InputSystem _inputSystem;
+    private Timer _levelTimer;
    
     [Inject]
-    public void Construct(Player player, InputSystem inputSystem)
+    public void Construct(Player player, InputSystem inputSystem, Timer levelTimer)
     {
         _player = player;
         _inputSystem = inputSystem;
+        _levelTimer = levelTimer;
     }
 
     private void Awake()
@@ -60,7 +61,6 @@ public class Level : MonoBehaviour
         _lightController.Sunset(0.5f, 0f, _levelData.timeToEnd, -5f,10f);
         _levelTimer.OnTimerComplete += LevelEnd;
     }
-
     
     private void Update()
     {
