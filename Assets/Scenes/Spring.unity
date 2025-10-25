@@ -857,6 +857,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1592959917}
   - {fileID: 93611860}
   - {fileID: 97499980}
   - {fileID: 545359982}
@@ -882,6 +883,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.5
+  _levelGoalsPanelAnimator: {fileID: 0}
+  _levelGoalsUITransform: {fileID: 0}
+  _levelGoalsText: {fileID: 0}
+  _selectItemPanel: {fileID: 0}
 --- !u!225 &187395352
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1936,7 +1941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6982ae167b7c428580dcecc0abfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _collectableItemData: {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
+  _collectableItemIcon: {fileID: 0}
   _clickSound: {fileID: 1306239376}
 --- !u!114 &483192320
 MonoBehaviour:
@@ -120450,12 +120455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelData: {fileID: 11400000, guid: b62a3b761f9549b48ab20d07d0e7416b, type: 2}
   _pointerClicker: {fileID: 54461414}
-  _player: {fileID: 266076539}
-  _inputSystem: {fileID: 1273113818}
-  _timerImage: {fileID: 545359980}
-  _chest: {fileID: 2039759331}
-  _levelGoalsUITransform: {fileID: 484035291}
-  _levelGoalsText: {fileID: 3346904989797125999, guid: c304d8ac6e3b8e84291121ef942124fb, type: 3}
+  _lightController: {fileID: 0}
   _weatherManager: {fileID: 1171443789}
 --- !u!1 &1200040050
 GameObject:
@@ -120829,7 +120829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6982ae167b7c428580dcecc0abfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AddToInventoryButton
-  _collectableItemData: {fileID: 11400000, guid: 45901d8c722d2774aba8ac29a930b606, type: 2}
+  _collectableItemIcon: {fileID: 0}
   _clickSound: {fileID: 1306239376}
 --- !u!114 &1353433938
 MonoBehaviour:
@@ -121454,7 +121454,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1933057433
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -122714,6 +122714,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532665788}
   m_CullTransparentMesh: 1
+--- !u!1001 &1592959916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 187395350}
+    m_Modifications:
+    - target: {fileID: 2223179212260012680, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_Name
+      value: Convert
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+--- !u!224 &1592959917 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6520122290640292787, guid: 404881d9cfd3a1f43bc933f936c31e86, type: 3}
+  m_PrefabInstance: {fileID: 1592959916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1606063499
 GameObject:
   m_ObjectHideFlags: 0
@@ -125162,7 +125264,9 @@ MonoBehaviour:
   - {fileID: 191480421}
   - {fileID: 1130337020}
   urpVolume: {fileID: 872991544}
-  playerInventory: {fileID: 11400000, guid: 36f303491eaeb2d418e7279d66c2d3b0, type: 2}
+  player: {fileID: 0}
+  inputSystem: {fileID: 0}
+  levelTimer: {fileID: 0}
 --- !u!1 &1687124914
 GameObject:
   m_ObjectHideFlags: 0
@@ -125241,7 +125345,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -16217685
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -125983,7 +126087,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -73739155
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -126587,7 +126691,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1599549777
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 497600982, guid: db22d05e4e15fca49bca28136710c021, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126774,7 +126878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6982ae167b7c428580dcecc0abfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AddToInventoryButton
-  _collectableItemData: {fileID: 11400000, guid: ebfa027f9f7eedd4993332300b1b4248, type: 2}
+  _collectableItemIcon: {fileID: 0}
   _clickSound: {fileID: 1306239376}
 --- !u!114 &2107714967
 MonoBehaviour:

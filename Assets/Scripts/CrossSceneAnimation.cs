@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CrossSceneAnimation : MonoBehaviour
 {
     [SerializeField] private float _duration = 1f;
@@ -17,7 +18,7 @@ public class CrossSceneAnimation : MonoBehaviour
         
         _material = Instantiate(image.material);
         image.material = _material;
-
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -25,7 +26,7 @@ public class CrossSceneAnimation : MonoBehaviour
     {
         if (_isTransitioning) return;
         _isTransitioning = true;
-        
+       
         _material.SetFloat("_ScreenAspect", (float)Screen.width / Screen.height);
         _material.DOFloat(0f, "_Radius", _duration)
             .SetEase(Ease.InOutSine)

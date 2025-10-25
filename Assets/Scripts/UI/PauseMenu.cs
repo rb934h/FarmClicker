@@ -37,7 +37,7 @@ public class PauseMenu : BaseMenu
     
     private void Exit()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(0);
     }
 
     private void ShowSettingsMenu()
