@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     [SerializeField] private PointerInteractor _pointerClicker;
     [SerializeField] private LightController _lightController;
     [SerializeField] private WeatherManager _weatherManager;
+    [SerializeField] private TutorialManager _tutorialManager;
     
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     private Player _player;
@@ -46,6 +47,7 @@ public class Level : MonoBehaviour
         _inputSystem.DownTouched -= StartLevel;
         _pointerClicker.OnPointerClick += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
+        _tutorialManager.StartTutorial();
         
         foreach (var screen in ScreenBase.Screens)
         {

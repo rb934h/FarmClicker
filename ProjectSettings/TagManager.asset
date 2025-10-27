@@ -77,5 +77,8 @@ TagManager:
   - name: Clouds
     uniqueID: 1592779689
     locked: 0
+  - name: Tutorial
+    uniqueID: 2360676663
+    locked: 0
   m_RenderingLayers:
   - Default

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Enum;
 using PointerObjects;
 
@@ -6,6 +7,8 @@ namespace Strategies.ChestStrategy
 {
     public class ChestLoadStrategy : IPointerObjectInteractStrategy
     {
+        public event Action OnComplete;
+
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
@@ -21,7 +24,7 @@ namespace Strategies.ChestStrategy
             }
             
             chest.State = ChestState.Loaded;
-
+            OnComplete?.Invoke();
             return true;
         }
     }

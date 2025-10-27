@@ -16,12 +16,14 @@ namespace DI.Scopes
         [SerializeField] private Player player;
         [SerializeField] private InputSystem inputSystem;
         [SerializeField] private Timer levelTimer;
+        [SerializeField] private DialogueManager dialogueManager;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(urpVolume);
             builder.RegisterComponent(player);
             builder.RegisterComponent(levelTimer);
+            builder.RegisterComponent(dialogueManager);
             
             // ------------ Pig ------------------
             builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);

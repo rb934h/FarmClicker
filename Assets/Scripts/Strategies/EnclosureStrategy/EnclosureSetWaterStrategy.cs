@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Enum;
 using PointerObjects;
 
@@ -6,6 +7,8 @@ namespace Strategies.EnclosureStrategy
 {
     public class EnclosureSetWaterStrategy : IPointerObjectInteractStrategy
     {
+        public event Action OnComplete;
+
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Enclosure enclosure) return false;
@@ -14,6 +17,7 @@ namespace Strategies.EnclosureStrategy
             player.inventory.UseWater();
             player.animator.PlayAnimation(PlayerAnimationState.PlayerWatering);
             DOVirtual.DelayedCall(enclosure.WorkTime, enclosure.SetWaterToBowl);
+            OnComplete?.Invoke();
             return true;
         }
     }

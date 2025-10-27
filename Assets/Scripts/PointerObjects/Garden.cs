@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DefaultNamespace;
 using Enum;
 using ScriptableObjects;
@@ -27,6 +28,8 @@ namespace PointerObjects
         [HideInInspector]
         public GardenState State = GardenState.Empty;
         public bool canPlantSeed => _currentSeed!=null;
+        
+        public event Action OnPlantSeed;
         
         private void Start()
         {
@@ -66,6 +69,8 @@ namespace PointerObjects
             HintAnimator.Show(hintSpriteRenderer);
             
             _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
+
+            OnPlantSeed?.Invoke();
         }
 
         public IEnumerator WaterAndGrow()

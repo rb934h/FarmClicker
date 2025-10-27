@@ -1,4 +1,5 @@
-﻿using Enum;
+﻿using System;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.ChestStrategy
@@ -6,6 +7,8 @@ namespace Strategies.ChestStrategy
 {
     public class ChestWithMoneyStrategy : IPointerObjectInteractStrategy
     {
+        public event Action OnComplete;
+
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;

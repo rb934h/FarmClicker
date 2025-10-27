@@ -1,10 +1,13 @@
-﻿using Enum;
+﻿using System;
+using Enum;
 using PointerObjects;
 
 namespace Strategies.EnclosureStrategy
 {
     public class EnclosureSetFoodStrategy : IPointerObjectInteractStrategy
     {
+        public event Action OnComplete;
+
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Enclosure enclosure) return false;
@@ -16,6 +19,7 @@ namespace Strategies.EnclosureStrategy
                 {
                     enclosure.SetFoodToBowl();
                     player.inventory.ClearItem(inventoryHarvestObject);
+                    OnComplete?.Invoke();
                     return true;
                 }
             }

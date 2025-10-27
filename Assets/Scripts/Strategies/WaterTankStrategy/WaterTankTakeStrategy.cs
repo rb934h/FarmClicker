@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Enum;
 using PointerObjects;
 
@@ -6,6 +7,8 @@ namespace Strategies.WaterTankStrategy
 {
     public class WaterTankTakeStrategy : IPointerObjectInteractStrategy
     {
+        public event Action OnComplete;
+
         public bool Interact(Player player, PointerObject pointerObject)
         {
             if (pointerObject is not WaterTank waterTank) return false;
@@ -17,7 +20,7 @@ namespace Strategies.WaterTankStrategy
                 waterTank.ChangeTile();
                 waterTank.State = WaterTankState.Empty;
             });
-            
+            OnComplete?.Invoke();
             return true;
         }
     }
