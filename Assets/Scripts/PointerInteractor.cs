@@ -1,13 +1,14 @@
 using UnityEngine;
 using System;
 using PointerObjects;
+using UnityEngine.EventSystems;
 
 public class PointerInteractor : MonoBehaviour
 {
     [SerializeField] private PointerObject[] pointerObjects;
     private Camera _camera;
 
-    public event Action<Vector2, PointerObject> OnPointerClick;
+    public event Action<Vector2, PointerObject> PointerClicked;
     public PointerObject[] PointerObjects => pointerObjects;
 
     private void Start()
@@ -28,10 +29,9 @@ public class PointerInteractor : MonoBehaviour
                 if (pointerObject.Collider != null &&
                     pointerObject.Collider.OverlapPoint(worldPoint))
                 {
-                    OnPointerClick?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
+                    PointerClicked?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
                 }
             }
         }
-
     }
 }

@@ -122773,6 +122773,7 @@ MonoBehaviour:
   _pointerClicker: {fileID: 3447126794373670924}
   _lightController: {fileID: 9003858522775230566}
   _weatherManager: {fileID: 4560348886892928068}
+  _tutorialManager: {fileID: 0}
 --- !u!114 &155123885733500502
 MonoBehaviour:
   m_ObjectHideFlags: 0

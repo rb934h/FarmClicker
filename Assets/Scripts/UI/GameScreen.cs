@@ -1,20 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DefaultNamespace;
 using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
-using UI;
 using UnityEngine;
+using Convert = DefaultNamespace.Convert;
 
-namespace DefaultNamespace
+namespace UI
 {
     public class GameScreen : ScreenBase
     {
         [SerializeField] private Animator _levelGoalsPanelAnimator;
         [SerializeField] private Transform _levelGoalsUITransform;
         [SerializeField] private TMP_Text _levelGoalsText;
+        [SerializeField] private Convert _convert;
         [SerializeField] private SelectItemPanel _selectItemPanel;
         
         private LevelGoalsView _levelGoalsView{ get; set; }
+
+        public event Action ConvertHided;
         
         private void Start()
         {
@@ -40,6 +45,18 @@ namespace DefaultNamespace
             {
                 _selectItemPanel.AddButton(collectableItemData);
             }
+        }
+
+        public void ShowConvert(string message, string sender)
+        {
+            _convert.SetMessage(message);
+            _convert.SetMessageSender(sender);
+            _convert.Show();
+        }
+        public void HideConvert()
+        {
+            _convert.Hide();
+            ConvertHided?.Invoke();
         }
     }
 }

@@ -120457,6 +120457,7 @@ MonoBehaviour:
   _pointerClicker: {fileID: 54461414}
   _lightController: {fileID: 0}
   _weatherManager: {fileID: 1171443789}
+  _tutorialManager: {fileID: 0}
 --- !u!1 &1200040050
 GameObject:
   m_ObjectHideFlags: 0
@@ -125267,6 +125268,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputSystem: {fileID: 0}
   levelTimer: {fileID: 0}
+  dialogueManager: {fileID: 0}
 --- !u!1 &1687124914
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectButton : MonoBehaviour
@@ -18,12 +17,7 @@ public class LevelSelectButton : MonoBehaviour
     private void SelectAndStartLevel()
     {
         _button.interactable = false;
-        crossSceneAnimation.Play(LoadLevel);
-    }
-
-    private void LoadLevel()
-    {
         LevelSession.selectedLevelIndex = levelIndex;
-        SceneManager.LoadSceneAsync(1);
+        crossSceneAnimation.Play(SceneLoader.LoadLevelScene);
     }
 }

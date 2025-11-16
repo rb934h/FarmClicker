@@ -1,5 +1,4 @@
-﻿
-namespace PointerObjects
+﻿namespace PointerObjects
 {
     public class Pig : PointerObject
     {

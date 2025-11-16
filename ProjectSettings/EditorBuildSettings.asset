@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ba76478508eacb446863b680dd639bd1
   - enabled: 1
-    path: Assets/Scenes/Summer.unity
+    path: Assets/Scenes/Game.unity
     guid: 6331523265303cc4bb37eeb41043e6b1
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -37,9 +37,10 @@ public class PauseMenu : BaseMenu
     
     private void Exit()
     {
-        SceneManager.LoadSceneAsync(0);
+        Hide();
+        CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
     }
-
+    
     private void ShowSettingsMenu()
     {
         SwitchTo(_settingsMenu);

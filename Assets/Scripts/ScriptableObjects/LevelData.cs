@@ -14,6 +14,8 @@ namespace ScriptableObjects
         [Header("Goals")]
         public List<LevelGoal> goals;
         public int requiredCoins;
+        public string convertMessage;
+        public string convertMessageSender;
         
         [Header("Weather")]
         public WeatherType weatherType;

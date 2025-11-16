@@ -12,9 +12,9 @@ public class ScreenBase : MonoBehaviour
     protected void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        Screens.Add(GetComponent<ScreenBase>());
+        Screens.Add(this);
     }
-
+    
     public virtual void ShowScreen()
     {
         _canvasGroup.DOFade(1, _duration);
@@ -23,5 +23,10 @@ public class ScreenBase : MonoBehaviour
     public virtual void HideScreen()
     {
         _canvasGroup.DOFade(0, _duration);
+    }
+    
+    private void OnDestroy()
+    {
+        Screens.Remove(this);
     }
 }

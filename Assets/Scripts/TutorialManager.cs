@@ -38,14 +38,13 @@ public class TutorialManager : MonoBehaviour
         NextStep();
     }
 
-    public void NextStep()
+    private void NextStep()
     {
         if (currentArrow) Destroy(currentArrow);
 
         currentStepIndex++;
         if (currentStepIndex >= steps.Length)
         {
-            Debug.Log("Tutorial complete!");
             _dialogueManager.HideDialogueWindow();
             return;
         }
@@ -61,8 +60,7 @@ public class TutorialManager : MonoBehaviour
         {
             _dialogueManager.NextLine();
         }
-           
-
+        
         if (step.target != null)
             CreateArrow(step.target);
 
@@ -78,7 +76,7 @@ public class TutorialManager : MonoBehaviour
                step.dialogue != null &&
                _dialogueManager.gameObject.activeSelf)
         {
-            yield return null; // ждём окончания диалога
+            yield return null; 
         }
 
         CompleteCurrentStep();
@@ -88,16 +86,6 @@ public class TutorialManager : MonoBehaviour
     {
         currentArrow = Instantiate(arrowPrefab, target.transform.parent);
         UpdateArrowPosition(target);
-    }
-
-    private void Update()
-    {
-        // if (currentArrow && steps.Length > 0 && currentStepIndex < steps.Length)
-        // {
-        //     var target = steps[currentStepIndex].target;
-        //     if (target)
-        //         UpdateArrowPosition(target);
-        // }
     }
 
     private void UpdateArrowPosition(Transform target)

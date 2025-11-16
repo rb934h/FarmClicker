@@ -16,6 +16,7 @@ namespace UI
         {
             _objectResolver = objectResolver;
         }
+        
         public void AddButton(CollectableItemData collectableItemData)
         {
             var instance = _objectResolver.Instantiate(addToInventoryButton, transform);
