@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -12,19 +11,22 @@ namespace DefaultNamespace
         [SerializeField] private TMP_Text _tmpTextMessage;
         [SerializeField] private TMP_Text _tmpTextMessageSender;
         [SerializeField] private Animator _animator;
+        [SerializeField] private AudioSource _letterSound;
 
         public void Show()
         {
-            gameObject.SetActive(true);
             _animator.SetTrigger(ShowAnimationTrigger);
         }
 
         public void Hide()
         {
             _animator.SetTrigger(HideAnimationTrigger);
-            gameObject.SetActive(false);
         }
-        
+
+        public void PlayLetterSound()
+        {
+            _letterSound?.Play();
+        }
         public void SetMessage(string message)
         {
             _tmpTextMessage.text = message;

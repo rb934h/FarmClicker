@@ -10,12 +10,16 @@ public class Timer : MonoBehaviour
     [SerializeField] private List<Image> _images = new();
     [SerializeField] private TMP_Text _timeText;
     
+    private enum Period { AM, PM }
+    private Period _previousPeriod = Period.AM;
+    
     private float _timeRemaining;
     private bool _isRunning;
     private Sequence _sequence;
     
     public event Action OnTimerComplete;
-    
+    public event Action DayPeriodChanged;
+
     public void StartTimer(float seconds)
     {
         if (seconds <= 0)
@@ -57,9 +61,9 @@ public class Timer : MonoBehaviour
         var segmentDuration = _timeRemaining / (_images.Count - 1);
         _sequence = DOTween.Sequence();
         
-        for (int i = 0; i < _images.Count - 1; i++)
+        for (var i = 0; i < _images.Count - 1; i++)
         {
-            float startTime = i * segmentDuration;
+            var startTime = i * segmentDuration;
 
             _sequence.Insert(startTime, _images[i].DOFade(0f, segmentDuration).SetEase(Ease.Linear));
             _sequence.Insert(startTime, _images[i + 1].DOFade(1f, segmentDuration).SetEase(Ease.Linear));
@@ -91,24 +95,32 @@ public class Timer : MonoBehaviour
 
     private void InitializeImageAlphas()
     {
-        for (int i = 0; i < _images.Count; i++)
+        for (var i = 0; i < _images.Count; i++)
         {
             var color = _images[i].color;
             color.a = (i == 0) ? 1f : 0f;
             _images[i].color = color;
         }
     }
-
+    
     private void UpdateTimeText(float totalMinutes)
     {
         var hours = Mathf.FloorToInt(totalMinutes / 60f);
 
-        var period = hours >= 12 ? "PM" : "AM";
-        
-        var displayHours = hours % 12;
-        if (displayHours == 0) displayHours = 12;
+        Period currentPeriod = hours >= 12 ? Period.PM : Period.AM;
 
-        _timeText.text = $"{displayHours:00} {period}";
+        if (currentPeriod != _previousPeriod)
+        {
+            Debug.Log("A");
+            DayPeriodChanged?.Invoke();
+        }
+
+        _previousPeriod = currentPeriod;
+        
+        var displayHours = hours % 12; 
+        if (displayHours == 0) 
+            displayHours = 12; 
+        _timeText.text = $"{displayHours:00} {currentPeriod}";
     }
 
     private void StopTimer()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4f5a77f20492347973b89deddc662e, type: 3}
   m_Name: Pumpkin
   m_EditorClassIdentifier: Assembly-CSharp::VegetableData
-  itemName: Pumpkin
+  itemName: "\u0422\u044B\u043A\u0432\u0430"
   price: 20
   growTime: 2
   ruinTime: 20
@@ -23,4 +23,3 @@ MonoBehaviour:
   - {fileID: -1122553910, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: 1487368888, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: -831890119, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
-  type: 1

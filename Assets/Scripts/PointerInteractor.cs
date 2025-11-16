@@ -1,11 +1,12 @@
 using UnityEngine;
 using System;
 using PointerObjects;
-using UnityEngine.EventSystems;
 
 public class PointerInteractor : MonoBehaviour
 {
     [SerializeField] private PointerObject[] pointerObjects;
+    [SerializeField] private AudioSource _clickSound;
+    
     private Camera _camera;
 
     public event Action<Vector2, PointerObject> PointerClicked;
@@ -29,6 +30,7 @@ public class PointerInteractor : MonoBehaviour
                 if (pointerObject.Collider != null &&
                     pointerObject.Collider.OverlapPoint(worldPoint))
                 {
+                    _clickSound?.Play();
                     PointerClicked?.Invoke(pointerObject.PointForInteraction.position, pointerObject);
                 }
             }

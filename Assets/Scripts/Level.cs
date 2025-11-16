@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using DG.Tweening;
 using PointerObjects;
 using ScriptableObjects;
@@ -17,6 +17,7 @@ public class Level : MonoBehaviour
     
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     private Player _player;
+    private AudioPlayer _audioPlayer;
     private Chest _chest;
     private InputSystem _inputSystem;
     private Timer _levelTimer;
@@ -25,11 +26,12 @@ public class Level : MonoBehaviour
     private readonly float _delayBeforeLevelStart = 3f;
    
     [Inject]
-    public void Construct(Player player, InputSystem inputSystem, Timer levelTimer)
+    public void Construct(Player player, InputSystem inputSystem, Timer levelTimer, AudioPlayer audioPlayer)
     {
         _player = player;
         _inputSystem = inputSystem;
         _levelTimer = levelTimer;
+        _audioPlayer = audioPlayer;
     }
 
     private void OnEnable()
@@ -45,7 +47,14 @@ public class Level : MonoBehaviour
         _pointerClicker.PointerClicked += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
         _levelTimer.OnTimerComplete += LevelEnd;
+        _levelTimer.DayPeriodChanged += OnDayPeriodChanged;
         _gameScreen.ConvertHided += OnConvertHided;
+    }
+
+    private void OnDayPeriodChanged()
+    {
+        _levelTimer.DayPeriodChanged -= OnDayPeriodChanged;
+        _audioPlayer.PlayNightSounds();
     }
 
     private void Awake()
@@ -55,14 +64,13 @@ public class Level : MonoBehaviour
             if(pointerObject is Chest chest)
                 _chest = chest;
         }
-        
     }
 
     private void Start()
     {
         _weatherManager.SetWeather(_levelData.weatherType);
-        
         _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
+        _audioPlayer.PlayDaySounds();
         
         DOVirtual.DelayedCall(_delayBeforeLevelStart, () =>
         {
@@ -87,7 +95,7 @@ public class Level : MonoBehaviour
         _gameScreen.ConvertHided -= OnConvertHided;
         
         _gameScreen.SetAvailableItems(_levelData.collectableItems);
-        _gameScreen.SetLevelGoals(_levelData.goals);
+        _gameScreen.SetLevelGoals(_levelData.goals, _levelData.requiredCoins);
         _gameScreen.ShowScreen();
         
         _tutorialManager?.StartTutorial();
@@ -133,12 +141,16 @@ public class Level : MonoBehaviour
                 return;
             }
         }
-
-        LevelEnd();
+        
+        _gameScreen.ShowConvert(_levelData.convertThankYouMessage, _levelData.convertMessageSender);
+        _inputSystem.DownTouched += LevelEnd;
+      
     }
+    
     
     private void LevelEnd()
     {
+        _inputSystem.DownTouched -= LevelEnd;
         CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
     }
 

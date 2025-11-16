@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a6e60cc3f400a83e4f7ab3210e9b4, type: 3}
   m_Name: Millet
   m_EditorClassIdentifier: 
-  itemName: Millet
+  itemName: "\u041F\u0448\u0435\u043D\u0438\u0446\u0430"
   price: 5
   growTime: 1
   ruinTime: 30

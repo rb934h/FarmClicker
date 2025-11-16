@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc7bbcfdb7141d1b8d22ddf59ba7056, type: 3}
   m_Name: Wool
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.SpecialItemData
-  itemName: Wool
+  itemName: "\u0428\u0435\u0440\u0441\u0442\u044C"
   price: 10
   growTime: 0
   ruinTime: 0

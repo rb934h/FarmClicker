@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     
     [Header("Настройки движения")] 
     [SerializeField] private float speed = 5f;
+    [SerializeField] private AudioSource _stepSound;
     
     [Header("Эмоции")] 
     [SerializeField] private SpriteRenderer playerHint;
@@ -118,6 +119,8 @@ public class Player : MonoBehaviour
 
     private async UniTask MoveTo(Vector2 target)
     {
+        _stepSound.Play();
+        
         while (Vector2.Distance(transform.position, target) > 0.1f)
         {
             _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // OK?🤔
@@ -125,6 +128,7 @@ public class Player : MonoBehaviour
             await UniTask.Yield();
         }
         
+        _stepSound.Stop();
         _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
     }
     

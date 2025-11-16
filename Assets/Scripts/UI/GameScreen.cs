@@ -26,7 +26,7 @@ namespace UI
             _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
         }
 
-        public void SetLevelGoals(List<LevelGoal> levelGoals)
+        public void SetLevelGoals(List<LevelGoal> levelGoals, int requiredCoins)
         {
             _levelGoalsPanelAnimator.enabled = true;
             
@@ -34,8 +34,11 @@ namespace UI
             {
                 foreach (var levelDataGoal in levelGoals)
                 {
-                    _levelGoalsView.SetGoal(levelDataGoal.itemData.name, levelDataGoal.requiredCount);
+                    _levelGoalsView.SetGoal(levelDataGoal.itemData.itemName, levelDataGoal.requiredCount);
                 }
+                
+                if(requiredCoins > 0)
+                    _levelGoalsView.SetGoal("Монеты ", requiredCoins);
             });
         }
 

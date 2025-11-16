@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4f5a77f20492347973b89deddc662e, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  itemName: Tomato
+  itemName: "\u041F\u043E\u043C\u0438\u0434\u043E\u0440\u044B"
   price: 10
   growTime: 1
   ruinTime: 40
@@ -23,4 +23,3 @@ MonoBehaviour:
   - {fileID: 197975434, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: 508448013, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: 60909638, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
-  type: 1

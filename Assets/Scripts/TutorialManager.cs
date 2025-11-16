@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using PointerObjects;
 using Strategies;
 using UnityEngine;
 using VContainer;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("Setup")]
-    [SerializeField] private GameObject arrowPrefab; // Стрелка (например, UI-объект или 3D-объект)
+    [Header("Setup")] 
+    [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private TutorialStep[] steps;
 
     private int currentStepIndex = -1;

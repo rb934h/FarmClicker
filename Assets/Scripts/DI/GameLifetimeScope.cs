@@ -1,4 +1,5 @@
-﻿using PostProcessing;
+﻿using DefaultNamespace;
+using PostProcessing;
 using Strategies;
 using Strategies.ChestStrategy;
 using Strategies.EnclosureStrategy;
@@ -17,6 +18,7 @@ namespace DI.Scopes
         [SerializeField] private InputSystem inputSystem;
         [SerializeField] private Timer levelTimer;
         [SerializeField] private DialogueManager dialogueManager;
+        [SerializeField] private AudioPlayer audioPlayer;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -24,6 +26,7 @@ namespace DI.Scopes
             builder.RegisterComponent(player);
             builder.RegisterComponent(levelTimer);
             builder.RegisterComponent(dialogueManager);
+            builder.RegisterComponent(audioPlayer);
             
             // ------------ Pig ------------------
             builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);

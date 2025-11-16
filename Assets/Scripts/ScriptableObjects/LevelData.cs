@@ -8,13 +8,16 @@ namespace ScriptableObjects
     public class LevelData : ScriptableObject
     {
         [Header("Info")]
-        public string levelName;
+        public int levelIndex;
         public float timeToEnd;
 
         [Header("Goals")]
         public List<LevelGoal> goals;
         public int requiredCoins;
+        
+        [Header("Convert")]
         public string convertMessage;
+        public string convertThankYouMessage;
         public string convertMessageSender;
         
         [Header("Weather")]

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using DG.Tweening;
+﻿using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -11,18 +9,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private float typingSpeed = 0.02f;
-    [SerializeField] private AudioClip _dialogueSound;
+    [SerializeField] private AudioSource _dialogueSound;
     
-    private AudioSource _audioSource;
     private Dialogue currentDialogue;
     private int currentLineIndex;
     private bool isTyping;
     private Coroutine typingCoroutine;
-
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
+    
 
     public void ShowDialogue(Dialogue dialogue)
     {
@@ -56,7 +49,7 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
         dialogueText.text = "";
         
-        _audioSource.PlayOneShot(_dialogueSound);
+        _dialogueSound.Play();
 
         foreach (char c in line)
         {
@@ -65,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
-        _audioSource.Stop();
+        _dialogueSound.Stop();
     }
     
     public void NextLine()
