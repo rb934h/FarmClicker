@@ -15,6 +15,7 @@ namespace Strategies.WaterTankStrategy
             if (waterTank.State is not WaterTankState.Empty) return false;
             DOVirtual.DelayedCall(waterTank.WorkTime, waterTank.ChangeTile);
             waterTank.State = WaterTankState.ReadyToCollect;
+            OnComplete?.Invoke();
             return true;
         }
     }

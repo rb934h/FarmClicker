@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using DG.Tweening;
 using Enum;
 using ScriptableObjects;
@@ -21,8 +22,10 @@ namespace PointerObjects
 
         [Header("Tile changer")] 
         [SerializeField] private Tilemap _tilemap;
-
         [SerializeField] private TileReplacementRule _rule;
+        
+        [Space]
+        [SerializeField] private FillBar _fillBar;
 
         [HideInInspector] 
         public ChestState State = ChestState.Empty;
@@ -89,6 +92,8 @@ namespace PointerObjects
         {
             _waitForSale = true;
             _saleBoard.Play();
+            _fillBar.Show();
+            _fillBar.Filling(chestData.deliveryTime + chestData.saleBoardDuration);
             
             foreach (var collectableItemData in cargo)
             {
@@ -99,7 +104,8 @@ namespace PointerObjects
             {
                 spriteRenderer.sprite = null;
             }
-
+            
+            
             var seq = DOTween.Sequence();
 
             seq.AppendInterval(chestData.deliveryTime);  
@@ -114,7 +120,7 @@ namespace PointerObjects
                 {
                     spin.Play();
                 }
-            });
+            }).OnComplete(_fillBar.Hide);
         }
 
         public void ChangeTile()

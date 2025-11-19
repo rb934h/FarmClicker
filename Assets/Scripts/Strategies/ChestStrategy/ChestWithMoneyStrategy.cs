@@ -15,6 +15,7 @@ namespace Strategies.ChestStrategy
             if (chest.State is not ChestState.WithMoney) return false;
             chest.ClearCargo();
             chest.State = ChestState.Empty;
+            OnComplete?.Invoke();
             return true;
         }
     }

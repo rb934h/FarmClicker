@@ -11,6 +11,7 @@ namespace Strategies
         {
             if (pointerObject is not Pig pig) return false;
             player.inventory.ClearAllItems();
+            OnComplete?.Invoke();
             return true;
         }
     }

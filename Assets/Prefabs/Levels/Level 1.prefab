@@ -121656,6 +121656,16 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     waitForPlayerAction: 1
+  - stepName: "\u041B\u0435\u0439\u043A\u0430"
+    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    target: {fileID: 8286801078401157553}
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    waitForPlayerAction: 1
   - stepName: "\u041F\u043E\u043B\u0438\u0432"
     dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
     target: {fileID: 7020339054037866363}
@@ -122836,6 +122846,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4125676033680053561, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
+      propertyPath: _fillBar
+      value: 
+      objectReference: {fileID: 7422620179428285001}
+    - target: {fileID: 4125676033680053561, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
       propertyPath: _tilemap
       value: 
       objectReference: {fileID: 6325841646602655627}
@@ -122907,6 +122921,17 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7754033425202722427, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
   m_PrefabInstance: {fileID: 2492332711524369899}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7422620179428285001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5013908110470225826, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
+  m_PrefabInstance: {fileID: 2492332711524369899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55418636e56a47e28a97934449615f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.FillBar
 --- !u!1001 &3345664549810573530
 PrefabInstance:
   m_ObjectHideFlags: 0

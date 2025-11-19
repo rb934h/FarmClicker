@@ -10,6 +10,8 @@ namespace DefaultNamespace
         [SerializeField] private SpriteRenderer _fillSprite;
         [SerializeField] private float _showScale = 0.5f;
         [SerializeField] private float _showDuration = 0.25f;
+        [SerializeField] private Color _fillColor = Color.green;
+        [SerializeField] private Color _emptyingColor = Color.red;
 
         private Sequence _fillSequence;
         private Vector3 _initialScale;
@@ -31,7 +33,7 @@ namespace DefaultNamespace
             _fillSprite.transform.localScale = scale;
 
             _fillSequence = DOTween.Sequence()
-                .Append(_fillSprite.DOColor(Color.green, time))
+                .Append(_fillSprite.DOColor(_fillColor, time))
                 .Join(_fillSprite.transform.DOScaleY(_initialScale.y, time)).SetEase(Ease.Linear)
                 .OnComplete(() => OnFill?.Invoke());
         }
@@ -41,7 +43,7 @@ namespace DefaultNamespace
             _fillSequence?.Kill();
 
             _fillSequence = DOTween.Sequence()
-                .Append(_fillSprite.DOColor(Color.red, time))
+                .Append(_fillSprite.DOColor(_emptyingColor, time))
                 .Join(_fillSprite.transform.DOScaleY(0, time)).SetEase(Ease.Linear)
                 .OnComplete(() => OnEmpty?.Invoke());
         }
