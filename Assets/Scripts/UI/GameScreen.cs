@@ -58,8 +58,7 @@ namespace UI
         }
         public void HideConvert()
         {
-            _convert.Hide();
-            ConvertHided?.Invoke();
+            DOVirtual.DelayedCall(_convert.Hide(), ()=> ConvertHided?.Invoke()); 
         }
     }
 }

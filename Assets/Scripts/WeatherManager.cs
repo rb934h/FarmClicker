@@ -8,7 +8,7 @@ public class WeatherManager : MonoBehaviour
 
     private Dictionary<WeatherType, GameObject> _effectInstances = new Dictionary<WeatherType, GameObject>();
     private GameObject _currentEffect;
-    private Vector3 _effectPosition = new (5,5,0);
+    private Vector3 _effectPosition = new (-5,10,0);
 
     public void SetWeather(WeatherType type)
     {

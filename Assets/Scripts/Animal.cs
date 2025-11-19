@@ -5,134 +5,131 @@ using ScriptableObjects;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace DefaultNamespace
+public class Animal : MonoBehaviour
 {
-    public class Animal : MonoBehaviour
-    {
-        [SerializeField] protected AnimalData _animalData;
-        [SerializeField] private Transform _wanderArea;
+    [SerializeField] protected AnimalData _animalData;
+    [SerializeField] private Transform _wanderArea;
         
-        protected static readonly int GrowUp = Animator.StringToHash("GrowUp");
-        protected static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
+    protected static readonly int GrowUp = Animator.StringToHash("GrowUp");
+    protected static readonly int SpecialPerk = Animator.StringToHash("SpecialPerk");
       
-        private bool _needFood;
-        private bool _needWater;
+    private bool _needFood;
+    private bool _needWater;
         
-        protected SpriteRenderer _spriteRenderer;
-        protected Animator _animator;
+    protected SpriteRenderer _spriteRenderer;
+    protected Animator _animator;
         
-        public AnimalGrowStates _currentGrowState;
-        public bool IsGoingToTarget { get; private set; }
+    public AnimalGrowStates _currentGrowState;
+    public bool IsGoingToTarget { get; private set; }
             
-        public event Action<Vector2> OnReachedTarget;
+    public event Action<Vector2> OnReachedTarget;
         
-        public bool NeedFood => _needFood;
-        public bool NeedWater => _needWater;
+    public bool NeedFood => _needFood;
+    public bool NeedWater => _needWater;
         
-        private void Start()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
+    private void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
 
-            _needFood = true;
-            _needWater = true;
+        _needFood = true;
+        _needWater = true;
             
-            Wander();
-        }
+        Wander();
+    }
         
-        public void GoTo(Vector2 target)
-        {
-            IsGoingToTarget = true;
-            var distance = Vector2.Distance(transform.position, target);
-            var duration = distance / _animalData._speed;
+    public void GoTo(Vector2 target)
+    {
+        IsGoingToTarget = true;
+        var distance = Vector2.Distance(transform.position, target);
+        var duration = distance / _animalData._speed;
 
-            transform
-                .DOKill();
-            transform
-                .DOMove(target, duration).SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    Wander();
-                    OnReachedTarget?.Invoke(target);
-                    IsGoingToTarget = false;
-                });
-
-            FlipSprite(target);
-        }
-
-        public void SetFood()
-        {
-            _needFood = false;
-        }
-        
-        public void SetWater()
-        {
-            _needWater = false;
-        }
-
-        public virtual CollectableItemData GetSpecialItem()
-        {
-            _spriteRenderer.sprite = _animalData._adultSprite;
-            _animator.SetBool(SpecialPerk, false);
-            
-            return _animalData._specialItemData;
-        }
-        public virtual void TryGrowUp()
-        {
-            if(_needFood || _needWater || _currentGrowState == AnimalGrowStates.Special)
-                return;
-            
-            if (_currentGrowState == AnimalGrowStates.Adult)
+        transform
+            .DOKill();
+        transform
+            .DOMove(target, duration).SetEase(Ease.Linear)
+            .OnComplete(() =>
             {
-                DoSomethingWhenAdult();
-                return;
-            }
+                Wander();
+                OnReachedTarget?.Invoke(target);
+                IsGoingToTarget = false;
+            });
+
+        FlipSprite(target);
+    }
+
+    public void SetFood()
+    {
+        _needFood = false;
+    }
+        
+    public void SetWater()
+    {
+        _needWater = false;
+    }
+
+    public virtual CollectableItemData GetSpecialItem()
+    {
+        _spriteRenderer.sprite = _animalData._adultSprite;
+        _animator.SetBool(SpecialPerk, false);
             
-            _currentGrowState = AnimalGrowStates.Adult;
+        return _animalData._specialItemData;
+    }
+    public virtual void TryGrowUp()
+    {
+        if(_needFood || _needWater || _currentGrowState == AnimalGrowStates.Special)
+            return;
             
-            _spriteRenderer.sprite = _animalData._adultSprite;
-            _animator.SetBool(GrowUp, true);
-
-            _needFood = true;
-            _needWater = true;
-        }
-
-        protected virtual void DoSomethingWhenAdult() { }
-
-        private void Wander()
+        if (_currentGrowState == AnimalGrowStates.Adult)
         {
-            Vector2 randomTarget = GetRandomPointInArea(_wanderArea);
+            DoSomethingWhenAdult();
+            return;
+        }
+            
+        _currentGrowState = AnimalGrowStates.Adult;
+            
+        _spriteRenderer.sprite = _animalData._adultSprite;
+        _animator.SetBool(GrowUp, true);
+
+        _needFood = true;
+        _needWater = true;
+    }
+
+    protected virtual void DoSomethingWhenAdult() { }
+
+    private void Wander()
+    {
+        Vector2 randomTarget = GetRandomPointInArea(_wanderArea);
     
-            var distance = Vector2.Distance(transform.position, randomTarget);
-            var duration = distance / _animalData._speed;
+        var distance = Vector2.Distance(transform.position, randomTarget);
+        var duration = distance / _animalData._speed;
 
-            transform.DOKill();
-            transform.DOMove(randomTarget, duration)
-                .SetEase(Ease.Linear)
-                .OnComplete(Wander);
+        transform.DOKill();
+        transform.DOMove(randomTarget, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(Wander);
 
-            FlipSprite(randomTarget);
-        }
+        FlipSprite(randomTarget);
+    }
 
-        private Vector2 GetRandomPointInArea(Transform area)
-        {
-            var center = area.position;
-            var scale = area.localScale * 0.5f; // половина ширины и высоты
+    private Vector2 GetRandomPointInArea(Transform area)
+    {
+        var center = area.position;
+        var scale = area.localScale * 0.5f; // половина ширины и высоты
 
-            return new Vector2(
-                Random.Range(center.x - scale.x, center.x + scale.x),
-                Random.Range(center.y - scale.y, center.y + scale.y)
-            );
-        }
+        return new Vector2(
+            Random.Range(center.x - scale.x, center.x + scale.x),
+            Random.Range(center.y - scale.y, center.y + scale.y)
+        );
+    }
 
-        private void FlipSprite(Vector2 target)
-        {
-            if (_spriteRenderer == null) return;
+    private void FlipSprite(Vector2 target)
+    {
+        if (_spriteRenderer == null) return;
 
-            if (target.x > transform.position.x)
-                _spriteRenderer.flipX = true;
-            else if (target.x < transform.position.x)
-                _spriteRenderer.flipX = false;
-        }
+        if (target.x > transform.position.x)
+            _spriteRenderer.flipX = true;
+        else if (target.x < transform.position.x)
+            _spriteRenderer.flipX = false;
     }
 }

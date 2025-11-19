@@ -80,5 +80,8 @@ TagManager:
   - name: Tutorial
     uniqueID: 2360676663
     locked: 0
+  - name: Fireflies
+    uniqueID: 2969598279
+    locked: 0
   m_RenderingLayers:
   - Default

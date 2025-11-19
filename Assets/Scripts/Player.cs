@@ -105,12 +105,12 @@ public class Player : MonoBehaviour
     
     private async UniTask WaitWork(float time)
     {
-        int count = playerHintData.workSprites.Length;
-        float part = time / count;
+        var count = playerHintData.workSprites.Length;
+        var part = time / count;
 
         HintAnimator.Show(playerHint, time);
 
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             playerHint.sprite = playerHintData.workSprites[i];
             await UniTask.WaitForSeconds(part);

@@ -18,9 +18,10 @@ namespace DefaultNamespace
             _animator.SetTrigger(ShowAnimationTrigger);
         }
 
-        public void Hide()
+        public float Hide()
         {
             _animator.SetTrigger(HideAnimationTrigger);
+            return _animator.GetCurrentAnimatorClipInfo(0).Length;
         }
 
         public void PlayLetterSound()

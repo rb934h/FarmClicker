@@ -11,13 +11,12 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private LevelData _levelData;
     [SerializeField] private PointerInteractor _pointerClicker;
-    [SerializeField] private LightController _lightController;
     [SerializeField] private WeatherManager _weatherManager;
     [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private TimeOfDayManager _timeOfDayManager;
     
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     private Player _player;
-    private AudioPlayer _audioPlayer;
     private Chest _chest;
     private InputSystem _inputSystem;
     private Timer _levelTimer;
@@ -26,12 +25,11 @@ public class Level : MonoBehaviour
     private readonly float _delayBeforeLevelStart = 3f;
    
     [Inject]
-    public void Construct(Player player, InputSystem inputSystem, Timer levelTimer, AudioPlayer audioPlayer)
+    public void Construct(Player player, InputSystem inputSystem, Timer levelTimer)
     {
         _player = player;
         _inputSystem = inputSystem;
         _levelTimer = levelTimer;
-        _audioPlayer = audioPlayer;
     }
 
     private void OnEnable()
@@ -54,7 +52,7 @@ public class Level : MonoBehaviour
     private void OnDayPeriodChanged()
     {
         _levelTimer.DayPeriodChanged -= OnDayPeriodChanged;
-        _audioPlayer.PlayNightSounds();
+        _timeOfDayManager.EnableNightMode();
     }
 
     private void Awake()
@@ -70,7 +68,7 @@ public class Level : MonoBehaviour
     {
         _weatherManager.SetWeather(_levelData.weatherType);
         _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
-        _audioPlayer.PlayDaySounds();
+        _timeOfDayManager.EnableDayMode();
         
         DOVirtual.DelayedCall(_delayBeforeLevelStart, () =>
         {
@@ -81,7 +79,6 @@ public class Level : MonoBehaviour
     private void StartLevel()
     {
         _inputSystem.DownTouched -= StartLevel;
-        
         _gameScreen.HideConvert();
     }
     
@@ -101,7 +98,7 @@ public class Level : MonoBehaviour
         _tutorialManager?.StartTutorial();
         
         _levelTimer.StartTimer(_levelData.timeToEnd);
-        _lightController.Sunset(0.5f, 0f, _levelData.timeToEnd, -5f,10f);
+        _timeOfDayManager.Sunset(0.5f, 0f, _levelData.timeToEnd, -5f,10f);
     }
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {

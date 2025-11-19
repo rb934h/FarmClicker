@@ -111,7 +111,6 @@ public class Timer : MonoBehaviour
 
         if (currentPeriod != _previousPeriod)
         {
-            Debug.Log("A");
             DayPeriodChanged?.Invoke();
         }
 
