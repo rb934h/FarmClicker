@@ -4,6 +4,7 @@ Shader "Custom/IrisTransition"
     {
         _Color ("Color", Color) = (0,0,0,1)
         _Radius ("Radius", Range(0,1)) = 0
+        _ScreenAspect ("Screen Aspect", Float) = 1
     }
     SubShader
     {
@@ -47,7 +48,7 @@ Shader "Custom/IrisTransition"
             fixed4 frag(v2f i) : SV_Target
             {
                 float dist = length(i.uv);
-                float alpha = smoothstep(_Radius, _Radius, dist);
+                float alpha = smoothstep(_Radius, _Radius + 0.001, dist);
                 return float4(_Color.rgb, alpha * _Color.a);
             }
             ENDHLSL
