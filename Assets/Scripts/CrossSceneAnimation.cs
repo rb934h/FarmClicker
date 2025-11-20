@@ -32,10 +32,11 @@ public class CrossSceneAnimation : MonoBehaviour
         if (!EnsureMaterial())
             return;
 
+        DOTween.KillAll();
         _isTransitioning = true;
 
         _material.SetFloat("_ScreenAspect", (float)Screen.width / Screen.height);
-        
+
         _material
             .DOFloat(0f, "_Radius", _duration)
             .SetEase(Ease.InOutSine)
