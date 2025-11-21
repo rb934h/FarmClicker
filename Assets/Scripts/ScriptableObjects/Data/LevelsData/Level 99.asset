@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9ed6c3363748f49af329374a3ee187, type: 3}
   m_Name: Level 99
   m_EditorClassIdentifier: 
-  levelIndex: 99
+  levelIndex: 2
   timeToEnd: 120
   goals: []
   requiredCoins: 200
@@ -31,3 +31,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 665c6ec204e760e4baa97b81517c33fc, type: 2}
   - {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
   - {fileID: 11400000, guid: 45901d8c722d2774aba8ac29a930b606, type: 2}
+  levelButton: {fileID: 2556699205772241574, guid: 8b10a0fcbd76894439cdd43578bdc03d, type: 3}

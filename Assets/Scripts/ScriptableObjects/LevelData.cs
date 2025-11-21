@@ -26,6 +26,9 @@ namespace ScriptableObjects
         [Space]
         [Header("Available items")]
         public List<CollectableItemData> collectableItems;
+        
+        [Header("UI")]
+        public LevelSelectButton levelButton;
     }
 
     [System.Serializable]

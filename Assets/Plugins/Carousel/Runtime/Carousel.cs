@@ -31,7 +31,17 @@ namespace Azur.Playable.Carousel
         private CarouselAnimator _animator;
         private ItemDataAccess _itemDataAccess;
         private CarouselUIService _uiService;
-
+        
+        private bool _initialized;
+        
+        public void Init()
+        {
+            Initialize();
+            Subscribe();
+            
+            _initialized = true;
+        }
+        
         private void Subscribe()
         {
             _animator.SequenceUpdated += _uiService.RequestSortingOrderUpdate;
@@ -46,14 +56,11 @@ namespace Azur.Playable.Carousel
             _input.MouseReleased += _animator.Rollback;
         }
         
-        private void Start()
-        {
-            Initialize();
-            Subscribe();
-        }
-
         private void Update()
         {
+            if(_initialized == false)
+                return;
+            
             _animator.PlayAutoScroll(Time.deltaTime);
             _input.HandleMouseInput();
         }

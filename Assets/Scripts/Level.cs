@@ -148,6 +148,10 @@ public class Level : MonoBehaviour
     private void LevelEnd()
     {
         _inputSystem.DownTouched -= LevelEnd;
+        if (Progress.unlockedLevel <= _levelData.levelIndex)
+        {
+            Progress.unlockedLevel = _levelData.levelIndex + 1;
+        }
         CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
     }
 

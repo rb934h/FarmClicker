@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9ed6c3363748f49af329374a3ee187, type: 3}
   m_Name: Level 100
   m_EditorClassIdentifier: 
-  levelIndex: 100
+  levelIndex: 3
   timeToEnd: 240
   goals:
   - itemData: {fileID: 11400000, guid: b27e89db2ed1843438ef3f5af3267159, type: 2}
@@ -29,3 +29,4 @@ MonoBehaviour:
   weatherType: 0
   collectableItems:
   - {fileID: 11400000, guid: 665c6ec204e760e4baa97b81517c33fc, type: 2}
+  levelButton: {fileID: 3493144641674947755, guid: 50edef3c81ebe814c80d480f06e4a766, type: 3}

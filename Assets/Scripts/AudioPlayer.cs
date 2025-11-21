@@ -44,14 +44,12 @@ public class AudioPlayer : MonoBehaviour
             }
         }
         
-        // === SWITCH CLIPS ===
         _ambientAudioSource.clip = _ambientAudioClips[index];
         _backgroundAudioSource.clip = _backgroundAudioClips[index];
 
         _ambientAudioSource.Play();
         _backgroundAudioSource.Play();
 
-        // === FADE IN ===
         for (float t = 0; t < _fadeDuration; t += Time.deltaTime)
         {
             var normalized = t / _fadeDuration;

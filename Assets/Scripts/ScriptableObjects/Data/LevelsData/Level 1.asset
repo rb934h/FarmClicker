@@ -31,3 +31,4 @@ MonoBehaviour:
   collectableItems:
   - {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
   - {fileID: 11400000, guid: 45901d8c722d2774aba8ac29a930b606, type: 2}
+  levelButton: {fileID: 2697209852219016527, guid: 99c2a1bf0b5a46344bbdc74b7ecc5d75, type: 3}

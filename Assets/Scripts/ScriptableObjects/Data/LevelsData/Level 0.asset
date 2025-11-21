@@ -29,3 +29,4 @@ MonoBehaviour:
   weatherType: 0
   collectableItems:
   - {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
+  levelButton: {fileID: 6463512329882710918, guid: cab4f7651554cfe49aaac21ea3895f4f, type: 3}

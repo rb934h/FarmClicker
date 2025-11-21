@@ -67,6 +67,9 @@ namespace Azur.Playable.Carousel
         
         private void ConfigureFirstItem()
         {
+            if(items == null || items.Count == 0)
+                return;
+            
             ItemScale = items.First().localScale;
             items.First().localPosition = Vector3.zero;
         }
