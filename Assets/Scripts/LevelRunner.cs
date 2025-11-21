@@ -15,7 +15,7 @@ public class LevelRunner : MonoBehaviour
     {
         _objectResolver = objectResolver;
     }
-    void Start()
+    private void Start()
     {
         StartLevel(LevelSession.selectedLevelIndex);
     }
@@ -24,8 +24,14 @@ public class LevelRunner : MonoBehaviour
         if (_currentLevelInstance != null)
                     Destroy(_currentLevelInstance);
         
-        _currentLevelInstance = _objectResolver.Instantiate(_levels[index], Vector3.zero, Quaternion.identity);
-        _currentLevelIndex = index;
+        foreach (var level in _levels)
+        {
+            if (level.LevelData.levelIndex == index)
+            {
+                _currentLevelInstance = _objectResolver.Instantiate(_levels[index], Vector3.zero, Quaternion.identity);
+                _currentLevelIndex = index;
+            }
+        }
     }
 
     public void RestartLevel() => StartLevel(_currentLevelIndex);

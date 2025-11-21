@@ -23,6 +23,8 @@ public class Level : MonoBehaviour
     private GameScreen _gameScreen;
     
     private readonly float _delayBeforeLevelStart = 3f;
+    
+    public LevelData LevelData => _levelData;
    
     [Inject]
     public void Construct(Player player, InputSystem inputSystem, Timer levelTimer)
