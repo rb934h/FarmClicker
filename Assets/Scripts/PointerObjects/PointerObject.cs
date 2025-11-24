@@ -10,7 +10,7 @@ namespace PointerObjects
         [SerializeField] private Transform pointForInteraction;
         [SerializeField] protected SpriteRenderer selectedSpriteRenderer;
         
-        protected  float _workTime;
+        protected float _workTime;
     
         public Collider2D Collider => pointerObjectCollider;
         public Transform PointForInteraction => pointForInteraction;

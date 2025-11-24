@@ -68,7 +68,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        _weatherManager.SetWeather(_levelData.weatherType);
+        _weatherManager.SetWeather(_levelData.weatherTypes);
         _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
         _timeOfDayManager.EnableDayMode();
         

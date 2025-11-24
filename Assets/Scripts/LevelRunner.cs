@@ -24,12 +24,14 @@ public class LevelRunner : MonoBehaviour
         if (_currentLevelInstance != null)
                     Destroy(_currentLevelInstance);
         
+  
         foreach (var level in _levels)
         {
             if (level.LevelData.levelIndex == index)
             {
-                _currentLevelInstance = _objectResolver.Instantiate(_levels[index], Vector3.zero, Quaternion.identity);
+                _currentLevelInstance = _objectResolver.Instantiate(level, Vector3.zero, Quaternion.identity);
                 _currentLevelIndex = index;
+                return;
             }
         }
     }

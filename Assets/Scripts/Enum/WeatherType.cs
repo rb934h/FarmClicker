@@ -4,6 +4,8 @@
     {
         None,
         Rain,
-        Snow
+        Snow,
+        Clouds,
+        Wind
     }
 }

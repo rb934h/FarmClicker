@@ -117047,8 +117047,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6995986054575033337}
+  m_Children: []
   m_Father: {fileID: 8543919679414756428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4560348886892928068
@@ -117063,9 +117062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a0dcd7281041f28129f54e28bde0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeatherManager
-  weatherEffects:
-  - {fileID: 11400000, guid: 7072374ec14d858488dc5bfc418c20bf, type: 2}
-  - {fileID: 11400000, guid: 342eb67a8452ca149b7f628ce41d283a, type: 2}
+  weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
 --- !u!1 &983796840401791948
 GameObject:
   m_ObjectHideFlags: 0
@@ -121945,7 +121942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ddc8e8357b05b4085ec08c35d003b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelData: {fileID: 11400000, guid: 917ad52f8dc06234a91edfc960a5cb17, type: 2}
+  _levelData: {fileID: 11400000, guid: ea26588569facc141b2ca2baea2a20d3, type: 2}
   _pointerClicker: {fileID: 3447126794373670924}
   _weatherManager: {fileID: 4560348886892928068}
   _tutorialManager: {fileID: 0}
@@ -122983,68 +122980,6 @@ SpriteRenderer:
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7754033425202722427, guid: e9f9a15de2c47034599002c743890dc8, type: 3}
   m_PrefabInstance: {fileID: 2492332711524369899}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3345664549810573530
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 953266581260586811}
-    m_Modifications:
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.8603897
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -13.699814
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.1085854
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7725267210032957964, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-      propertyPath: m_Name
-      value: Clouds
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
---- !u!4 &6995986054575033337 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5726481332450335523, guid: 22ffe0809ad9ec446aedb53015fc7d36, type: 3}
-  m_PrefabInstance: {fileID: 3345664549810573530}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3877286614109037514
 PrefabInstance:

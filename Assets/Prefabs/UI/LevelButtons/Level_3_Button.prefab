@@ -470,7 +470,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.6226415, g: 0.61970454, b: 0.61970454, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -502,8 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButton
   levelIndex: 3
-  crossSceneAnimation: {fileID: 0}
-  _clickSound: {fileID: 0}
 --- !u!223 &1886974610244266203
 Canvas:
   m_ObjectHideFlags: 0
@@ -609,7 +607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f36961c1ae96ba418a644bb4ed3aaa0, type: 2}
   m_sharedMaterial: {fileID: 28899418513665081, guid: 8f36961c1ae96ba418a644bb4ed3aaa0, type: 2}

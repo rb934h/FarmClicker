@@ -21,9 +21,9 @@ public class PointerInteractor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = Input.mousePosition;
+            var mousePosition = Input.mousePosition;
             mousePosition.z = Mathf.Abs(_camera.transform.position.z);
-            Vector2 worldPoint = _camera.ScreenToWorldPoint(mousePosition);
+            var worldPoint = _camera.ScreenToWorldPoint(mousePosition);
 
             foreach (var pointerObject in pointerObjects)
             {

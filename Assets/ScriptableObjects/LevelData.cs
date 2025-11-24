@@ -22,7 +22,7 @@ namespace ScriptableObjects
         public string convertMessageSender;
         
         [Header("Weather")]
-        public WeatherType weatherType;
+        public WeatherType[] weatherTypes;
         
         [Space]
         [Header("Available items")]

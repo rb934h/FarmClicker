@@ -54,6 +54,9 @@ namespace Azur.Playable.Carousel
 
             _input.MouseReleased += _animator.Pause;
             _input.MouseReleased += _animator.Rollback;
+            
+            _input.MouseDragging += OnMouseDragging;
+            _input.MouseReleased += OnMouseReleasedButtons;
         }
         
         private void Update()
@@ -107,6 +110,29 @@ namespace Azur.Playable.Carousel
             _animator.PlayForward(duration);
         }
         
+        private void OnMouseDragging()
+        {
+            SetChildrenInteractable(false);
+        }
+
+        private void OnMouseReleasedButtons()
+        {
+            SetChildrenInteractable(true);
+        }
+        
+        private void SetChildrenInteractable(bool value)
+        {
+            foreach (var child in transform)
+            {
+                if (child is Transform t)
+                {
+                    var button = t.GetComponent<UnityEngine.UI.Button>();
+                    if (button != null)
+                        button.interactable = value;
+                }
+            }
+        }
+        
         private void UnSubscribe()
         {
             _animator.SequenceUpdated -= _uiService.RequestSortingOrderUpdate;
@@ -119,6 +145,9 @@ namespace Azur.Playable.Carousel
 
             _input.MouseReleased -= _animator.Pause;
             _input.MouseReleased -= _animator.Rollback;
+            
+            _input.MouseDragging -= OnMouseDragging;
+            _input.MouseReleased -= OnMouseReleasedButtons;
         }
         
         private void OnDisable()
