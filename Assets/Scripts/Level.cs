@@ -47,13 +47,13 @@ public class Level : MonoBehaviour
         _pointerClicker.PointerClicked += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
         _levelTimer.OnTimerComplete += LevelEnd;
-        _levelTimer.DayPeriodChanged += OnDayPeriodChanged;
+        _levelTimer.EveningArrived += OnEveningArrived;
         _gameScreen.ConvertHided += OnConvertHided;
     }
 
-    private void OnDayPeriodChanged()
+    private void OnEveningArrived()
     {
-        _levelTimer.DayPeriodChanged -= OnDayPeriodChanged;
+        _levelTimer.EveningArrived -= OnEveningArrived;
         _timeOfDayManager.EnableNightMode();
     }
 
@@ -100,7 +100,7 @@ public class Level : MonoBehaviour
         _tutorialManager?.StartTutorial();
         
         _levelTimer.StartTimer(_levelData.timeToEnd);
-        _timeOfDayManager.Sunset(0.5f, 0f, _levelData.timeToEnd, -5f,10f);
+        _timeOfDayManager.Sunset(0.5f, 0f, _levelData.timeToEnd, -15f,20f);
     }
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {

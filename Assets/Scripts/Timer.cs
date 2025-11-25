@@ -19,6 +19,7 @@ public class Timer : MonoBehaviour
     
     public event Action OnTimerComplete;
     public event Action DayPeriodChanged;
+    public event Action EveningArrived;
 
     public void StartTimer(float seconds)
     {
@@ -106,20 +107,27 @@ public class Timer : MonoBehaviour
     private void UpdateTimeText(float totalMinutes)
     {
         var hours = Mathf.FloorToInt(totalMinutes / 60f);
-
-        Period currentPeriod = hours >= 12 ? Period.PM : Period.AM;
+        var currentPeriod = hours >= 12 ? Period.PM : Period.AM;
 
         if (currentPeriod != _previousPeriod)
         {
-            DayPeriodChanged?.Invoke();
+           DayPeriodChanged?.Invoke();
         }
 
         _previousPeriod = currentPeriod;
         
+        var eveningHour = 16;
         var displayHours = hours % 12; 
+        
         if (displayHours == 0) 
             displayHours = 12; 
         _timeText.text = $"{displayHours:00} {currentPeriod}";
+        
+        if (hours == eveningHour)
+        {
+            EveningArrived?.Invoke();
+        }
+
     }
 
     private void StopTimer()
