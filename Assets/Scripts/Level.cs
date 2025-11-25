@@ -131,6 +131,11 @@ public class Level : MonoBehaviour
 
     private void CheckLevelGoals()
     {
+        if (_player.inventory.coins < _levelData.requiredCoins)
+        {
+            return;
+        }
+        
         foreach (var goal in _levelData.goals)
         {
             _deliveredItems.TryGetValue(goal.itemData, out var deliveredCount);
@@ -143,7 +148,6 @@ public class Level : MonoBehaviour
         
         _gameScreen.ShowConvert(_levelData.convertThankYouMessage, _levelData.convertMessageSender);
         _inputSystem.DownTouched += LevelEnd;
-      
     }
     
     
