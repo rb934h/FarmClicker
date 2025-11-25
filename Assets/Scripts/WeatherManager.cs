@@ -9,18 +9,15 @@ public class WeatherManager : MonoBehaviour
 
     private Dictionary<WeatherType, GameObject> _effectInstances = new Dictionary<WeatherType, GameObject>();
     private GameObject _currentEffect;
-   // private Vector3 _effectPosition = new (-5,10,0);
 
    public void SetWeather(WeatherType[] types)
    {
-       // Отключаем все текущие эффекты
        if (_currentEffect != null)
            _currentEffect.SetActive(false);
 
        foreach (var kvp in _effectInstances)
            kvp.Value.SetActive(false);
-
-       // Проверяем пусто ли или содержит только None
+       
        if (types == null || types.Length == 0 || (types.Length == 1 && types[0] == WeatherType.None))
        {
            _currentEffect = null;
@@ -55,8 +52,7 @@ public class WeatherManager : MonoBehaviour
            // if (effectData.sound != null)
            //     AudioSource.PlayClipAtPoint(effectData.sound, Camera.main!.transform.position);
        }
-
-       // Последний активированный делаем текущим (если нужно)
+       
        _currentEffect = lastEffect;
    }
 

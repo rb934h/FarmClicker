@@ -26,7 +26,7 @@ MonoBehaviour:
     \u0431\u043E\u043B\u044C\u0448\u043E\u0435 \u0410\u043D\u044F!"
   convertMessageSender: "\u0441 \u0443\u0432\u0430\u0436\u0435\u043D\u0438\u0435\u043C
     \u041C\u044D\u0440"
-  weatherType: 1
+  weatherTypes: 0100000004000000
   collectableItems:
   - {fileID: 11400000, guid: 665c6ec204e760e4baa97b81517c33fc, type: 2}
   - {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}

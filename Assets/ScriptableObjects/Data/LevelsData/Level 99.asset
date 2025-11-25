@@ -27,7 +27,7 @@ MonoBehaviour:
     \u0442\u0435\u0431\u0435, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0410\u043D\u044F!"
   convertMessageSender: "\u0441 \u0443\u0432\u0430\u0436\u0435\u043D\u0438\u0435\u043C
     \u041C\u044D\u0440"
-  weatherType: 0
+  weatherTypes: 
   collectableItems:
   - {fileID: 11400000, guid: 665c6ec204e760e4baa97b81517c33fc, type: 2}
   levelButton: {fileID: 3493144641674947755, guid: 50edef3c81ebe814c80d480f06e4a766, type: 3}
