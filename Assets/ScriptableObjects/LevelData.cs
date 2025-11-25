@@ -2,6 +2,7 @@
 using Enum;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ScriptableObjects
 {
@@ -18,7 +19,8 @@ namespace ScriptableObjects
         
         [Header("Convert")]
         public string convertMessage;
-        public string convertThankYouMessage;
+        public string convertWinMessage;
+        public string convertLoseMessage;
         public string convertMessageSender;
         
         [Header("Weather")]

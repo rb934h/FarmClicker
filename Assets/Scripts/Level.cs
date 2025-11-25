@@ -46,7 +46,7 @@ public class Level : MonoBehaviour
         
         _pointerClicker.PointerClicked += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
-        _levelTimer.OnTimerComplete += LevelEnd;
+        _levelTimer.OnTimerComplete += Lose;
         _levelTimer.EveningArrived += OnEveningArrived;
         _gameScreen.ConvertHided += OnConvertHided;
     }
@@ -146,19 +146,34 @@ public class Level : MonoBehaviour
             }
         }
         
-        _gameScreen.ShowConvert(_levelData.convertThankYouMessage, _levelData.convertMessageSender);
+        UnlockNextLevel();
+        Win();
+    }
+
+    private void Win()
+    {
+        _gameScreen.ShowConvert(_levelData.convertWinMessage, _levelData.convertMessageSender);
         _inputSystem.DownTouched += LevelEnd;
     }
     
-    
+    private void Lose()
+    {
+        _gameScreen.ShowConvert(_levelData.convertLoseMessage, _levelData.convertMessageSender);
+        _inputSystem.DownTouched += LevelEnd;
+    }
+
     private void LevelEnd()
     {
         _inputSystem.DownTouched -= LevelEnd;
+        CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
+    }
+
+    private void UnlockNextLevel()
+    {
         if (Progress.unlockedLevel <= _levelData.levelIndex)
         {
             Progress.unlockedLevel = _levelData.levelIndex + 1;
         }
-        CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
     }
 
     private void OnDisable()
