@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
@@ -18,8 +17,7 @@ namespace UI
         [SerializeField] private SelectItemPanel _selectItemPanel;
         
         private LevelGoalsView _levelGoalsView{ get; set; }
-
-        public event Action ConvertHided;
+        
         
         private void Start()
         {
@@ -50,15 +48,15 @@ namespace UI
             }
         }
 
-        public void ShowConvert(string message, string sender)
+        public async UniTask ShowConvert(string message, string sender)
         {
             _convert.SetMessage(message);
             _convert.SetMessageSender(sender);
-            _convert.Show();
+            await _convert.Show();
         }
-        public void HideConvert()
+        public async UniTask HideConvert()
         {
-            DOVirtual.DelayedCall(_convert.Hide(), ()=> ConvertHided?.Invoke()); 
+            await _convert.Hide(); 
         }
     }
 }

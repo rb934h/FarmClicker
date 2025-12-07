@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   itemName: "\u041F\u043E\u043C\u0438\u0434\u043E\u0440\u044B"
-  price: 10
+  price: 15
   growTime: 1
   ruinTime: 40
   spriteForHands: {fileID: 523383999, guid: c52439be0dceeb141adbec4630146525, type: 3}

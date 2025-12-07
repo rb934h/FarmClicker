@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DefaultNamespace;
-using DG.Tweening;
 using PointerObjects;
 using ScriptableObjects;
 using UI;
@@ -14,18 +14,16 @@ public class Level : MonoBehaviour
     [SerializeField] private WeatherManager _weatherManager;
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private TimeOfDayManager _timeOfDayManager;
-    
+
     private Dictionary<CollectableItemData, int> _deliveredItems = new();
     private Player _player;
     private Chest _chest;
     private InputSystem _inputSystem;
     private Timer _levelTimer;
     private GameScreen _gameScreen;
-    
-    private readonly float _delayBeforeLevelStart = 3f;
-    
-    public LevelData LevelData => _levelData;
-   
+
+    public LevelData levelData => _levelData;
+
     [Inject]
     public void Construct(Player player, InputSystem inputSystem, Timer levelTimer)
     {
@@ -38,52 +36,43 @@ public class Level : MonoBehaviour
     {
         foreach (var screen in ScreenBase.Screens)
         {
-            if(screen is GameScreen gameScreen)
+            if (screen is GameScreen gameScreen)
             {
                 _gameScreen = gameScreen;
             }
         }
-        
+
         _pointerClicker.PointerClicked += OnPointerClick;
         _chest.IsSolded += AddDeliveredItem;
         _levelTimer.OnTimerComplete += Lose;
         _levelTimer.EveningArrived += OnEveningArrived;
-        _gameScreen.ConvertHided += OnConvertHided;
     }
-
-    private void OnEveningArrived()
-    {
-        _levelTimer.EveningArrived -= OnEveningArrived;
-        _timeOfDayManager.EnableNightMode();
-    }
-
+    
     private void Awake()
     {
         foreach (var pointerObject in _pointerClicker.PointerObjects)
         {
-            if(pointerObject is Chest chest)
+            if (pointerObject is Chest chest)
                 _chest = chest;
         }
     }
 
-    private void Start()
+    private async void Start()
     {
         _weatherManager.SetWeather(_levelData.weatherTypes);
-        _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
         _timeOfDayManager.EnableDayMode();
-        
-        DOVirtual.DelayedCall(_delayBeforeLevelStart, () =>
-        {
-            _inputSystem.DownTouched += StartLevel;
-        });
+
+        await _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
+        _inputSystem.DownTouched += StartLevel;
     }
-    
-    private void StartLevel()
+
+    private async void StartLevel()
     {
         _inputSystem.DownTouched -= StartLevel;
-        _gameScreen.HideConvert();
+        await _gameScreen.HideConvert();
+        OnConvertHided();
     }
-    
+
     private void Update()
     {
         _levelTimer.CheckTimer();
@@ -91,24 +80,29 @@ public class Level : MonoBehaviour
 
     private void OnConvertHided()
     {
-        _gameScreen.ConvertHided -= OnConvertHided;
-        
         _gameScreen.SetAvailableItems(_levelData.collectableItems);
         _gameScreen.SetLevelGoals(_levelData.goals, _levelData.requiredCoins);
         _gameScreen.ShowScreen();
-        
+
         _tutorialManager?.StartTutorial();
-        
+
         _levelTimer.StartTimer(_levelData.timeToEnd);
-        _timeOfDayManager.Sunset(0.5f, 0f, _levelData.timeToEnd, -15f,20f);
+        _timeOfDayManager.Sunset(0.5f, 0f, _levelData.timeToEnd, -15f, 20f);
     }
+
+    private void OnEveningArrived()
+    {
+        _levelTimer.EveningArrived -= OnEveningArrived;
+        _timeOfDayManager.EnableNightMode();
+    }
+    
     private void OnPointerClick(Vector2 positionForInteract, PointerObject pointerObject)
     {
         if (pointerObject is Garden garden && _player.inventory.currentSeed != null)
         {
             garden.SetSeed(_player.inventory.currentSeed); // TODO Hmm..
         }
-        
+
         _player.InteractWithPointerObject(positionForInteract, pointerObject);
         _player.inventory.currentSeed = null;
     }
@@ -120,12 +114,11 @@ public class Level : MonoBehaviour
             if (!_deliveredItems.TryAdd(item, 1))
             {
                 _deliveredItems[item]++;
-                
             }
-            
+
             _player.inventory.AddCoins(item.price);
         }
-       
+
         CheckLevelGoals();
     }
 
@@ -135,37 +128,39 @@ public class Level : MonoBehaviour
         {
             return;
         }
-        
+
         foreach (var goal in _levelData.goals)
         {
             _deliveredItems.TryGetValue(goal.itemData, out var deliveredCount);
-            
+
             if (deliveredCount < goal.requiredCount)
             {
                 return;
             }
         }
         
-        UnlockNextLevel();
         Win();
     }
 
-    private void Win()
+    private async void Win()
     {
-        _gameScreen.ShowConvert(_levelData.convertWinMessage, _levelData.convertMessageSender);
+        await _gameScreen.ShowConvert(_levelData.convertWinMessage, _levelData.convertMessageSender);
+        UnlockNextLevel();
         _inputSystem.DownTouched += LevelEnd;
     }
-    
-    private void Lose()
+
+    private async void Lose()
     {
-        _gameScreen.ShowConvert(_levelData.convertLoseMessage, _levelData.convertMessageSender);
+        await _gameScreen.ShowConvert(_levelData.convertLoseMessage, _levelData.convertMessageSender);
         _inputSystem.DownTouched += LevelEnd;
     }
 
     private void LevelEnd()
     {
         _inputSystem.DownTouched -= LevelEnd;
-        CrossSceneAnimation.Instance.Play(SceneLoader.LoadMainMenuScene);
+        CrossSceneAnimation.Instance
+            .PlayTransition(SceneLoader.LoadMainMenuScene)
+            .Forget();;
     }
 
     private void UnlockNextLevel()
@@ -180,7 +175,6 @@ public class Level : MonoBehaviour
     {
         _pointerClicker.PointerClicked -= OnPointerClick;
         _chest.IsSolded -= AddDeliveredItem;
-        _levelTimer.OnTimerComplete -= LevelEnd;
-        _gameScreen.ConvertHided -= OnConvertHided;
+        //_levelTimer.OnTimerComplete -= LevelEnd;
     }
 }

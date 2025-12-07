@@ -99,7 +99,7 @@ public class Animal : MonoBehaviour
 
     private void Wander()
     {
-        Vector2 randomTarget = GetRandomPointInArea(_wanderArea);
+        var randomTarget = GetRandomPointInArea(_wanderArea);
     
         var distance = Vector2.Distance(transform.position, randomTarget);
         var duration = distance / _animalData._speed;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Millet
   m_EditorClassIdentifier: 
   itemName: "\u041F\u0448\u0435\u043D\u0438\u0446\u0430"
-  price: 5
+  price: 10
   growTime: 1
   ruinTime: 30
   spriteForHands: {fileID: -417437520, guid: c52439be0dceeb141adbec4630146525, type: 3}

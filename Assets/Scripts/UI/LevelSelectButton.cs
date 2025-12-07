@@ -28,7 +28,9 @@ namespace UI
         {
             _button.interactable = false;
             LevelSession.selectedLevelIndex = levelIndex;
-            _crossSceneAnimation.Play(SceneLoader.LoadLevelScene);
+            CrossSceneAnimation.Instance
+                .PlayTransition(SceneLoader.LoadLevelScene)
+                .Forget();;
         }
     }
 } 

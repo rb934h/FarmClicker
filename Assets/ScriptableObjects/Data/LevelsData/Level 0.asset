@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 0
   m_EditorClassIdentifier: 
   levelIndex: 0
-  timeToEnd: 120
+  timeToEnd: 2
   goals:
   - itemData: {fileID: 11400000, guid: 98e9651ec45f34348aecc43e37fbff3a, type: 2}
     requiredCount: 1

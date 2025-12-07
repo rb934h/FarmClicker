@@ -344,8 +344,9 @@ GameObject:
   - component: {fileID: 4129831186750907918}
   - component: {fileID: 155123885733500502}
   - component: {fileID: 2976219360321628702}
+  - component: {fileID: 2306415570981587311}
   m_Layer: 0
-  m_Name: Level 100
+  m_Name: Level 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +385,7 @@ MonoBehaviour:
   _levelData: {fileID: 11400000, guid: 385ffa77b07ee554cb348b344914efc8, type: 2}
   _pointerClicker: {fileID: 8332313687483326895}
   _weatherManager: {fileID: 4560348886892928068}
-  _tutorialManager: {fileID: 0}
+  _tutorialManager: {fileID: 2306415570981587311}
   _timeOfDayManager: {fileID: 2976219360321628702}
 --- !u!114 &155123885733500502
 MonoBehaviour:
@@ -424,6 +425,30 @@ MonoBehaviour:
   - {fileID: 4620240410926828798}
   - {fileID: 4545771679736926420}
   - {fileID: 5955659698167349537}
+--- !u!114 &2306415570981587311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172036097262971160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d336ae319bdb4c5b9edb9dbd47a3c22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
+  arrowPrefab: {fileID: 0}
+  steps:
+  - stepName: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0435 \u044F\u0438\u0446"
+    dialogue: {fileID: 11400000, guid: f0961e9fb1d309a419236a58fb7c5cf7, type: 2}
+    target: {fileID: 2255895114120199521}
+    onStepStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    waitForPlayerAction: 1
 --- !u!1 &6399132992740275922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,6 +1275,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6826299d25f916049918247f18f8575a, type: 3}
+--- !u!4 &2255895114120199521 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 367554979892388163, guid: 6826299d25f916049918247f18f8575a, type: 3}
+  m_PrefabInstance: {fileID: 1898089027098450978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3887970037339165359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3432734467921514125, guid: 6826299d25f916049918247f18f8575a, type: 3}

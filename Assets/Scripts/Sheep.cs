@@ -1,14 +1,11 @@
 ﻿using Enum;
 
-namespace DefaultNamespace
+public class Sheep : Animal
 {
-    public class Sheep : Animal
+    protected override void DoSomethingWhenAdult()
     {
-        protected override void DoSomethingWhenAdult()
-        {
-            _animator.SetBool(SpecialPerk, true);
-            _currentGrowState = AnimalGrowStates.Special;
-            _spriteRenderer.sprite = _animalData._specialStateSprite;
-        }
+        _animator.SetBool(SpecialPerk, true);
+        _currentGrowState = AnimalGrowStates.Special;
+        _spriteRenderer.sprite = _animalData._specialStateSprite;
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using DefaultNamespace;
 using ScriptableObjects.Data.Enclosure;
 using UnityEngine;
 
@@ -8,23 +8,24 @@ namespace PointerObjects
 {
     public class Enclosure : PointerObject
     {
-        [Header("Bowl settings")] 
+        [Header("Bowl settings")]
         [SerializeField] private SpriteRenderer _bowlForFood;
         [SerializeField] private SpriteRenderer _bowlForWater;
         [SerializeField] private BowlSpritesData _bowlSpritesData;
 
-        [Header("Animals settings")] 
+        [Header("Animals settings")]
         [SerializeField] private Animal[] _animals;
 
         [HideInInspector] public bool HasWater;
         [HideInInspector] public bool HasFood;
         private bool _foodInUse = false;
         private bool _waterInUse = false;
+
         private float _checkAnimalsDelay = 5f;
-        
-        private Queue<Animal> _foodQueue = new Queue<Animal>();
-        private Queue<Animal> _waterQueue = new Queue<Animal>();
-        
+
+        private Queue<Animal> _foodQueue = new();
+        private Queue<Animal> _waterQueue = new();
+
         public Animal[] Animals => _animals;
 
         private void Start()
@@ -36,8 +37,8 @@ namespace PointerObjects
                 animal.OnReachedTarget += OnAnimalReached;
                 animal.OnReachedTarget += (_) => animal.TryGrowUp();
             }
-            
-            StartCoroutine(CheckAnimalsRoutine());
+
+            CheckAnimalsLoop().Forget();
         }
 
         public void SetWaterToBowl()
@@ -45,46 +46,60 @@ namespace PointerObjects
             _bowlForWater.sprite = _bowlSpritesData.waterBowl;
             HasWater = true;
         }
+
         public void SetFoodToBowl()
         {
             _bowlForFood.sprite = _bowlSpritesData.foodBowl;
             HasFood = true;
         }
-        private IEnumerator CheckAnimalsRoutine()
+        
+        private async UniTaskVoid CheckAnimalsLoop()
         {
-            while (true)
+            var token = this.GetCancellationTokenOnDestroy();
+
+            try
             {
-                if (HasFood)
+                while (true)
                 {
-                    if (_foodQueue.Count == 0)
+                    token.ThrowIfCancellationRequested();
+                    
+                    if (HasFood)
                     {
-                        foreach (var animal in _animals)
+                        if (_foodQueue.Count == 0)
                         {
-                            if (animal.NeedFood && !animal.IsGoingToTarget)
-                                _foodQueue.Enqueue(animal);
+                            foreach (var a in _animals)
+                            {
+                                if (a.NeedFood && !a.IsGoingToTarget)
+                                    _foodQueue.Enqueue(a);
+                            }
                         }
+
+                        TrySendNextFoodAnimal();
+                    }
+                    
+                    if (HasWater)
+                    {
+                        if (_waterQueue.Count == 0)
+                        {
+                            foreach (var a in _animals)
+                            {
+                                if (a.NeedWater && !a.IsGoingToTarget)
+                                    _waterQueue.Enqueue(a);
+                            }
+                        }
+
+                        TrySendNextWaterAnimal();
                     }
 
-                    TrySendNextFoodAnimal();
+                    await UniTask.WaitForSeconds(_checkAnimalsDelay, cancellationToken: token);
                 }
-
-                if (HasWater)
-                {
-                    if (_waterQueue.Count == 0)
-                    {
-                        foreach (var animal in _animals)
-                        {
-                            if (animal.NeedWater && !animal.IsGoingToTarget)
-                                _waterQueue.Enqueue(animal);
-                        }
-                    }
-
-                    TrySendNextWaterAnimal();
-                }
-
-                yield return _checkAnimalsDelay;
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Token was cancelled");
             }
         }
+
         private void CleanBowl(Vector2 position)
         {
             if ((Vector2)_bowlForFood.transform.position == position)
@@ -98,6 +113,7 @@ namespace PointerObjects
                 HasWater = false;
             }
         }
+
         private void TrySendNextFoodAnimal()
         {
             if (!HasFood || _foodInUse || _foodQueue.Count == 0)
@@ -108,7 +124,7 @@ namespace PointerObjects
             while (_foodQueue.Count > 0)
             {
                 var next = _foodQueue.Dequeue();
-                if (!next.IsGoingToTarget)
+                if (next.IsGoingToTarget == false)
                 {
                     animal = next;
                     break;
@@ -122,6 +138,7 @@ namespace PointerObjects
             animal.GoTo(_bowlForFood.transform.position);
             animal.SetFood();
         }
+
         private void TrySendNextWaterAnimal()
         {
             if (!HasWater || _waterInUse || _waterQueue.Count == 0)
@@ -146,6 +163,7 @@ namespace PointerObjects
             animal.GoTo(_bowlForWater.transform.position);
             animal.SetWater();
         }
+
         private void OnAnimalReached(Vector2 position)
         {
             if ((Vector2)_bowlForFood.transform.position == position)

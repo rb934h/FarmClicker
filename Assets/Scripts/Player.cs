@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
@@ -8,6 +9,7 @@ using PointerObjects;
 using ScriptableObjects;
 using Scripts;
 using Strategies;
+using Unity.VisualScripting;
 using VContainer;
 
 public class Player : MonoBehaviour
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour
     
     private PlayerAnimator _playerAnimator;
     private PointerObject _pointerObject;
-    private readonly ActionQueue _actionQueue = new();
+    private ActionQueue _actionQueue;
 
     private readonly HashSet<PointerObject> _busyPointerObjects = new ();
 
@@ -46,12 +48,12 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerInventoryData = Instantiate(playerInventoryData);
+        _actionQueue = new ActionQueue(this);
     }
 
     private void Start()
     {
-        var animator = GetComponentInChildren<Animator>();
-        _playerAnimator = new PlayerAnimator(animator);
+        _playerAnimator = new PlayerAnimator(GetComponentInChildren<Animator>());
     }
     
     public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject)
@@ -59,43 +61,47 @@ public class Player : MonoBehaviour
     {
         if (_busyPointerObjects.Contains(pointerObject))
             return;
-        
-        if(Vector3.Distance(transform.position, targetPosition) > 0.1f)
+
+        if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
             HintAnimator.Show(pointerObject.SelectedSpriteRenderer);
-        
-        _actionQueue.Enqueue(async () =>
+
+        _actionQueue.Enqueue(async token =>
         {
             _busyPointerObjects.Add(pointerObject);
-            
+            bool wasCanceled = false;
+
             try
             {
                 var flip = transform.position.x > targetPosition.x;
                 transform.rotation = Quaternion.Euler(0, flip ? 180 : 0f, 0);
-                
-                await MoveTo(targetPosition);
-                
+
+                await MoveTo(targetPosition).AttachExternalCancellation(token);
+
                 HintAnimator.Hide(pointerObject.SelectedSpriteRenderer, false, 0);
-                
-                foreach (var strategy in _interactStrategy)
+
+                if (_interactStrategy.Any(s => s.Interact(this, pointerObject)))
                 {
-                    if (strategy.Interact(this, pointerObject))
-                    {
-                        await WaitWork(pointerObject.WorkTime);
-                        return;
-                    }
-                       
+                    await WaitWork(pointerObject.WorkTime)
+                        .AttachExternalCancellation(token);
+
+                    return;
                 }
-                
+
                 MakeMistake();
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("Token was cancelled");
+                wasCanceled = true;
             }
             finally
             {
-                _busyPointerObjects.Remove(pointerObject);
+                if (!wasCanceled)
+                    _busyPointerObjects.Remove(pointerObject);
             }
         });
-        
-        
     }
+
 
     private void MakeMistake()
     {
@@ -105,6 +111,7 @@ public class Player : MonoBehaviour
     
     private async UniTask WaitWork(float time)
     {
+        var token = this.GetCancellationTokenOnDestroy();
         var count = playerHintData.workSprites.Length;
         var part = time / count;
 
@@ -112,25 +119,49 @@ public class Player : MonoBehaviour
 
         for (var i = 0; i < count; i++)
         {
+            token.ThrowIfCancellationRequested(); 
             playerHint.sprite = playerHintData.workSprites[i];
-            await UniTask.WaitForSeconds(part);
+            
+            await UniTask.WaitForSeconds(part, cancellationToken: token);
         }
     }
 
+
     private async UniTask MoveTo(Vector2 target)
     {
+        var token = this.GetCancellationTokenOnDestroy();
+        var wasCanceled = false;
+        
         _stepSound.Play();
-        
-        while (Vector2.Distance(transform.position, target) > 0.1f)
+
+        try
         {
-            _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun); // OK?🤔
-            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-            await UniTask.Yield();
+            while (Vector2.Distance(transform.position, target) > 0.1f)
+            {
+                token.ThrowIfCancellationRequested();
+                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerRun);
+
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    target,
+                    speed * Time.deltaTime
+                );
+
+                await UniTask.Yield(PlayerLoopTiming.Update, token);
+            }
         }
-        
-        _stepSound.Stop();
-        _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle);
+        catch (OperationCanceledException)
+        {
+            Debug.Log("Token was cancelled");
+            wasCanceled = true;
+        }
+        finally
+        {
+            if (wasCanceled == false)
+            {
+                _stepSound.Stop();
+                _playerAnimator.PlayAnimation(PlayerAnimationState.PlayerIdle); 
+            }
+        }
     }
-    
-    
 }

@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ public class CrossSceneAnimation : MonoBehaviour
         image.material = _material;
     }
     
-    public void Play(Func<AsyncOperation> loadOperation)
+    public async UniTaskVoid PlayTransition(Func<UniTask> loadOperation)
     {
         if (_isTransitioning || loadOperation == null)
             return;
@@ -32,45 +33,44 @@ public class CrossSceneAnimation : MonoBehaviour
         if (!EnsureMaterial())
             return;
 
-        DOTween.KillAll();
+        DOTween.Kill(_material);
         _isTransitioning = true;
+
+        var token = this.GetCancellationTokenOnDestroy();
 
         _material.SetFloat("_ScreenAspect", (float)Screen.width / Screen.height);
 
-        _material
-            .DOFloat(0f, "_Radius", _duration)
-            .SetEase(Ease.InOutSine)
-            .SetUpdate(true)
-            .OnComplete(() => StartCoroutine(PlaySecondHalf(loadOperation)));
-    }
-    
-    private IEnumerator PlaySecondHalf(Func<AsyncOperation> loadOperation)
-    {
-        var asyncOp = loadOperation.Invoke();
-        
-        if (asyncOp != null)
+        try
         {
-            while (!asyncOp.isDone)
-                yield return null;
-        }
-        else
-        {
-            yield return null;
-        }
+            await PlayTween(
+                _material.DOFloat(0f, "_Radius", _duration).SetEase(Ease.InOutSine),
+                token
+            );
 
-        if (!EnsureMaterial())
+            await loadOperation().AttachExternalCancellation(token);
+
+            await PlayTween(
+                _material.DOFloat(1f, "_Radius", _duration).SetEase(Ease.InOutSine),
+                token
+            );
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("Token was cancelled");
+        }
+        finally
         {
             _isTransitioning = false;
-            yield break;
         }
-        
-        _material
-            .DOFloat(1f, "_Radius", _duration)
-            .SetEase(Ease.InOutSine)
-            .SetUpdate(true)
-            .OnComplete(() => _isTransitioning = false);
     }
     
+    private UniTask PlayTween(Tween tween, CancellationToken token)
+    {
+        return tween
+            .AsyncWaitForCompletion()
+            .AsUniTask()
+            .AttachExternalCancellation(token);
+    }
     private bool EnsureMaterial()
     {
         if (_material != null)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.SpecialItemData
   itemName: "\u042F\u0439\u0446\u043E"
-  price: 15
+  price: 30
   growTime: 0
   ruinTime: 0
   spriteForHands: {fileID: 309653246, guid: c52439be0dceeb141adbec4630146525, type: 3}

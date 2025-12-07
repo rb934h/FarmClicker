@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -12,16 +13,19 @@ namespace DefaultNamespace
         [SerializeField] private TMP_Text _tmpTextMessageSender;
         [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _letterSound;
-
-        public void Show()
+        
+        private readonly float _secondsForWaitAfterAnimation = 2f;
+        
+        public async UniTask Show()
         {
             _animator.SetTrigger(ShowAnimationTrigger);
+            await UniTask.WaitForSeconds(_secondsForWaitAfterAnimation);
         }
 
-        public float Hide()
+        public async UniTask Hide()
         {
             _animator.SetTrigger(HideAnimationTrigger);
-            return _animator.GetCurrentAnimatorClipInfo(0).Length;
+            await UniTask.WaitForSeconds(_secondsForWaitAfterAnimation);
         }
 
         public void PlayLetterSound()

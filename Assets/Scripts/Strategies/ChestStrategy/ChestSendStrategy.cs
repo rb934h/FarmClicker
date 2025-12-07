@@ -13,7 +13,7 @@ namespace Strategies.ChestStrategy
         {
             if (pointerObject is not Chest chest) return false;
             if (chest.State is not ChestState.Loaded || chest.WaitForSale) return false;
-            
+
             if (player.inventory.handsNotEmpty && chest.GetCargoCount() != 2)
             {
                 foreach (var inventoryHarvestObject in player
@@ -27,7 +27,7 @@ namespace Strategies.ChestStrategy
 
                 return true;
             }
-              
+
             chest.ChangeTile();
             chest.Send();
             OnComplete?.Invoke();

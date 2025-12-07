@@ -1,16 +1,17 @@
-﻿using UnityEngine.SceneManagement;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public static class SceneLoader
 {
-    public static AsyncOperation LoadMainMenuScene()
+    public static async UniTask LoadMainMenuScene()
     {
-        return SceneManager.LoadSceneAsync(0);
+        await SceneManager.LoadSceneAsync(0);
     }
     
-    public static AsyncOperation LoadLevelScene()
+    public static async UniTask LoadLevelScene()
     {
-        return SceneManager.LoadSceneAsync(1);
+        await SceneManager.LoadSceneAsync(1);
     }
  
 }

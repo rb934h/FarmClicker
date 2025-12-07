@@ -1,10 +1,9 @@
-﻿using System;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using VContainer;
 
-namespace DefaultNamespace 
+namespace DefaultNamespace
 {
     public class PlayerInventoryView : MonoBehaviour
     {
@@ -56,7 +55,7 @@ namespace DefaultNamespace
                 _leftHandItemData = item;
             }
         }
-        
+
         private void ClearItem(CollectableItemData item)
         {
             if (_leftHandItemData == item)
@@ -78,7 +77,7 @@ namespace DefaultNamespace
             rightHandItem.sprite = null;
             _rightHandItemData = null;
         }
-        
+
         private void UpdateCoinsCountText()
         {
             if (coinsCountText != null)

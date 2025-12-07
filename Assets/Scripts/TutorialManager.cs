@@ -20,7 +20,6 @@ public class TutorialManager : MonoBehaviour
     {
         _dialogueManager = dialogueManager;
         _interactStrategy = interactStrategies;
-        
     }
 
     private void Start()
@@ -60,7 +59,7 @@ public class TutorialManager : MonoBehaviour
             _dialogueManager.NextLine();
         }
         
-        if (step.target != null)
+        if (step.target != null && arrowPrefab != null)
             CreateArrow(step.target);
 
         if (!step.waitForPlayerAction)
