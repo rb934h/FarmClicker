@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc7bbcfdb7141d1b8d22ddf59ba7056, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableObjects.SpecialItemData
-  itemName: "\u042F\u0439\u0446\u043E"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:27c1a7021b995364a8a326bfdee2636b
+    m_TableEntryReference:
+      m_KeyId: 89620889600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   price: 30
   growTime: 0
   ruinTime: 0
   spriteForHands: {fileID: 309653246, guid: c52439be0dceeb141adbec4630146525, type: 3}
   spritesForGarden: []
+  references:
+    version: 2
+    RefIds: []

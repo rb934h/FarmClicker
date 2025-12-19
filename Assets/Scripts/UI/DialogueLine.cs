@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using UnityEngine.Localization;
 
-[System.Serializable]
-public class DialogueLine
+namespace UI
 {
-    [TextArea(2, 5)]
-    public string text;         
-    public string speakerName;  
+    [System.Serializable]
+    public class DialogueLine
+    {
+        public LocalizedString text;         
+        public LocalizedString speakerName;  
+    }
 }

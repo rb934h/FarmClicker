@@ -15,8 +15,80 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Russian (Russia) (ru-RU)
   m_GUID: 41edcc2fab6ce4a4b860af306305294e
   m_SerializeEntries:
+  - m_GUID: 05170e098f840814182023a3d442dbdf
+    m_Address: Level1_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ab532955e90d3947b2c2c5ddef52d21
+    m_Address: Level0_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f7ae2039b951184e8b49d1e072d0427
+    m_Address: Level2_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3060ecbe4ce843847a17ec5e94d09de4
     m_Address: MainMenu_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 427bc54641e7032499160fccd01701b0
+    m_Address: Level4_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4461fcd529a93b242b4512082f321d4b
+    m_Address: PauseMenu_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45f9d149953c6a4498752a9376a57ebe
+    m_Address: CollectableItems_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 594cefc10f6dc374585e32e8ba68142a
+    m_Address: Level3_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 612ea59f1d0f61a4db6833ee6b04be81
+    m_Address: Level5_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81d81a66bd62a5f4a81518a52898812b
+    m_Address: TutorialDialogueLevel4_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3eae2a2231c98842a68d0f643012e45
+    m_Address: TutorialDialogueLevel0_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de0a06312c1b8f144b80f405a8116d74
+    m_Address: SettingsMenu_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd35c90377d01ca4a8bd37d6599ec9ad
+    m_Address: Speakers_ru-RU
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru-RU

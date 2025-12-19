@@ -13,8 +13,24 @@ MonoBehaviour:
   m_Name: TutorialDialogue 1
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   lines:
-  - text: "\u0414\u043B\u044F \u0442\u043E\u0433\u043E, \u0447\u0442\u043E\u0431\u044B
-      \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u044F\u0439\u0446\u0430,
-      \u043C\u043D\u0435 \u043D\u0443\u0436\u043D\u043E \u043D\u0430\u043A\u043E\u0440\u043C\u0438\u0442\u044C
-      \u0438 \u043D\u0430\u043F\u043E\u0438\u0442\u044C \u043A\u0443\u0440\u043E\u0447\u0435\u043A"
-    speakerName: "\u0410\u043D\u043D\u0430"
+  - text:
+      m_TableReference:
+        m_TableCollectionName: GUID:a1456ed1adc5ba348b5adeef2794ba70
+      m_TableEntryReference:
+        m_KeyId: 72118059008
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    speakerName:
+      m_TableReference:
+        m_TableCollectionName: GUID:8e7fc3c4d9c04064594c83fc587699a6
+      m_TableEntryReference:
+        m_KeyId: 3889315840
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

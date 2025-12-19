@@ -15,8 +15,68 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: 9e557eafd115d884fb0bce9d8a2ce934
   m_SerializeEntries:
+  - m_GUID: 126c9e5fd034ce94186eb8c76d3bcc74
+    m_Address: Assets/Localization/Tables/Level1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a754c360182512468d681e51701fde6
+    m_Address: Assets/Localization/Tables/Level Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 203a2d475a1174640987b82763bc4b1f
+    m_Address: Assets/Localization/Tables/Level2 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23b0b0dcdc367a04ea82488cb53d090d
+    m_Address: Assets/Localization/Tables/SettingsMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27c1a7021b995364a8a326bfdee2636b
+    m_Address: Assets/Localization/Tables/CollectableItems Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ca3737fb82015548abde116d32a1dff
+    m_Address: Assets/Localization/Tables/Level4 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 709f51219ffdb1346bbed6687ef825ec
+    m_Address: Assets/Localization/Tables/Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 733e917267604a1439ba0a1c3493c0bb
+    m_Address: Assets/Localization/Tables/SettingsMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74a6718fa8817af46a6a9314004b55b2
     m_Address: Assets/Localization/Tables/MainMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e7fc3c4d9c04064594c83fc587699a6
+    m_Address: Assets/Localization/Tables/Speakers Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1456ed1adc5ba348b5adeef2794ba70
+    m_Address: Assets/Localization/Tables/TutorialDialogueLevel3 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b97ec2dc3a13c9f4985d1d864f71f454
+    m_Address: Assets/Localization/Tables/Level5 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4c1f8e09773e29448986d98ec3191ba
+    m_Address: Assets/Localization/Tables/Level3 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialDialogueLevel0_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 709f51219ffdb1346bbed6687ef825ec, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 43768758272
+    m_Localized: "Let\u2019s plant the seeds in the garden bed"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4185497157632
+    m_Localized: "Now let\u2019s get some water from the well"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4354091401216
+    m_Localized: Great, we need to fill the watering can!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4370554044416
+    m_Localized: "Great, let\u2019s water the garden bed"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4388954456064
+    m_Localized: "Wow, what a harvest! Let\u2019s collect it!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4404884422656
+    m_Localized: "Let\u2019s take the harvest to the chest"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4421141544960
+    m_Localized: Time to sell!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4439651008512
+    m_Localized: "Order completed. Let\u2019s wait for the reward!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

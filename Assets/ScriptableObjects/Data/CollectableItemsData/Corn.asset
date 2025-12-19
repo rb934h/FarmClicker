@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a6e60cc3f400a83e4f7ab3210e9b4, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: 
-  itemName: "\u041A\u0443\u043A\u0443\u0440\u0443\u0437\u0430"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:27c1a7021b995364a8a326bfdee2636b
+    m_TableEntryReference:
+      m_KeyId: 51347865600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   price: 20
   growTime: 1
   ruinTime: 30
@@ -23,3 +31,6 @@ MonoBehaviour:
   - {fileID: -991708383, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: 688705752, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: -422562415, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  references:
+    version: 2
+    RefIds: []

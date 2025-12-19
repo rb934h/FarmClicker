@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a6e60cc3f400a83e4f7ab3210e9b4, type: 3}
   m_Name: Millet
   m_EditorClassIdentifier: 
-  itemName: "\u041F\u0448\u0435\u043D\u0438\u0446\u0430"
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:27c1a7021b995364a8a326bfdee2636b
+    m_TableEntryReference:
+      m_KeyId: 114111430656
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   price: 10
   growTime: 1
   ruinTime: 30
@@ -23,3 +31,6 @@ MonoBehaviour:
   - {fileID: -1259069688, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: -158862826, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
   - {fileID: 24358058, guid: fc6b8a15aacfc574791c0a15c2413af5, type: 3}
+  references:
+    version: 2
+    RefIds: []

@@ -2,7 +2,7 @@
 using Enum;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Localization;
 
 namespace ScriptableObjects
 {
@@ -18,10 +18,10 @@ namespace ScriptableObjects
         public int requiredCoins;
         
         [Header("Convert")]
-        public string convertMessage;
-        public string convertWinMessage;
-        public string convertLoseMessage;
-        public string convertMessageSender;
+        public LocalizedString convertMessage;
+        public LocalizedString convertWinMessage;
+        public LocalizedString convertLoseMessage;
+        public LocalizedString convertMessageSender;
         
         [Header("Weather")]
         public WeatherType[] weatherTypes;

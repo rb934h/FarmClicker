@@ -38,10 +38,10 @@ public class DialogueManager : MonoBehaviour
         if (currentDialogue == null) return;
 
         var line = currentDialogue.lines[currentLineIndex];
-        speakerNameText.text = line.speakerName;
+        speakerNameText.text = line.speakerName.GetLocalizedString();
         
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeLine(line.text));
+        typingCoroutine = StartCoroutine(TypeLine(line.text.GetLocalizedString()));
     }
     
     private IEnumerator TypeLine(string line)
@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
         if (isTyping)
         {
             StopCoroutine(typingCoroutine);
-            dialogueText.text = currentDialogue.lines[currentLineIndex].text;
+            dialogueText.text = currentDialogue.lines[currentLineIndex].text.GetLocalizedString();
             isTyping = false;
             return;
         }

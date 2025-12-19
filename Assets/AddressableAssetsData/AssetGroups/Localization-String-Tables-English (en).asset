@@ -15,8 +15,80 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 9920eab3c7a1a534b836aeef9c7bdc5a
   m_SerializeEntries:
+  - m_GUID: 098e5a77936228f4299e9a558b0c5413
+    m_Address: Speakers_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16b7a392e2fd1ab418ca8264ceb93261
+    m_Address: Level0_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4174a6384cdd18e4393f63925adbdcab
+    m_Address: Level5_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51bd8bffc8ac71a4a941ea10d235eaaa
+    m_Address: TutorialDialogueLevel4_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 613ebcf43c1fa5f4698a26be5401f297
+    m_Address: Level4_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6845141b379044a4b8c493a1bdbafed2
     m_Address: MainMenu_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6be7b019bdbc5ea43ac235cf1f0d84f2
+    m_Address: Level1_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e768f5a6288a85429868dd413052ced
+    m_Address: SettingsMenu_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79ae2eb4e162d0946b0761c17ca4584b
+    m_Address: TutorialDialogueLevel0_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d731281fe63a764f9ea15b3b48e3c26
+    m_Address: Level2_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e50be2fed4b031845867005631b92538
+    m_Address: CollectableItems_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eae35b43172e3704eb385b5ac1facee6
+    m_Address: PauseMenu_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcfbd96044cb3e34993a3191a87c7e24
+    m_Address: Level3_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

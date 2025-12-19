@@ -62,7 +62,7 @@ public class Level : MonoBehaviour
         _weatherManager.SetWeather(_levelData.weatherTypes);
         _timeOfDayManager.EnableDayMode();
 
-        await _gameScreen.ShowConvert(_levelData.convertMessage, _levelData.convertMessageSender);
+        await _gameScreen.ShowConvert(_levelData.convertMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
         _inputSystem.DownTouched += StartLevel;
     }
 
@@ -144,14 +144,14 @@ public class Level : MonoBehaviour
 
     private async void Win()
     {
-        await _gameScreen.ShowConvert(_levelData.convertWinMessage, _levelData.convertMessageSender);
+        await _gameScreen.ShowConvert(_levelData.convertWinMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
         UnlockNextLevel();
         _inputSystem.DownTouched += LevelEnd;
     }
 
     private async void Lose()
     {
-        await _gameScreen.ShowConvert(_levelData.convertLoseMessage, _levelData.convertMessageSender);
+        await _gameScreen.ShowConvert(_levelData.convertLoseMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
         _inputSystem.DownTouched += LevelEnd;
     }
 

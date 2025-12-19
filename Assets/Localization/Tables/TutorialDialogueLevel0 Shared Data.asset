@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: TutorialDialogueLevel0 Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: TutorialDialogueLevel0
+  m_TableCollectionNameGuidString: 709f51219ffdb1346bbed6687ef825ec
+  m_Entries:
+  - m_Id: 43768758272
+    m_Key: dialogue.tutorial.01.plant_seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4185497157632
+    m_Key: dialogue.tutorial.02.get_water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4354091401216
+    m_Key: dialogue.tutorial.03.fill_watering_can
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4370554044416
+    m_Key: dialogue.tutorial.04.water_bed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4388954456064
+    m_Key: dialogue.tutorial.05.harvest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4404884422656
+    m_Key: dialogue.tutorial.06.store_harvest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4421141544960
+    m_Key: dialogue.tutorial.07.sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4439651008512
+    m_Key: dialogue.tutorial.08.order_complete
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6285786327928275046
+  references:
+    version: 2
+    RefIds:
+    - rid: 6285786327928275046
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1765979027697
