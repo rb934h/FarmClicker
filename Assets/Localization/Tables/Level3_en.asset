@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f4c1f8e09773e29448986d98ec3191ba, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 324552245248
+    m_Localized: Hi Anya. There are not enough products on the market, can you help?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 382584635392
+    m_Localized: Thank you, as always, quickly and efficiently!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450297479168
+    m_Localized: It's a pity that you didn't succeed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 524494716928
+    m_Localized: Sincerely, merchant Ramis
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -8,7 +8,7 @@ namespace Strategies.EnclosureStrategy
     {
         public event Action OnComplete;
 
-        public bool Interact(Player player, PointerObject pointerObject)
+        public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Enclosure enclosure) return false;
             if (!player.inventory.canAddItem) return false;

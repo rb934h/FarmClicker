@@ -6,6 +6,6 @@ namespace Strategies
     public interface IPointerObjectInteractStrategy
     {
         public event Action OnComplete;
-        public bool Interact(Player player, PointerObject pointerObject);
+        public bool Interact(Player.Player player, PointerObject pointerObject);
     }
 }

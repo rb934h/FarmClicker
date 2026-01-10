@@ -15,7 +15,7 @@ namespace DI.Scopes
     public class GameLifetimeScope : LifetimeScope
     {
         [SerializeField] private URPVolume urpVolume;
-        [SerializeField] private Player player;
+        [SerializeField] private Player.Player player;
         [SerializeField] private InputSystem inputSystem;
         [SerializeField] private Timer levelTimer;
         [SerializeField] private DialogueManager dialogueManager;

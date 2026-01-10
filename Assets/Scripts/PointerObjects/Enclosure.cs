@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Animals;
 using ScriptableObjects.Data.Enclosure;
 using UnityEngine;
 

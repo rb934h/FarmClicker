@@ -12,10 +12,10 @@ namespace UI
 
         private CollectableItemData _collectableItemData;
         private Button _buttonComponent;
-        private Player _player;
+        private Player.Player _player;
 
         [Inject]
-        public void Construct(Player player)
+        public void Construct(Player.Player player)
         {
             _player = player;
         }

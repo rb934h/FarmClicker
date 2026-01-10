@@ -29,7 +29,7 @@ public class TilemapAreaHighlighter
     {
         _tilemap.SetTileFlags(cellPos, TileFlags.None);
 
-        Color startColor = _tilemap.GetColor(cellPos);
+        var startColor = _tilemap.GetColor(cellPos);
 
         DOTween.To(
             () => startColor,
@@ -45,16 +45,16 @@ public class TilemapAreaHighlighter
     
     private IEnumerable<Vector3Int> GetCellsInCollider()
     {
-        for (int x = _minCell.x; x <= _maxCell.x; x++)
+        for (var x = _minCell.x; x <= _maxCell.x; x++)
         {
-            for (int y = _minCell.y; y <= _maxCell.y; y++)
+            for (var y = _minCell.y; y <= _maxCell.y; y++)
             {
                 var cellPos = new Vector3Int(x, y, 0);
 
                 if (!_tilemap.HasTile(cellPos)) 
                     continue;
 
-                Vector3 worldPos = _tilemap.GetCellCenterWorld(cellPos);
+                var worldPos = _tilemap.GetCellCenterWorld(cellPos);
 
                 if (_areaCollider.OverlapPoint(worldPos))
                     yield return cellPos;
@@ -64,7 +64,7 @@ public class TilemapAreaHighlighter
     
     private void UpdateBounds()
     {
-        Bounds bounds = _areaCollider.bounds;
+        var bounds = _areaCollider.bounds;
         _minCell = _tilemap.WorldToCell(bounds.min);
         _maxCell = _tilemap.WorldToCell(bounds.max);
     }

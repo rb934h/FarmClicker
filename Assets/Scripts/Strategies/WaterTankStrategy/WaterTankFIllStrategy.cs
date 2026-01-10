@@ -9,7 +9,7 @@ namespace Strategies.WaterTankStrategy
     {
         public event Action OnComplete;
 
-        public bool Interact(Player player, PointerObject pointerObject)
+        public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not WaterTank waterTank) return false;
             if (waterTank.State is not WaterTankState.Empty) return false;

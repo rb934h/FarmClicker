@@ -7,7 +7,7 @@ namespace Strategies
     {
         public event Action OnComplete;
 
-        public bool Interact(Player player, PointerObject pointerObject)
+        public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Pig pig) return false;
             player.inventory.ClearAllItems();
