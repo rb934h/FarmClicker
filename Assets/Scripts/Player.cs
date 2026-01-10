@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 using Enum;
 using PointerObjects;
 using ScriptableObjects;
 using Scripts;
 using Strategies;
-using Unity.VisualScripting;
 using VContainer;
 
 public class Player : MonoBehaviour

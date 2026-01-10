@@ -1230,6 +1230,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnclosureChickenTilemap
       objectReference: {fileID: 0}
+    - target: {fileID: 1485836995680166761, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: _wanderArea
+      value: 
+      objectReference: {fileID: 7626233723448623687}
+    - target: {fileID: 1627582408064155908, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: _wanderArea
+      value: 
+      objectReference: {fileID: 7626233723448623687}
+    - target: {fileID: 2046042801077166812, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046042801077166812, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 348314021
+      objectReference: {fileID: 0}
     - target: {fileID: 3432734467921514125, guid: 6826299d25f916049918247f18f8575a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.33
@@ -1270,6 +1286,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8084599314434410354, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8084599314434410354, guid: 6826299d25f916049918247f18f8575a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 348314021
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1304,6 +1328,11 @@ MonoBehaviour:
 --- !u!212 &7305100571587468561 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 9166993126135185715, guid: 6826299d25f916049918247f18f8575a, type: 3}
+  m_PrefabInstance: {fileID: 1898089027098450978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7626233723448623687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8323372032054500965, guid: 6826299d25f916049918247f18f8575a, type: 3}
   m_PrefabInstance: {fileID: 1898089027098450978}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2579233590570884200

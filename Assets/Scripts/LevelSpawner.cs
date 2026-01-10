@@ -14,10 +14,12 @@ public class LevelSpawner : MonoBehaviour
     {
         _objectResolver = objectResolver;
     }
+    
     private void Start()
     {
         Spawn(LevelSession.selectedLevelIndex);
     }
+    
     private void Spawn(int index)
     {
         if (_currentLevelInstance != null)

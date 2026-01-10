@@ -2,6 +2,7 @@ Shader "Custom/IrisTransition"
 {
     Properties
     {
+        _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (0,0,0,1)
         _Radius ("Radius", Range(0,1)) = 0
         _ScreenAspect ("Screen Aspect", Float) = 1
@@ -32,6 +33,8 @@ Shader "Custom/IrisTransition"
                 float4 vertex : SV_POSITION;
             };
 
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
             float _Radius;
             float4 _Color;
             float _ScreenAspect;
@@ -49,7 +52,11 @@ Shader "Custom/IrisTransition"
             {
                 float dist = length(i.uv);
                 float alpha = smoothstep(_Radius, _Radius + 0.001, dist);
-                return float4(_Color.rgb, alpha * _Color.a);
+                
+                float2 uvTex = (i.uv / 2 + 0.5);
+                fixed4 texColor = tex2D(_MainTex, uvTex);
+
+                return float4(texColor.rgb * _Color.rgb, alpha * texColor.a * _Color.a);
             }
             ENDHLSL
         }

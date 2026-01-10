@@ -1,14 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public class EnumMap<TEnum, TValue> where TEnum : System.Enum
+namespace Enum
 {
-    [SerializeField] private TValue[] values;
-
-    public TValue this[TEnum key]
+    [Serializable]
+    public class EnumMap<TEnum, TValue> where TEnum : System.Enum
     {
-        get => values[Convert.ToInt32(key)];
-        set => values[Convert.ToInt32(key)] = value;
+        [SerializeField] private TValue[] values;
+
+        public TValue this[TEnum key]
+        {
+            get => values[Convert.ToInt32(key)];
+            set => values[Convert.ToInt32(key)] = value;
+        }
     }
 }

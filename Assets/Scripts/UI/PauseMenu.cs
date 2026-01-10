@@ -1,51 +1,53 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenu : BaseMenu
+namespace UI
 {
-    [Header("Buttons")] 
-    [SerializeField] private Button _resumeButton;
-    [SerializeField] private Button _settingsButton;
-    [SerializeField] private Button _exitButton;
-    
-    private SettingsMenu _settingsMenu;
-
-    private void Start()
+    public class PauseMenu : BaseMenu
     {
-        foreach (var menu in BaseMenus)
+        [Header("Buttons")] 
+        [SerializeField] private Button _resumeButton;
+        [SerializeField] private Button _settingsButton;
+        [SerializeField] private Button _exitButton;
+    
+        private SettingsMenu _settingsMenu;
+
+        private void Start()
         {
-            if (menu is SettingsMenu settings)
+            foreach (var menu in BaseMenus)
             {
-                _settingsMenu = settings;
-                break;
+                if (menu is SettingsMenu settings)
+                {
+                    _settingsMenu = settings;
+                    break;
+                }
             }
-        }
         
-        _resumeButton.onClick.AddListener(Toggle);
-        _exitButton.onClick.AddListener(Exit);
-        _settingsButton.onClick.AddListener(ShowSettingsMenu);
-    }
+            _resumeButton.onClick.AddListener(Toggle);
+            _exitButton.onClick.AddListener(Exit);
+            _settingsButton.onClick.AddListener(ShowSettingsMenu);
+        }
   
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private void Update()
         {
-            Toggle();
-        } 
-    }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Toggle();
+            } 
+        }
     
-    private void Exit()
-    {
-        Hide();
-        CrossSceneAnimation.Instance
-            .PlayTransition(SceneLoader.LoadMainMenuScene)
-            .Forget();
-    }
+        private void Exit()
+        {
+            Hide();
+            CrossSceneAnimation.Instance
+                .PlayTransition(SceneLoader.LoadMainMenuScene)
+                .Forget();
+        }
     
-    private void ShowSettingsMenu()
-    {
-        SwitchTo(_settingsMenu);
-    }
+        private void ShowSettingsMenu()
+        {
+            SwitchTo(_settingsMenu);
+        }
 
+    }
 }

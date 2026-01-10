@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace Localization
@@ -10,7 +9,9 @@ namespace Localization
         private void Awake()
         {
             if (PlayerPrefs.HasKey("LANG"))
+            {
                 SetLanguage(PlayerPrefs.GetString("LANG"));
+            }
         }
 
         public void SetLanguage(string localeCode)
@@ -18,19 +19,19 @@ namespace Localization
             PlayerPrefs.SetString("LANG", localeCode);
             PlayerPrefs.Save();
 
-            StartCoroutine(SetLocaleCoroutine(localeCode));
+            SetLocaleAsync(localeCode).Forget();
         }
 
-        private IEnumerator SetLocaleCoroutine(string localeCode)
+        private async UniTask SetLocaleAsync(string localeCode)
         {
-            yield return LocalizationSettings.InitializationOperation;
+            await LocalizationSettings.InitializationOperation.ToUniTask();
 
             var locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
 
             if (locale == null)
             {
                 Debug.LogError($"Locale not found: {localeCode}");
-                yield break;
+                return;
             }
 
             LocalizationSettings.SelectedLocale = locale;

@@ -115,7 +115,7 @@ public class Animal : MonoBehaviour
     private Vector2 GetRandomPointInArea(Transform area)
     {
         var center = area.position;
-        var scale = area.localScale * 0.5f; // половина ширины и высоты
+        var scale = area.localScale * 0.5f;
 
         return new Vector2(
             Random.Range(center.x - scale.x, center.x + scale.x),

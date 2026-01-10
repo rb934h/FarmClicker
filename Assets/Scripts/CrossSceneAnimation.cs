@@ -32,8 +32,7 @@ public class CrossSceneAnimation : MonoBehaviour
 
         if (!EnsureMaterial())
             return;
-
-        DOTween.Kill(_material);
+      
         _isTransitioning = true;
 
         var token = this.GetCancellationTokenOnDestroy();
@@ -46,9 +45,10 @@ public class CrossSceneAnimation : MonoBehaviour
                 _material.DOFloat(0f, "_Radius", _duration).SetEase(Ease.InOutSine),
                 token
             );
-
+            
             await loadOperation().AttachExternalCancellation(token);
-
+            DOTween.KillAll();
+            
             await PlayTween(
                 _material.DOFloat(1f, "_Radius", _duration).SetEase(Ease.InOutSine),
                 token

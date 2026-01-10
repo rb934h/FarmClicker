@@ -31,8 +31,7 @@ public class AudioPlayer : MonoBehaviour
 
         var startAmbientVol = _ambientAudioSource.volume;
         var startBackgroundVol = _backgroundAudioSource.volume;
-
-        // === FADE OUT ТОЛЬКО ЕСЛИ ДО ЭТОГО ЧТО-ТО ИГРАЛО ===
+        
         if (hasPlayedBefore && (startAmbientVol > 0f || startBackgroundVol > 0f))
         {
             for (float t = 0; t < _fadeDuration; t += Time.deltaTime)

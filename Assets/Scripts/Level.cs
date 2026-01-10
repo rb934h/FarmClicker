@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
@@ -59,18 +60,28 @@ public class Level : MonoBehaviour
 
     private async void Start()
     {
-        _weatherManager.SetWeather(_levelData.weatherTypes);
-        _timeOfDayManager.EnableDayMode();
+        try
+        {
+            _weatherManager.SetWeather(_levelData.weatherTypes);
+            _timeOfDayManager.EnableDayMode();
 
-        await _gameScreen.ShowConvert(_levelData.convertMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
-        _inputSystem.DownTouched += StartLevel;
+            var message = await levelData.convertMessage.GetLocalizedStringAsync();
+            var sender  = await levelData.convertMessageSender.GetLocalizedStringAsync();
+
+            _gameScreen.ShowConvert(message, sender);
+            _gameScreen.Convert.OnHided += OnConvertHided;
+            _inputSystem.DownTouched += StartLevel;
+        }
+        catch 
+        {
+            Debug.Log("Level start error");
+        }
     }
 
-    private async void StartLevel()
+    private void StartLevel()
     {
         _inputSystem.DownTouched -= StartLevel;
-        await _gameScreen.HideConvert();
-        OnConvertHided();
+        _gameScreen.HideConvert();
     }
 
     private void Update()
@@ -80,6 +91,8 @@ public class Level : MonoBehaviour
 
     private void OnConvertHided()
     {
+        _gameScreen.Convert.OnHided -= OnConvertHided;
+        
         _gameScreen.SetAvailableItems(_levelData.collectableItems);
         _gameScreen.SetLevelGoals(_levelData.goals, _levelData.requiredCoins);
         _gameScreen.ShowScreen();
@@ -144,15 +157,41 @@ public class Level : MonoBehaviour
 
     private async void Win()
     {
-        await _gameScreen.ShowConvert(_levelData.convertWinMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
-        UnlockNextLevel();
-        _inputSystem.DownTouched += LevelEnd;
+        try
+        {
+            var messageWin = await levelData.convertWinMessage.GetLocalizedStringAsync();
+            var sender  = await levelData.convertMessageSender.GetLocalizedStringAsync();
+        
+            _gameScreen.ShowConvert(messageWin, sender);
+            _gameScreen.Convert.OnShowed += ()=>
+            {
+                UnlockNextLevel();
+                _inputSystem.DownTouched += LevelEnd;
+            };
+        }
+        catch 
+        {
+            Debug.Log("Level win error");
+        }
     }
 
     private async void Lose()
     {
-        await _gameScreen.ShowConvert(_levelData.convertLoseMessage.GetLocalizedString(), _levelData.convertMessageSender.GetLocalizedString());
-        _inputSystem.DownTouched += LevelEnd;
+        try
+        {
+            var messageLose = await levelData.convertWinMessage.GetLocalizedStringAsync();
+            var sender  = await levelData.convertMessageSender.GetLocalizedStringAsync();
+        
+            _gameScreen.ShowConvert(messageLose, sender);
+            _gameScreen.Convert.OnShowed += () =>
+            {
+                _inputSystem.DownTouched += LevelEnd;
+            };
+        }
+        catch 
+        {
+            Debug.Log("Level lose error");
+        }
     }
 
     private void LevelEnd()
@@ -175,6 +214,6 @@ public class Level : MonoBehaviour
     {
         _pointerClicker.PointerClicked -= OnPointerClick;
         _chest.IsSolded -= AddDeliveredItem;
-        //_levelTimer.OnTimerComplete -= LevelEnd;
     }
+    
 }

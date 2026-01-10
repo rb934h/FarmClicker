@@ -8,15 +8,8 @@ namespace UI
     {
         [SerializeField] private int levelIndex;
         
-        private CrossSceneAnimation _crossSceneAnimation;
         private Button _button;
-
-        [Inject]
-        private void Construct(CrossSceneAnimation crossSceneAnimation)
-        {
-            _crossSceneAnimation = crossSceneAnimation;
-        }
-
+        
         private void Start()
         {
             _button = GetComponent<Button>();
@@ -30,7 +23,7 @@ namespace UI
             LevelSession.selectedLevelIndex = levelIndex;
             CrossSceneAnimation.Instance
                 .PlayTransition(SceneLoader.LoadLevelScene)
-                .Forget();;
+                .Forget();
         }
     }
 } 

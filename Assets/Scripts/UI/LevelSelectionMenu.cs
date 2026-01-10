@@ -1,4 +1,5 @@
-﻿using Azur.Playable.Carousel;
+﻿using System.Linq;
+using Azur.Playable.Carousel;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -31,14 +32,18 @@ namespace UI
         private void GenerateLevelButtons()
         {
             var unlockedLevel = Progress.unlockedLevel;
-        
-            foreach (var level in database.levels)
+            var levels = database.levels;
+
+            for (var i = levels.Length - 1; i >= 0; i--)
             {
+                var level = levels[i];
+
                 if (level.levelIndex <= unlockedLevel && level.levelButton != null)
                 {
                     _objectResolver.Instantiate(level.levelButton, transform);
                 }
             }
+
         }
     }
 }

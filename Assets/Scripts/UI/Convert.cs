@@ -1,8 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace UI
 {
     public class Convert : MonoBehaviour
     {
@@ -15,17 +16,27 @@ namespace DefaultNamespace
         [SerializeField] private AudioSource _letterSound;
         
         private readonly float _secondsForWaitAfterAnimation = 2f;
+
+        public event Action OnShowed;
+        public event Action OnHided;
         
-        public async UniTask Show()
+        
+        public void Show()
         {
             _animator.SetTrigger(ShowAnimationTrigger);
-            await UniTask.WaitForSeconds(_secondsForWaitAfterAnimation);
+            DOVirtual.DelayedCall(_secondsForWaitAfterAnimation, () =>
+            {
+                OnShowed?.Invoke();
+            });
         }
 
-        public async UniTask Hide()
+        public void Hide()
         {
             _animator.SetTrigger(HideAnimationTrigger);
-            await UniTask.WaitForSeconds(_secondsForWaitAfterAnimation);
+            DOVirtual.DelayedCall(_secondsForWaitAfterAnimation, () =>
+            {
+                OnHided?.Invoke();
+            });
         }
 
         public void PlayLetterSound()

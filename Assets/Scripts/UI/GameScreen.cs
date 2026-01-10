@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
-using Convert = DefaultNamespace.Convert;
+using Convert = UI.Convert;
 
 namespace UI
 {
@@ -21,6 +21,8 @@ namespace UI
         private LevelGoalsView _levelGoalsView{ get; set; }
         private StringTable  _localizationTable;
         
+        public Convert Convert => _convert;
+        
         private async void Start()
         {
             var localizationTableName = "CollectableItems";
@@ -31,21 +33,29 @@ namespace UI
         public void SetLevelGoals(List<LevelGoal> levelGoals, int requiredCoins)
         {
             _levelGoalsPanelAnimator.enabled = true;
-            
-            DOVirtual.DelayedCall(_levelGoalsPanelAnimator.GetCurrentAnimatorClipInfo(0).Length * .5f, () =>
-            {
-                foreach (var levelDataGoal in levelGoals)
-                {
-                    _levelGoalsView.SetGoal(levelDataGoal.itemData.itemName.GetLocalizedString(), levelDataGoal.requiredCount);
-                }
 
-                if (requiredCoins > 0)
-                {
-                    var localizationKeyForCoin = "Coin_Key";
-                    _levelGoalsView.SetGoal(_localizationTable.GetEntry(localizationKeyForCoin).GetLocalizedString(), requiredCoins);
-                }
-                    
-            });
+            DOVirtual.DelayedCall(
+                _levelGoalsPanelAnimator.GetCurrentAnimatorClipInfo(0).Length * 0.5f,
+                () => SetGoalsAsync(levelGoals, requiredCoins).Forget()
+            );
+        }
+
+        private async UniTask SetGoalsAsync(List<LevelGoal> levelGoals, int requiredCoins)
+        {
+            foreach (var levelDataGoal in levelGoals)
+            {
+                var itemName = await levelDataGoal.itemData.itemName
+                    .GetLocalizedStringAsync();
+
+                _levelGoalsView.SetGoal(itemName, levelDataGoal.requiredCount);
+            }
+
+            if (requiredCoins > 0)
+            {
+                var localizationKeyForCoin = "Coin_Key";
+                _levelGoalsView.SetGoal(_localizationTable.GetEntry(localizationKeyForCoin).GetLocalizedString(),
+                    requiredCoins);
+            }
         }
 
         public void SetAvailableItems(List<CollectableItemData> availableItems)
@@ -56,15 +66,15 @@ namespace UI
             }
         }
 
-        public async UniTask ShowConvert(string message, string sender)
+        public void ShowConvert(string message, string sender)
         {
             _convert.SetMessage(message);
             _convert.SetMessageSender(sender);
-            await _convert.Show();
+            _convert.Show();
         }
-        public async UniTask HideConvert()
+        public void HideConvert()
         {
-            await _convert.Hide(); 
+            _convert.Hide(); 
         }
     }
 }
