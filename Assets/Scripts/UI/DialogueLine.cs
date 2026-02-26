@@ -5,7 +5,7 @@ namespace UI
     [System.Serializable]
     public class DialogueLine
     {
-        public LocalizedString text;         
-        public LocalizedString speakerName;  
+        public LocalizedString Text;
+        public LocalizedString SpeakerName;
     }
 }

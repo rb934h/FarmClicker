@@ -1,5 +1,6 @@
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,7 +8,7 @@ namespace UI
 {
     public class SelectItemPanel : MonoBehaviour
     {
-        [SerializeField] private AddToInventoryButton addToInventoryButton;
+        [FormerlySerializedAs("addToInventoryButton")] [SerializeField] private AddToInventoryButton _addToInventoryButton;
     
         private  IObjectResolver _objectResolver;
    
@@ -19,7 +20,7 @@ namespace UI
         
         public void AddButton(CollectableItemData collectableItemData)
         {
-            var instance = _objectResolver.Instantiate(addToInventoryButton, transform);
+            var instance = _objectResolver.Instantiate(_addToInventoryButton, transform);
             instance.SetCollectableItemData(collectableItemData);
         }
     }

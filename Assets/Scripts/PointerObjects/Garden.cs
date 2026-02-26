@@ -5,17 +5,18 @@ using Enum;
 using ScriptableObjects;
 using Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace PointerObjects
 {
     public class Garden : PointerObject
     {
-        [SerializeField] private SpriteRenderer[] seedingPointsSpriteRenderers;
-        [SerializeField] private SpriteRenderer hintSpriteRenderer;
+        [FormerlySerializedAs("seedingPointsSpriteRenderers")] [SerializeField] private SpriteRenderer[] _seedingPointsSpriteRenderers;
+        [FormerlySerializedAs("hintSpriteRenderer")] [SerializeField] private SpriteRenderer _hintSpriteRenderer;
         [SerializeField] private FillBar _fillBar;
-        [SerializeField] private GardenHintData hintData;
-        [SerializeField] private Tilemap tileMap;
+        [FormerlySerializedAs("hintData")] [SerializeField] private GardenHintData _hintData;
+        [FormerlySerializedAs("tileMap")] [SerializeField] private Tilemap _tileMap;
         
         private CollectableItemData _currentSeed; 
         private CollectableItemData _harvestedSeed; 
@@ -26,14 +27,14 @@ namespace PointerObjects
         private Coroutine _seedingCoroutine;
         
         [HideInInspector]
-        public GardenState State = GardenState.Empty;
+        [FormerlySerializedAs("State")] public GardenState _state = GardenState.Empty;
         public bool canPlantSeed => _currentSeed!=null;
         
         public event Action OnPlantSeed;
         
         private void Start()
         {
-            _tilemapAreaHighlighter = new TilemapAreaHighlighter(tileMap, pointerObjectCollider);
+            _tilemapAreaHighlighter = new TilemapAreaHighlighter(_tileMap, _pointerObjectCollider);
             
             _fillBar.OnFill += StartRuinGarden;
             _fillBar.OnEmpty += Remove;
@@ -58,15 +59,15 @@ namespace PointerObjects
 
             _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Seed));
             
-            _workTime = _seedingTime * seedingPointsSpriteRenderers.Length;
+            _workTime = _seedingTime * _seedingPointsSpriteRenderers.Length;
             _fillBar.Filling(_workTime);
             
             yield return new WaitForSeconds(_currentSeed.growTime);
             
-            State = GardenState.Planted;
+            _state = GardenState.Planted;
             
-            hintSpriteRenderer.sprite = hintData.waterSprite;
-            HintAnimator.Show(hintSpriteRenderer);
+            _hintSpriteRenderer.sprite = _hintData.waterSprite;
+            HintAnimator.Show(_hintSpriteRenderer);
             
             _seedingCoroutine = StartCoroutine(SetSpritesSeedingPoints(GrowStates.Sprout));
 
@@ -98,10 +99,10 @@ namespace PointerObjects
             
             yield return new WaitForSeconds(_seedingTime);
             
-            State = GardenState.ReadyToHarvest;
+            _state = GardenState.ReadyToHarvest;
             
-            hintSpriteRenderer.sprite = hintData.harvestSprite;
-            HintAnimator.Show(hintSpriteRenderer);
+            _hintSpriteRenderer.sprite = _hintData.harvestSprite;
+            HintAnimator.Show(_hintSpriteRenderer);
         }
 
         public void Remove()
@@ -111,12 +112,12 @@ namespace PointerObjects
                 StartCoroutine(ClearSpritesFromSeedingPoints());
             }
             
-            _workTime = _seedingTime * seedingPointsSpriteRenderers.Length;
+            _workTime = _seedingTime * _seedingPointsSpriteRenderers.Length;
             _fillBar.Hide();
             
-            State = GardenState.Empty;
+            _state = GardenState.Empty;
             
-            HintAnimator.Hide(hintSpriteRenderer, true);
+            HintAnimator.Hide(_hintSpriteRenderer, true);
             
             _currentSeed = null;
             _harvestedSeed = null;
@@ -131,7 +132,7 @@ namespace PointerObjects
 
         private IEnumerator SetSpritesSeedingPoints(GrowStates growState)
         {
-            foreach (var seedingPointSpriteRenderer in seedingPointsSpriteRenderers)
+            foreach (var seedingPointSpriteRenderer in _seedingPointsSpriteRenderers)
             {
                 yield return new WaitForSeconds(_seedingTime);
                 seedingPointSpriteRenderer.sprite = _currentSeed.spritesForGarden[(int)growState];
@@ -143,7 +144,7 @@ namespace PointerObjects
             StopCoroutine(_seedingCoroutine);
             _seedingCoroutine = null;
             
-            foreach (var seedingPointSpriteRenderer in seedingPointsSpriteRenderers)
+            foreach (var seedingPointSpriteRenderer in _seedingPointsSpriteRenderers)
             {
                 yield return new WaitForSeconds(_seedingTime);
                 seedingPointSpriteRenderer.sprite = null;

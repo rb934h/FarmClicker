@@ -2,16 +2,17 @@
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Player
 {
     public class PlayerInventoryView : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer leftHandItem;
-        [SerializeField] private SpriteRenderer rightHandItem;
-        [SerializeField] private SpriteRenderer wateringCan;
-        [SerializeField] private TMP_Text coinsCountText;
+        [FormerlySerializedAs("leftHandItem")] [SerializeField] private SpriteRenderer _leftHandItem;
+        [FormerlySerializedAs("rightHandItem")] [SerializeField] private SpriteRenderer _rightHandItem;
+        [FormerlySerializedAs("wateringCan")] [SerializeField] private SpriteRenderer _wateringCan;
+        [FormerlySerializedAs("coinsCountText")] [SerializeField] private TMP_Text _coinsCountText;
 
         private Player _player;
         private CollectableItemData _leftHandItemData;
@@ -35,31 +36,31 @@ namespace Player
 
         private void HideWateringCan()
         {
-            wateringCan.enabled = false;
+            _wateringCan.enabled = false;
         }
 
         private void ShowWateringCan()
         {
-            wateringCan.enabled = true;
+            _wateringCan.enabled = true;
         }
 
         private void SetItem(CollectableItemData item)
         {
-            if (wateringCan.enabled)
+            if (_wateringCan.enabled)
             {
                 HideWateringCan();
                 DOVirtual.DelayedCall(1f, ShowWateringCan);
             }
                
             
-            if (rightHandItem.sprite == null)
+            if (_rightHandItem.sprite == null)
             {
-                rightHandItem.sprite = item.spriteForHands;
+                _rightHandItem.sprite = item.spriteForHands;
                 _rightHandItemData = item;
             }
             else
             {
-                leftHandItem.sprite = item.spriteForHands;
+                _leftHandItem.sprite = item.spriteForHands;
                 _leftHandItemData = item;
             }
         }
@@ -68,29 +69,29 @@ namespace Player
         {
             if (_leftHandItemData == item)
             {
-                leftHandItem.sprite = null;
+                _leftHandItem.sprite = null;
                 _leftHandItemData = null;
             }
             else if (_rightHandItemData == item)
             {
-                rightHandItem.sprite = null;
+                _rightHandItem.sprite = null;
                 _rightHandItemData = null;
             }
         }
 
         private void ClearAllItems()
         {
-            leftHandItem.sprite = null;
+            _leftHandItem.sprite = null;
             _leftHandItemData = null;
-            rightHandItem.sprite = null;
+            _rightHandItem.sprite = null;
             _rightHandItemData = null;
         }
 
         private void UpdateCoinsCountText()
         {
-            if (coinsCountText != null)
+            if (_coinsCountText != null)
             {
-                coinsCountText.text = $"{_player.inventory.coins}";
+                _coinsCountText.text = $"{_player.inventory.coins}";
             }
         }
     }

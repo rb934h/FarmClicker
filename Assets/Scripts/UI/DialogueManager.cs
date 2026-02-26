@@ -2,54 +2,55 @@
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI
 {
     public class DialogueManager : MonoBehaviour
     {
         [Header("UI Elements")]
-        [SerializeField] private GameObject dialogueWindow;
-        [SerializeField] private TMP_Text speakerNameText;
-        [SerializeField] private TMP_Text dialogueText;
-        [SerializeField] private float typingSpeed = 0.02f;
+        [FormerlySerializedAs("dialogueWindow")] [SerializeField] private GameObject _dialogueWindow;
+        [FormerlySerializedAs("speakerNameText")] [SerializeField] private TMP_Text _speakerNameText;
+        [FormerlySerializedAs("dialogueText")] [SerializeField] private TMP_Text _dialogueText;
+        [FormerlySerializedAs("typingSpeed")] [SerializeField] private float _typingSpeed = 0.02f;
         [SerializeField] private AudioSource _dialogueSound;
     
-        private Dialogue currentDialogue;
-        private int currentLineIndex;
-        private bool isTyping;
-        private Coroutine typingCoroutine;
+        private Dialogue _currentDialogue;
+        private int _currentLineIndex;
+        private bool _isTyping;
+        private Coroutine _typingCoroutine;
     
 
         public void ShowDialogue(Dialogue dialogue)
         {
             if (dialogue == null || dialogue.lines.Length == 0) return;
 
-            currentDialogue = dialogue;
-            currentLineIndex = 0;
-            dialogueWindow.SetActive(true);
+            _currentDialogue = dialogue;
+            _currentLineIndex = 0;
+            _dialogueWindow.SetActive(true);
             ShowCurrentLine();
         }
     
         public void HideDialogueWindow()
         {
-            dialogueWindow.SetActive(false);
-            currentDialogue = null;
+            _dialogueWindow.SetActive(false);
+            _currentDialogue = null;
         }
     
         private async void ShowCurrentLine()
         {
             try
             {
-                if (currentDialogue == null) return;
+                if (_currentDialogue == null) return;
 
-                var line = currentDialogue.lines[currentLineIndex];
-                var speakerName = await line.speakerName.GetLocalizedStringAsync();
+                var line = _currentDialogue.lines[_currentLineIndex];
+                var speakerName = await line.SpeakerName.GetLocalizedStringAsync();
         
-                speakerNameText.text = speakerName;
+                _speakerNameText.text = speakerName;
         
-                if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-                var text = await line.text.GetLocalizedStringAsync();
-                typingCoroutine = StartCoroutine(TypeLine(text));
+                if (_typingCoroutine != null) StopCoroutine(_typingCoroutine);
+                var text = await line.Text.GetLocalizedStringAsync();
+                _typingCoroutine = StartCoroutine(TypeLine(text));
             }
             catch
             {
@@ -59,18 +60,18 @@ namespace UI
     
         private IEnumerator TypeLine(string line)
         {
-            isTyping = true;
-            dialogueText.text = "";
+            _isTyping = true;
+            _dialogueText.text = "";
         
             _dialogueSound.Play();
 
             foreach (char c in line)
             {
-                dialogueText.text += c;
-                yield return new WaitForSeconds(typingSpeed);
+                _dialogueText.text += c;
+                yield return new WaitForSeconds(_typingSpeed);
             }
 
-            isTyping = false;
+            _isTyping = false;
             _dialogueSound.Stop();
         }
     
@@ -78,18 +79,18 @@ namespace UI
         {
             try
             {
-                if (isTyping)
+                if (_isTyping)
                 {
-                    StopCoroutine(typingCoroutine);
-                    var text = await currentDialogue.lines[currentLineIndex].text.GetLocalizedStringAsync();
-                    dialogueText.text = text;
-                    isTyping = false;
+                    StopCoroutine(_typingCoroutine);
+                    var text = await _currentDialogue.lines[_currentLineIndex].Text.GetLocalizedStringAsync();
+                    _dialogueText.text = text;
+                    _isTyping = false;
                     return;
                 }
 
-                currentLineIndex++;
+                _currentLineIndex++;
 
-                if (currentLineIndex >= currentDialogue.lines.Length)
+                if (_currentLineIndex >= _currentDialogue.lines.Length)
                 {
                     HideDialogueWindow();
                 }

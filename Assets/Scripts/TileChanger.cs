@@ -8,7 +8,7 @@ public class TileChanger
     private Tilemap _tilemap;
     private TileReplacementRule _rule;
 
-    private bool isSwapped = false;
+    private bool _isSwapped = false;
 
     public TileChanger(Tilemap tilemap, TileReplacementRule rule)
     {
@@ -17,13 +17,13 @@ public class TileChanger
     }
     public void ChangeTiles()
     {
-        var from = isSwapped ? _rule.to : _rule.from;
-        var to   = isSwapped ? _rule.from : _rule.to;
+        var from = _isSwapped ? _rule.to : _rule.from;
+        var to   = _isSwapped ? _rule.from : _rule.to;
 
         int length = Mathf.Min(from.Length, to.Length);
         for (int i = 0; i < length; i++)
             _tilemap.SwapTile(from[i], to[i]);
         
-        isSwapped = !isSwapped;
+        _isSwapped = !_isSwapped;
     }
 }

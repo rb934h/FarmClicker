@@ -12,7 +12,7 @@ namespace Strategies.ChestStrategy
         public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
-            if (chest.State is not ChestState.Empty || chest.GetCargoCount() >= 2 ||
+            if (chest._state is not ChestState.Empty || chest.GetCargoCount() >= 2 ||
                 !player.inventory.handsNotEmpty) return false;
 
             foreach (var inventoryHarvestObject in player
@@ -24,7 +24,7 @@ namespace Strategies.ChestStrategy
                 player.inventory.ClearItem(inventoryHarvestObject);
             }
 
-            chest.State = ChestState.Loaded;
+            chest._state = ChestState.Loaded;
             OnComplete?.Invoke();
             return true;
         }

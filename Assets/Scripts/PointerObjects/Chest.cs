@@ -6,14 +6,15 @@ using Enum;
 using Level.Objects;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace PointerObjects
 {
     public class Chest : PointerObject
     {
-        [SerializeField] private ChestData chestData;
-        [SerializeField] private SpriteRenderer[] objectsInChest;
+        [FormerlySerializedAs("chestData")] [SerializeField] private ChestData _chestData;
+        [FormerlySerializedAs("objectsInChest")] [SerializeField] private SpriteRenderer[] _objectsInChest;
             
         [Header("Coin Spin")] 
         [SerializeField] private Transform _coinsParent;
@@ -29,12 +30,12 @@ namespace PointerObjects
         [SerializeField] private FillBar _fillBar;
 
         [HideInInspector] 
-        public ChestState State = ChestState.Empty;
+        [FormerlySerializedAs("State")] public ChestState _state = ChestState.Empty;
 
         public event Action<List<CollectableItemData>> IsSolded;
 
         private TileChanger _tileChanger;
-        private List<CollectableItemData> cargo = new();
+        private List<CollectableItemData> _cargo = new();
         private List<CoinSpin> _spins = new();
         private SaleBoard _saleBoard;
         private bool _waitForSale;
@@ -49,24 +50,24 @@ namespace PointerObjects
 
             foreach (var coin in coins)
             {
-                var spin = new CoinSpin(coin, chestData);
+                var spin = new CoinSpin(coin, _chestData);
                 _spins.Add(spin);
             }
 
-            _saleBoard = new SaleBoard(_saleBoardSpriteRenderer, chestData);
+            _saleBoard = new SaleBoard(_saleBoardSpriteRenderer, _chestData);
         }
 
         public bool PutCargo(CollectableItemData objectsFromPlayer)
         {
-            if(cargo.Count > 1)
+            if(_cargo.Count > 1)
                 return false;
             
-            cargo.Add(objectsFromPlayer);
+            _cargo.Add(objectsFromPlayer);
             
-            for (int chestIndex = 0; chestIndex < cargo.Count; chestIndex++)
+            for (int chestIndex = 0; chestIndex < _cargo.Count; chestIndex++)
             {
-               if(objectsInChest[chestIndex].sprite == null)
-                    objectsInChest[chestIndex].sprite = objectsFromPlayer.spriteForHands;
+               if(_objectsInChest[chestIndex].sprite == null)
+                    _objectsInChest[chestIndex].sprite = objectsFromPlayer.spriteForHands;
             }
             
             return true;
@@ -74,19 +75,19 @@ namespace PointerObjects
 
         public void ClearCargo()
         {
-            IsSolded?.Invoke(cargo);
+            IsSolded?.Invoke(_cargo);
             
             foreach (var spin in _spins)
             {
                 spin.Stop();
             }
 
-            cargo.Clear();
+            _cargo.Clear();
         }
         
         public int GetCargoCount()
         {
-            return cargo.Count;
+            return _cargo.Count;
         }
 
         public void Send()
@@ -94,14 +95,14 @@ namespace PointerObjects
             _waitForSale = true;
             _saleBoard.Play();
             _fillBar.Show();
-            _fillBar.Filling(chestData.deliveryTime + chestData.saleBoardDuration);
+            _fillBar.Filling(_chestData.deliveryTime + _chestData.saleBoardDuration);
             
-            foreach (var collectableItemData in cargo)
+            foreach (var collectableItemData in _cargo)
             {
                 Debug.Log(collectableItemData.name);
             }
             
-            foreach (var spriteRenderer in objectsInChest)
+            foreach (var spriteRenderer in _objectsInChest)
             {
                 spriteRenderer.sprite = null;
             }
@@ -109,13 +110,13 @@ namespace PointerObjects
             
             var seq = DOTween.Sequence();
 
-            seq.AppendInterval(chestData.deliveryTime);  
+            seq.AppendInterval(_chestData.deliveryTime);  
             seq.AppendCallback(() => _saleBoard.Stop()); 
-            seq.AppendInterval(chestData.saleBoardDuration);                    
+            seq.AppendInterval(_chestData.saleBoardDuration);
             seq.AppendCallback(() =>
             {
                 _waitForSale = false;
-                State = ChestState.WithMoney;
+                _state = ChestState.WithMoney;
                 ChangeTile();
                 foreach (var spin in _spins)
                 {

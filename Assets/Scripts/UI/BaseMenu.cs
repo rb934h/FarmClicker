@@ -14,17 +14,16 @@ namespace UI
         private Tween _fadeTween;
         private URPVolume _urpVolume;
         private CanvasGroup _canvasGroup;
+        
         protected static readonly List<BaseMenu> BaseMenus = new();
         protected bool IsOpen { get; private set; } = false;
         
-    
         [Inject]
         public void Construct(URPVolume urpVolume)
         {
             _urpVolume = urpVolume;
         }
-    
-
+        
         protected virtual void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();

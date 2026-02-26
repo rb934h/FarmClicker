@@ -1,15 +1,16 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Level.Objects
 {
     public class CloudMover : MonoBehaviour
     {
-        [SerializeField] private float startX = -10f; 
-        [SerializeField] private float endX = 10f;     
-        [SerializeField] private float yPos = 0f;      
-        [SerializeField] private float moveTime = 10f; 
-        [SerializeField] private float repeatDelay = 2f;
+        [FormerlySerializedAs("startX")] [SerializeField] private float _startX = -10f;
+        [FormerlySerializedAs("endX")] [SerializeField] private float _endX = 10f;
+        [FormerlySerializedAs("yPos")] [SerializeField] private float _yPos = 0f;
+        [FormerlySerializedAs("moveTime")] [SerializeField] private float _moveTime = 10f;
+        [FormerlySerializedAs("repeatDelay")] [SerializeField] private float _repeatDelay = 2f;
 
         private void Start()
         {
@@ -18,12 +19,12 @@ namespace Level.Objects
 
         private void MoveCloud()
         {
-            transform.position = new Vector3(startX, yPos, transform.position.z);
-            transform.DOMoveX(endX, moveTime)
+            transform.position = new Vector3(_startX, _yPos, transform.position.z);
+            transform.DOMoveX(_endX, _moveTime)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
-                    DOVirtual.DelayedCall(repeatDelay, MoveCloud);
+                    DOVirtual.DelayedCall(_repeatDelay, MoveCloud);
                 });
         }
     }

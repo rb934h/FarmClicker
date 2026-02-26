@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Animals;
 using ScriptableObjects.Data.Enclosure;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PointerObjects
 {
@@ -19,11 +20,10 @@ namespace PointerObjects
 
         [HideInInspector] public bool HasWater;
         [HideInInspector] public bool HasFood;
+        
         private bool _foodInUse = false;
         private bool _waterInUse = false;
-
         private float _checkAnimalsDelay = 5f;
-
         private Queue<Animal> _foodQueue = new();
         private Queue<Animal> _waterQueue = new();
 

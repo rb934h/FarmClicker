@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using Strategies;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 public class TutorialManager : MonoBehaviour
 {
     [Header("Setup")] 
-    [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private TutorialStep[] steps;
+    [FormerlySerializedAs("arrowPrefab")] [SerializeField] private GameObject _arrowPrefab;
+    [FormerlySerializedAs("steps")] [SerializeField] private TutorialStep[] _steps;
 
-    private int currentStepIndex = -1;
-    private GameObject currentArrow;
+    private int _currentStepIndex = -1;
+    private GameObject _currentArrow;
     private DialogueManager _dialogueManager;
     private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
 
@@ -33,37 +34,37 @@ public class TutorialManager : MonoBehaviour
 
     public void StartTutorial()
     {
-        currentStepIndex = -1;
+        _currentStepIndex = -1;
         NextStep();
     }
 
     private void NextStep()
     {
-        if (currentArrow) Destroy(currentArrow);
+        if (_currentArrow) Destroy(_currentArrow);
 
-        currentStepIndex++;
-        if (currentStepIndex >= steps.Length)
+        _currentStepIndex++;
+        if (_currentStepIndex >= _steps.Length)
         {
             _dialogueManager.HideDialogueWindow();
             return;
         }
 
-        var step = steps[currentStepIndex];
-        step.onStepStart?.Invoke();
+        var step = _steps[_currentStepIndex];
+        step.OnStepStart?.Invoke();
 
-        if (currentStepIndex == 0)
+        if (_currentStepIndex == 0)
         {
-            _dialogueManager.ShowDialogue(step.dialogue);
+            _dialogueManager.ShowDialogue(step.Dialogue);
         }
         else
         {
             _dialogueManager.NextLine();
         }
         
-        if (step.target != null && arrowPrefab != null)
-            CreateArrow(step.target);
+        if (step.Target != null && _arrowPrefab != null)
+            CreateArrow(step.Target);
 
-        if (!step.waitForPlayerAction)
+        if (!step.WaitForPlayerAction)
         {
             StartCoroutine(AutoAdvanceAfterDialogue(step));
         }
@@ -72,7 +73,7 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator AutoAdvanceAfterDialogue(TutorialStep step)
     {
         while (_dialogueManager != null &&
-               step.dialogue != null &&
+               step.Dialogue != null &&
                _dialogueManager.gameObject.activeSelf)
         {
             yield return null; 
@@ -83,23 +84,23 @@ public class TutorialManager : MonoBehaviour
 
     private void CreateArrow(Transform target)
     {
-        currentArrow = Instantiate(arrowPrefab, target.transform.parent);
+        _currentArrow = Instantiate(_arrowPrefab, target.transform.parent);
         UpdateArrowPosition(target);
     }
 
     private void UpdateArrowPosition(Transform target)
     {
-        currentArrow.transform.position = target.position + new Vector3(0, 1.5f, 0);
+        _currentArrow.transform.position = target.position + new Vector3(0, 1.5f, 0);
     }
 
     private void CompleteCurrentStep()
     {
-        if (currentStepIndex < 0 || currentStepIndex >= steps.Length) return;
+        if (_currentStepIndex < 0 || _currentStepIndex >= _steps.Length) return;
 
-        var step = steps[currentStepIndex];
-        step.onStepComplete?.Invoke();
+        var step = _steps[_currentStepIndex];
+        step.OnStepComplete?.Invoke();
 
-        if (currentArrow) Destroy(currentArrow);
+        if (_currentArrow) Destroy(_currentArrow);
         _dialogueManager.HideDialogueWindow();
 
         NextStep();

@@ -1,5 +1,6 @@
-﻿using Level;
+using Level;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VContainer;
 
@@ -7,7 +8,7 @@ namespace UI
 {
     public class LevelSelectButton : MonoBehaviour
     {
-        [SerializeField] private int levelIndex;
+        [FormerlySerializedAs("levelIndex")] [SerializeField] private int _levelIndex;
         
         private Button _button;
         
@@ -15,16 +16,16 @@ namespace UI
         {
             _button = GetComponent<Button>();
             _button.onClick.AddListener(SelectAndStartLevel);
-            _button.gameObject.SetActive(levelIndex <= Progress.unlockedLevel);
+            _button.gameObject.SetActive(_levelIndex <= Progress.unlockedLevel);
         }
 
         private void SelectAndStartLevel()
         {
             _button.interactable = false;
-            LevelSession.selectedLevelIndex = levelIndex;
+            LevelSession.SelectedLevelIndex = _levelIndex;
             CrossSceneAnimation.Instance
                 .PlayTransition(SceneLoader.LoadLevelScene)
                 .Forget();
         }
     }
-} 
+}

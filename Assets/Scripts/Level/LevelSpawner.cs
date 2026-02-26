@@ -19,7 +19,7 @@ namespace Level
     
         private void Start()
         {
-            Spawn(LevelSession.selectedLevelIndex);
+            Spawn(LevelSession.SelectedLevelIndex);
         }
     
         private void Spawn(int index)

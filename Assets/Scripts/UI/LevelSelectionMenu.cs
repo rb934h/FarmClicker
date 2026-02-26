@@ -2,6 +2,7 @@
 using Azur.Playable.Carousel;
 using Level;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,7 +10,7 @@ namespace UI
 {
     public class LevelSelectionMenu : MonoBehaviour
     {
-        public LevelDatabase database; 
+        [FormerlySerializedAs("database")] public LevelDatabase _database;
     
         private Carousel _carousel;
         private IObjectResolver _objectResolver;
@@ -33,7 +34,7 @@ namespace UI
         private void GenerateLevelButtons()
         {
             var unlockedLevel = Progress.unlockedLevel;
-            var levels = database.levels;
+            var levels = _database.levels;
 
             for (var i = levels.Length - 1; i >= 0; i--)
             {

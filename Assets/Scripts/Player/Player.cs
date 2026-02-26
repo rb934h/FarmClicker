@@ -8,6 +8,7 @@ using ScriptableObjects;
 using Scripts;
 using Strategies;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Player
@@ -15,18 +16,18 @@ namespace Player
     public class Player : MonoBehaviour
     {
         [Header("Спрайт игрока")] 
-        [SerializeField] private SpriteRenderer playerSprite;
+        [FormerlySerializedAs("playerSprite")] [SerializeField] private SpriteRenderer _playerSprite;
     
         [Header("Настройки движения")] 
-        [SerializeField] private float speed = 5f;
+        [FormerlySerializedAs("speed")] [SerializeField] private float _speed = 5f;
         [SerializeField] private AudioSource _stepSound;
     
         [Header("Эмоции")] 
-        [SerializeField] private SpriteRenderer playerHint;
-        [SerializeField] private PlayerHintData playerHintData;
+        [FormerlySerializedAs("playerHint")] [SerializeField] private SpriteRenderer _playerHint;
+        [FormerlySerializedAs("playerHintData")] [SerializeField] private PlayerHintData _playerHintData;
     
         [Header("Инвентарь")]
-        [SerializeField] private PlayerInventoryData playerInventoryData;
+        [FormerlySerializedAs("playerInventoryData")] [SerializeField] private PlayerInventoryData _playerInventoryData;
     
         private PlayerAnimator _playerAnimator;
         private PointerObject _pointerObject;
@@ -34,7 +35,7 @@ namespace Player
 
         private readonly HashSet<PointerObject> _busyPointerObjects = new ();
 
-        public PlayerInventoryData inventory => playerInventoryData;
+        public PlayerInventoryData inventory => _playerInventoryData;
         public PlayerAnimator animator => _playerAnimator;
     
         private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
@@ -47,7 +48,7 @@ namespace Player
 
         private void Awake()
         {
-            playerInventoryData = Instantiate(playerInventoryData);
+            _playerInventoryData = Instantiate(_playerInventoryData);
             _actionQueue = new ActionQueue(this);
         }
 
@@ -105,22 +106,22 @@ namespace Player
 
         private void MakeMistake()
         {
-            playerHint.sprite = playerHintData.mistakeSprite;
-            HintAnimator.Show(playerHint, 1);
+            _playerHint.sprite = _playerHintData.mistakeSprite;
+            HintAnimator.Show(_playerHint, 1);
         }
     
         private async UniTask WaitWork(float time)
         {
             var token = this.GetCancellationTokenOnDestroy();
-            var count = playerHintData.workSprites.Length;
+            var count = _playerHintData.workSprites.Length;
             var part = time / count;
 
-            HintAnimator.Show(playerHint, time);
+            HintAnimator.Show(_playerHint, time);
 
             for (var i = 0; i < count; i++)
             {
                 token.ThrowIfCancellationRequested(); 
-                playerHint.sprite = playerHintData.workSprites[i];
+                _playerHint.sprite = _playerHintData.workSprites[i];
             
                 await UniTask.WaitForSeconds(part, cancellationToken: token);
             }
@@ -144,7 +145,7 @@ namespace Player
                     transform.position = Vector3.MoveTowards(
                         transform.position,
                         target,
-                        speed * Time.deltaTime
+                        _speed * Time.deltaTime
                     );
 
                     await UniTask.Yield(PlayerLoopTiming.Update, token);

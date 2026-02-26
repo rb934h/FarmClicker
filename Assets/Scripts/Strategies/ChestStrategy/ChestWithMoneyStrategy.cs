@@ -12,9 +12,9 @@ namespace Strategies.ChestStrategy
         public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Chest chest) return false;
-            if (chest.State is not ChestState.WithMoney) return false;
+            if (chest._state is not ChestState.WithMoney) return false;
             chest.ClearCargo();
-            chest.State = ChestState.Empty;
+            chest._state = ChestState.Empty;
             OnComplete?.Invoke();
             return true;
         }

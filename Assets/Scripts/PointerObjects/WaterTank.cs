@@ -1,6 +1,7 @@
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace PointerObjects
@@ -12,7 +13,7 @@ namespace PointerObjects
         [SerializeField] private TileReplacementRule _rule;
     
         [HideInInspector]
-        public WaterTankState State = WaterTankState.Empty;
+        [FormerlySerializedAs("State")] public WaterTankState _state = WaterTankState.Empty;
     
         private TileChanger _tileChanger;
 

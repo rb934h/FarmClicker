@@ -7,6 +7,7 @@ using Strategies.GardenStrategy;
 using Strategies.WaterTankStrategy;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -14,20 +15,20 @@ namespace DI.Scopes
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [SerializeField] private URPVolume urpVolume;
-        [SerializeField] private Player.Player player;
-        [SerializeField] private InputSystem inputSystem;
-        [SerializeField] private Timer levelTimer;
-        [SerializeField] private DialogueManager dialogueManager;
-        [SerializeField] private AudioPlayer audioPlayer;
+        [FormerlySerializedAs("urpVolume")] [SerializeField] private URPVolume _urpVolume;
+        [FormerlySerializedAs("player")] [SerializeField] private Player.Player _player;
+        [FormerlySerializedAs("inputSystem")] [SerializeField] private InputSystem _inputSystem;
+        [FormerlySerializedAs("levelTimer")] [SerializeField] private Timer _levelTimer;
+        [FormerlySerializedAs("dialogueManager")] [SerializeField] private DialogueManager _dialogueManager;
+        [FormerlySerializedAs("audioPlayer")] [SerializeField] private AudioPlayer _audioPlayer;
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(urpVolume);
-            builder.RegisterComponent(player);
-            builder.RegisterComponent(levelTimer);
-            builder.RegisterComponent(dialogueManager);
-            builder.RegisterComponent(audioPlayer);
+            builder.RegisterComponent(_urpVolume);
+            builder.RegisterComponent(_player);
+            builder.RegisterComponent(_levelTimer);
+            builder.RegisterComponent(_dialogueManager);
+            builder.RegisterComponent(_audioPlayer);
             
             // ------------ Pig ------------------
             builder.Register<IPointerObjectInteractStrategy, PigResetHandsStrategy>(Lifetime.Singleton);
@@ -48,7 +49,7 @@ namespace DI.Scopes
             builder.Register<IPointerObjectInteractStrategy, EnclosureGetSpecialItemStrategy>(Lifetime.Singleton);
             
             // ------------ Other ------------------
-            builder.RegisterComponent(inputSystem);
+            builder.RegisterComponent(_inputSystem);
         }
     }
 }

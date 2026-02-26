@@ -11,7 +11,7 @@ namespace Strategies.GardenStrategy
         public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not Garden garden) return false;
-            if (garden.State is not GardenState.Planted || !player.inventory.hasWater) return false;
+            if (garden._state is not GardenState.Planted || !player.inventory.hasWater) return false;
             player.inventory.UseWater();
             player.animator.PlayAnimation(PlayerAnimationState.PlayerWatering);
             garden.StartCoroutine(garden.WaterAndGrow());

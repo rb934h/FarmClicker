@@ -2,12 +2,13 @@
 using Enum;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Level
 {
     public class WeatherManager : MonoBehaviour
     {
-        [SerializeField] private WeatherData weatherData;
+        [FormerlySerializedAs("weatherData")] [SerializeField] private WeatherData _weatherData;
 
         private Dictionary<WeatherType, GameObject> _effectInstances = new Dictionary<WeatherType, GameObject>();
         private GameObject _currentEffect;
@@ -33,7 +34,7 @@ namespace Level
                 if (type == WeatherType.None)
                     continue;
 
-                var effectData = weatherData.weatherEffects.Find(e => e.type == type);
+                var effectData = _weatherData.weatherEffects.Find(e => e.type == type);
                 if (effectData == null)
                 {
                     Debug.LogWarning($"Effect for {type} not found!");

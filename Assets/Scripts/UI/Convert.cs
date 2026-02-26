@@ -20,7 +20,6 @@ namespace UI
         public event Action OnShowed;
         public event Action OnHided;
         
-        
         public void Show()
         {
             _animator.SetTrigger(ShowAnimationTrigger);

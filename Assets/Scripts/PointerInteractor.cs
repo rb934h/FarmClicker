@@ -1,16 +1,17 @@
 using UnityEngine;
 using System;
 using PointerObjects;
+using UnityEngine.Serialization;
 
 public class PointerInteractor : MonoBehaviour
 {
-    [SerializeField] private PointerObject[] pointerObjects;
+    [FormerlySerializedAs("pointerObjects")] [SerializeField] private PointerObject[] _pointerObjects;
     [SerializeField] private AudioSource _clickSound;
     
     private Camera _camera;
 
     public event Action<Vector2, PointerObject> PointerClicked;
-    public PointerObject[] PointerObjects => pointerObjects;
+    public PointerObject[] PointerObjects => _pointerObjects;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class PointerInteractor : MonoBehaviour
             mousePosition.z = Mathf.Abs(_camera.transform.position.z);
             var worldPoint = _camera.ScreenToWorldPoint(mousePosition);
 
-            foreach (var pointerObject in pointerObjects)
+            foreach (var pointerObject in _pointerObjects)
             {
                 if (pointerObject.Collider != null &&
                     pointerObject.Collider.OverlapPoint(worldPoint))

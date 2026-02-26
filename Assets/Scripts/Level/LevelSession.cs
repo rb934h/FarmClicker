@@ -1,7 +1,7 @@
-﻿namespace Level
+namespace Level
 {
     public static class LevelSession
     {
-        public static int selectedLevelIndex = 0;
+        public static int SelectedLevelIndex = 0;
     }
 }

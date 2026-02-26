@@ -12,13 +12,13 @@ namespace Strategies.WaterTankStrategy
         public bool Interact(Player.Player player, PointerObject pointerObject)
         {
             if (pointerObject is not WaterTank waterTank) return false;
-            if (waterTank.State is not WaterTankState.ReadyToCollect || player.inventory.hasWater || !player.inventory.canAddItem) return false;
+            if (waterTank._state is not WaterTankState.ReadyToCollect || player.inventory.hasWater || !player.inventory.canAddItem) return false;
             player.animator.PlayAnimation(PlayerAnimationState.PlayerWateringReverse);
             DOVirtual.DelayedCall(waterTank.WorkTime, () =>
             {
                 player.inventory.FillWater();
                 waterTank.ChangeTile();
-                waterTank.State = WaterTankState.Empty;
+                waterTank._state = WaterTankState.Empty;
             });
             OnComplete?.Invoke();
             return true;
