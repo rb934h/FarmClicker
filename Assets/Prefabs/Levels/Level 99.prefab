@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a0dcd7281041f28129f54e28bde0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeatherManager
-  weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
+  _weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
 --- !u!1 &797108354819125194
 GameObject:
   m_ObjectHideFlags: 0
@@ -121101,7 +121101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523da45621f1ea84299809f75ee16def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointerObjects:
+  _pointerObjects:
   - {fileID: 6750066586638899623}
   - {fileID: 1275263365670817069}
   - {fileID: 5130196978635537094}

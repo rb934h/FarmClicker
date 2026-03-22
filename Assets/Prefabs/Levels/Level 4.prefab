@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a0dcd7281041f28129f54e28bde0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeatherManager
-  weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
+  _weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
 --- !u!1 &3451473579769459266
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,18 +437,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d336ae319bdb4c5b9edb9dbd47a3c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  arrowPrefab: {fileID: 0}
-  steps:
-  - stepName: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0435 \u044F\u0438\u0446"
-    dialogue: {fileID: 11400000, guid: f0961e9fb1d309a419236a58fb7c5cf7, type: 2}
-    target: {fileID: 2255895114120199521}
-    onStepStart:
+  _arrowPrefab: {fileID: 1062542957706238146, guid: 2ea9f7a26ed724b478fb72a1e53dc174, type: 3}
+  _steps:
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: f0961e9fb1d309a419236a58fb7c5cf7, type: 2}
+    Target: {fileID: 2255895114120199521}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
+    WaitForPlayerAction: 1
 --- !u!1 &6399132992740275922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523da45621f1ea84299809f75ee16def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointerObjects:
+  _pointerObjects:
   - {fileID: 6750066586638899623}
   - {fileID: 1275263365670817069}
   - {fileID: 5130196978635537094}

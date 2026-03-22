@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a0dcd7281041f28129f54e28bde0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeatherManager
-  weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
+  _weatherData: {fileID: 11400000, guid: 867e07e9ef0b1844c9bdd51d3385e873, type: 2}
 --- !u!1 &1182173298589173262
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523da45621f1ea84299809f75ee16def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointerObjects:
+  _pointerObjects:
   - {fileID: 7353439886244395870}
   - {fileID: 6232700916736299401}
   - {fileID: 2986854637711787859}
@@ -635,88 +635,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d336ae319bdb4c5b9edb9dbd47a3c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  arrowPrefab: {fileID: 1062542957706238146, guid: 2ea9f7a26ed724b478fb72a1e53dc174, type: 3}
-  steps:
-  - stepName: "\u0413\u0440\u044F\u0434\u043A\u0430"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 6196475406304682189}
-    onStepStart:
+  _arrowPrefab: {fileID: 1062542957706238146, guid: 2ea9f7a26ed724b478fb72a1e53dc174, type: 3}
+  _steps:
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 6196475406304682189}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u0412\u043E\u0434\u0430"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 8206489656845457292}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 8206489656845457292}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u041B\u0435\u0439\u043A\u0430"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 8206489656845457292}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 8206489656845457292}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u041F\u043E\u043B\u0438\u0432"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 6196475406304682189}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 6196475406304682189}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u0443\u0440\u043E\u0436\u0430\u0439"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 6196475406304682189}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 6196475406304682189}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u041E\u0442\u043D\u0435\u0441\u0442\u0438 \u043A \u0441\u0443\u043D\u0434\u0443\u043A\u0443"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 8089812756833186552}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 8089812756833186552}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u041E\u0442\u043D\u0435\u0441\u0442\u0438 \u043A \u0441\u0443\u043D\u0434\u0443\u043A\u0443"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 8089812756833186552}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 8089812756833186552}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
-  - stepName: "\u041E\u0442\u043D\u0435\u0441\u0442\u0438 \u043A \u0441\u0443\u043D\u0434\u0443\u043A\u0443"
-    dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
-    target: {fileID: 8089812756833186552}
-    onStepStart:
+    WaitForPlayerAction: 1
+  - StepName: 
+    Dialogue: {fileID: 11400000, guid: 67857ce54f1888a4185d22d539f662f0, type: 2}
+    Target: {fileID: 8089812756833186552}
+    OnStepStart:
       m_PersistentCalls:
         m_Calls: []
-    onStepComplete:
+    OnStepComplete:
       m_PersistentCalls:
         m_Calls: []
-    waitForPlayerAction: 1
+    WaitForPlayerAction: 1
 --- !u!114 &8605833189407692352
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edec5b624274facbf5181b42c9ba78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectionMenu
-  database: {fileID: 11400000, guid: b07f345ebdbc56b4aa203da30200d79b, type: 2}
+  _database: {fileID: 11400000, guid: b07f345ebdbc56b4aa203da30200d79b, type: 2}
 --- !u!1 &188744396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,10 +2358,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f604c9def2f4248872b2bd74edf9a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.UIBounceEffect
-  rotationAngle: 2
-  rotationDuration: 15
-  scaleAmount: 0.01
-  scaleDuration: 5
+  _rotationAngle: 2
+  _rotationDuration: 15
+  _scaleAmount: 0.01
+  _scaleDuration: 5
 --- !u!1 &587847922
 GameObject:
   m_ObjectHideFlags: 0

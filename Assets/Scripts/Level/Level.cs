@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
 using PointerObjects;
 using ScriptableObjects;
 using UI;
@@ -45,7 +44,7 @@ namespace Level
             }
 
             _pointerClicker.PointerClicked += OnPointerClick;
-            _chest.IsSolded += AddDeliveredItem;
+            _chest.Solded += AddDeliveredItem;
             _levelTimer.OnTimerComplete += Lose;
             _levelTimer.EveningArrived += OnEveningArrived;
         }
@@ -85,11 +84,8 @@ namespace Level
             _gameScreen.HideConvert();
         }
 
-        private void Update()
-        {
-            _levelTimer.CheckTimer();
-        }
-
+        private void Update() => _levelTimer.CheckTimer();
+        
         private void OnConvertHided()
         {
             _gameScreen.Convert.OnHided -= OnConvertHided;
@@ -200,7 +196,7 @@ namespace Level
             _inputSystem.DownTouched -= LevelEnd;
             CrossSceneAnimation.Instance
                 .PlayTransition(SceneLoader.LoadMainMenuScene)
-                .Forget();;
+                .Forget();
         }
 
         private void UnlockNextLevel()
@@ -214,8 +210,7 @@ namespace Level
         private void OnDisable()
         {
             _pointerClicker.PointerClicked -= OnPointerClick;
-            _chest.IsSolded -= AddDeliveredItem;
+            _chest.Solded -= AddDeliveredItem;
         }
-    
     }
 }

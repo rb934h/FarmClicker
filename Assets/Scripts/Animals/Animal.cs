@@ -60,20 +60,13 @@ namespace Animals
             FlipSprite(target);
         }
 
-        public void SetFood()
-        {
-            _needFood = false;
-        }
-
-        public void SetWater()
-        {
-            _needWater = false;
-        }
-
+        public void SetFood() => _needFood = false;
+        
+        public void SetWater() => _needWater = false;
+        
         public virtual CollectableItemData GetSpecialItem()
         {
             ChangeGeneration(AnimalGrowStates.Adult);
-
             return _animalData._specialItemData;
         }
 
@@ -87,8 +80,10 @@ namespace Animals
         public void TryGrowUp()
         {
             if (_needFood || _needWater || _currentGrowState == AnimalGrowStates.Special)
+            {
                 return;
-
+            }
+            
             if (_currentGrowState == AnimalGrowStates.Adult)
             {
                 DoSomethingWhenAdult();
@@ -101,9 +96,7 @@ namespace Animals
             _animator.SetBool(GrowUp, true);
         }
 
-        protected virtual void DoSomethingWhenAdult()
-        {
-        }
+        protected virtual void DoSomethingWhenAdult() { }
 
         private void Wander()
         {
@@ -133,7 +126,10 @@ namespace Animals
 
         private void FlipSprite(Vector2 target)
         {
-            if (_spriteRenderer == null) return;
+            if (_spriteRenderer == null)
+            {
+                return;
+            }
 
             if (target.x > transform.position.x)
                 _spriteRenderer.flipX = true;

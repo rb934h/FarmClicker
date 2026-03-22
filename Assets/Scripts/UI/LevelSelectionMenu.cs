@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Azur.Playable.Carousel;
+﻿using Azur.Playable.Carousel;
 using Level;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,21 +8,15 @@ namespace UI
 {
     public class LevelSelectionMenu : MonoBehaviour
     {
-        [FormerlySerializedAs("database")] public LevelDatabase _database;
+        public LevelDatabase _database;
     
         private Carousel _carousel;
         private IObjectResolver _objectResolver;
    
         [Inject]
-        public void Construct(IObjectResolver objectResolver)
-        {
-            _objectResolver = objectResolver;
-        }
-        private void Awake()
-        {
-            _carousel = GetComponent<Carousel>();
-        }
-
+        public void Construct(IObjectResolver objectResolver) => _objectResolver = objectResolver;
+        private void Awake() => _carousel = GetComponent<Carousel>();
+        
         private void Start()
         {
             GenerateLevelButtons();
@@ -45,7 +37,6 @@ namespace UI
                     _objectResolver.Instantiate(level.levelButton, transform);
                 }
             }
-
         }
     }
 }

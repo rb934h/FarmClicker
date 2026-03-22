@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorialDialogue 1
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   lines:
-  - text:
+  - Text:
       m_TableReference:
         m_TableCollectionName: GUID:a1456ed1adc5ba348b5adeef2794ba70
       m_TableEntryReference:
@@ -22,7 +22,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    speakerName:
+    SpeakerName:
       m_TableReference:
         m_TableCollectionName: GUID:8e7fc3c4d9c04064594c83fc587699a6
       m_TableEntryReference:

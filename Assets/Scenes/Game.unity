@@ -282,12 +282,12 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 268937545}
-  urpVolume: {fileID: 1741469455}
-  player: {fileID: 752859350}
-  inputSystem: {fileID: 1027432370}
-  levelTimer: {fileID: 1672161547}
-  dialogueManager: {fileID: 69378253}
-  audioPlayer: {fileID: 655555215}
+  _urpVolume: {fileID: 1741469455}
+  _player: {fileID: 752859350}
+  _inputSystem: {fileID: 1027432370}
+  _levelTimer: {fileID: 1672161547}
+  _dialogueManager: {fileID: 69378253}
+  _audioPlayer: {fileID: 655555215}
 --- !u!1001 &69378252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -661,6 +661,7 @@ MonoBehaviour:
   _selectItemPanel: {fileID: 591461084}
   _tableReferenceForCoinsText:
     m_TableCollectionName: 
+  _layoutGroupDisabler: {fileID: 1426152912}
 --- !u!225 &482445175
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1115,7 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f58bc13cc0f834cb1fc7b86a9d6745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectItemPanel
-  addToInventoryButton: {fileID: 8254451806049500701, guid: ed2f59f54ccf76844921ea66ca2d5012, type: 3}
+  _addToInventoryButton: {fileID: 8254451806049500701, guid: ed2f59f54ccf76844921ea66ca2d5012, type: 3}
 --- !u!1001 &655555211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1512,6 +1513,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &769447474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4979818911733903758, guid: ee76db6903a9e1242b4142340669eefb, type: 3}
+  m_PrefabInstance: {fileID: 1722689670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
 --- !u!212 &770208547 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8914413953689331700, guid: 79129ceb912bf08439db7061552ef590, type: 3}
@@ -1789,6 +1801,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882238419}
   m_CullTransparentMesh: 1
+--- !u!1 &908473546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908473547}
+  m_Layer: 0
+  m_Name: Helpers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &908473547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908473546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1100, y: 774, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1426152911}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1027432369
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,6 +2047,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1426152910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426152911}
+  - component: {fileID: 1426152912}
+  m_Layer: 0
+  m_Name: LayoutGroupDisabler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426152911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426152910}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908473547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426152912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426152910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8372b742aaca4b419a7c8f66522dc424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.LayoutGroupDisabler
+  _layoutGroups:
+  - {fileID: 1896682305}
+  - {fileID: 769447474}
+  - {fileID: 1989559545}
+  - {fileID: 591461083}
 --- !u!82 &1480370529 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3722275819637681593, guid: dfccce4f5fea5c946a679d6c39b82b7c, type: 3}
@@ -2923,6 +3016,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1896682305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8655613588197546049, guid: 5d799669efc0cda4a84a58e8a3c764a7, type: 3}
+  m_PrefabInstance: {fileID: 505223469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
 --- !u!95 &1946202296 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7217186198666473616, guid: 79129ceb912bf08439db7061552ef590, type: 3}
@@ -3269,6 +3373,10 @@ PrefabInstance:
       propertyPath: playerInventoryData
       value: 
       objectReference: {fileID: 11400000, guid: 36f303491eaeb2d418e7279d66c2d3b0, type: 2}
+    - target: {fileID: 3643208359327367310, guid: 79129ceb912bf08439db7061552ef590, type: 3}
+      propertyPath: _playerInventoryData
+      value: 
+      objectReference: {fileID: 11400000, guid: 36f303491eaeb2d418e7279d66c2d3b0, type: 2}
     - target: {fileID: 3976839226852558810, guid: 79129ceb912bf08439db7061552ef590, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.221
@@ -3442,3 +3550,4 @@ SceneRoots:
   - {fileID: 655555211}
   - {fileID: 1614614289}
   - {fileID: 1707853670}
+  - {fileID: 908473547}

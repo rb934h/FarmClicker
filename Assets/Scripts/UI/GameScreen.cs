@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Level;
@@ -7,7 +8,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
-using Convert = UI.Convert;
 
 namespace UI
 {
@@ -19,16 +19,25 @@ namespace UI
         [SerializeField] private Convert _convert;
         [SerializeField] private SelectItemPanel _selectItemPanel;
         [SerializeField] private TableReference _tableReferenceForCoinsText;
-        private LevelGoalsView _levelGoalsView{ get; set; }
+        [SerializeField] private LayoutGroupDisabler _layoutGroupDisabler;
+        
+        private LevelGoalsView _levelGoalsView;
         private StringTable  _localizationTable;
         
         public Convert Convert => _convert;
         
         private async void Start()
         {
-            var localizationTableName = "CollectableItems";
-            _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
-            _localizationTable = await LocalizationSettings.StringDatabase.GetTableAsync(localizationTableName);
+            try
+            {
+                var localizationTableName = "CollectableItems";
+                _levelGoalsView = new LevelGoalsView(_levelGoalsUITransform, _levelGoalsText);
+                _localizationTable = await LocalizationSettings.StringDatabase.GetTableAsync(localizationTableName);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
 
         public void SetLevelGoals(List<LevelGoal> levelGoals, int requiredCoins)
@@ -39,6 +48,8 @@ namespace UI
                 _levelGoalsPanelAnimator.GetCurrentAnimatorClipInfo(0).Length * 0.5f,
                 () => SetGoalsAsync(levelGoals, requiredCoins).Forget()
             );
+
+            DOVirtual.DelayedCall(_levelGoalsPanelAnimator.GetCurrentAnimatorClipInfo(0).Length, _layoutGroupDisabler.DisableLayoutGroups);
         }
 
         private async UniTask SetGoalsAsync(List<LevelGoal> levelGoals, int requiredCoins)
@@ -73,9 +84,6 @@ namespace UI
             _convert.SetMessageSender(sender);
             _convert.Show();
         }
-        public void HideConvert()
-        {
-            _convert.Hide(); 
-        }
+        public void HideConvert() => _convert.Hide(); 
     }
 }

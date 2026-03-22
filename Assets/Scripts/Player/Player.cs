@@ -8,7 +8,6 @@ using ScriptableObjects;
 using Scripts;
 using Strategies;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Player
@@ -16,35 +15,32 @@ namespace Player
     public class Player : MonoBehaviour
     {
         [Header("Спрайт игрока")] 
-        [FormerlySerializedAs("playerSprite")] [SerializeField] private SpriteRenderer _playerSprite;
+        [SerializeField] private SpriteRenderer _playerSprite;
     
         [Header("Настройки движения")] 
-        [FormerlySerializedAs("speed")] [SerializeField] private float _speed = 5f;
+        [SerializeField] private float _speed = 5f;
         [SerializeField] private AudioSource _stepSound;
     
         [Header("Эмоции")] 
-        [FormerlySerializedAs("playerHint")] [SerializeField] private SpriteRenderer _playerHint;
-        [FormerlySerializedAs("playerHintData")] [SerializeField] private PlayerHintData _playerHintData;
+        [SerializeField] private SpriteRenderer _playerHint;
+        [SerializeField] private PlayerHintData _playerHintData;
     
         [Header("Инвентарь")]
-        [FormerlySerializedAs("playerInventoryData")] [SerializeField] private PlayerInventoryData _playerInventoryData;
+        [SerializeField] private PlayerInventoryData _playerInventoryData;
     
         private PlayerAnimator _playerAnimator;
         private PointerObject _pointerObject;
         private ActionQueue _actionQueue;
 
         private readonly HashSet<PointerObject> _busyPointerObjects = new ();
-
+        private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
+        
         public PlayerInventoryData inventory => _playerInventoryData;
         public PlayerAnimator animator => _playerAnimator;
-    
-        private IEnumerable<IPointerObjectInteractStrategy> _interactStrategy;
+        
 
         [Inject]
-        public void Construct(IEnumerable<IPointerObjectInteractStrategy> interactStrategies)
-        {
-            _interactStrategy = interactStrategies;
-        }
+        public void Construct(IEnumerable<IPointerObjectInteractStrategy> interactStrategies) => _interactStrategy = interactStrategies;
 
         private void Awake()
         {
@@ -52,11 +48,8 @@ namespace Player
             _actionQueue = new ActionQueue(this);
         }
 
-        private void Start()
-        {
-            _playerAnimator = new PlayerAnimator(GetComponentInChildren<Animator>());
-        }
-    
+        private void Start() => _playerAnimator = new PlayerAnimator(GetComponentInChildren<Animator>());
+        
         public void InteractWithPointerObject<T>(Vector3 targetPosition, T pointerObject)
             where T : PointerObject
         {
@@ -126,8 +119,7 @@ namespace Player
                 await UniTask.WaitForSeconds(part, cancellationToken: token);
             }
         }
-
-
+        
         private async UniTask MoveTo(Vector2 target)
         {
             var token = this.GetCancellationTokenOnDestroy();

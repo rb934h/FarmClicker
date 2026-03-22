@@ -32,7 +32,7 @@ namespace PointerObjects
         [HideInInspector] 
         [FormerlySerializedAs("State")] public ChestState _state = ChestState.Empty;
 
-        public event Action<List<CollectableItemData>> IsSolded;
+        public event Action<List<CollectableItemData>> Solded;
 
         private TileChanger _tileChanger;
         private List<CollectableItemData> _cargo = new();
@@ -75,7 +75,7 @@ namespace PointerObjects
 
         public void ClearCargo()
         {
-            IsSolded?.Invoke(_cargo);
+            Solded?.Invoke(_cargo);
             
             foreach (var spin in _spins)
             {
