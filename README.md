@@ -10,7 +10,7 @@ FarmClicker (AnnaFarm) - это казуальная тайм-менеджмен
 - Цикл эволюции животных (детеныш, взрослый, готов дать ресурс)
   <img width="1533" height="689" alt="image" src="https://github.com/user-attachments/assets/c138cc36-104c-45b5-bad3-b3cd3000ffa7"/>
 
-- Цилкл роста растений (семя, политое, готовое к сборке, мертвое)
+- Цикл роста растений (семя, политое, готовое к сборке, мертвое)
   <img width="1533" height="689" alt="image" src="https://github.com/user-attachments/assets/375b9bf7-b65b-454c-8c93-e3cc1069509d"/>
 
 - Смена времени суток (свет, звуки, VFX)
